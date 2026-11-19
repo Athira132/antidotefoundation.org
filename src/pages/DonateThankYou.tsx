@@ -71,3 +71,4 @@ export const DonateThankYou: React.FC = () => {
     </div>
   );
 };
+

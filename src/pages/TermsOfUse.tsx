@@ -131,3 +131,4 @@ export const TermsOfUse: React.FC = () => {
     </div>
   );
 };
+

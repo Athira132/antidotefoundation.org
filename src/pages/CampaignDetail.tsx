@@ -197,3 +197,4 @@ export const CampaignDetail: React.FC = () => {
     </div>
   );
 };
+

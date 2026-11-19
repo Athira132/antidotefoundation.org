@@ -167,3 +167,4 @@ export interface DonationFormData {
   anonymous: boolean;
   paymentMethod: 'upi' | 'bank_transfer' | 'card' | 'net_banking';
 }
+

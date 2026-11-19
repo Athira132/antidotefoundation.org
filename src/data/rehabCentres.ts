@@ -100,3 +100,4 @@ export const verifiedRehabCentres: RehabCentre[] = [
     notes: 'Key coastal Karnataka healthcare institution coordinating with state mental health departments.'
   }
 ];
+

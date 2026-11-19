@@ -92,3 +92,4 @@ export const galleryItems: GalleryItem[] = [
     isIllustrative: true
   }
 ];
+

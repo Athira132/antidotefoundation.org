@@ -194,3 +194,4 @@ export const News: React.FC = () => {
     </div>
   );
 };
+

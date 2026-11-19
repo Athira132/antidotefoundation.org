@@ -422,3 +422,4 @@ export const Donate: React.FC = () => {
     </div>
   );
 };
+

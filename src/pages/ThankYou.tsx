@@ -47,3 +47,4 @@ export const ThankYou: React.FC = () => {
     </div>
   );
 };
+

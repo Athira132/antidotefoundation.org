@@ -29,3 +29,4 @@ export const upcomingEvents: EventItem[] = [
     status: 'Upcoming'
   }
 ];
+

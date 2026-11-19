@@ -70,3 +70,4 @@ export const newsArticles: NewsArticle[] = [
     verificationNote: 'Verified organisational press release and field deployment.'
   }
 ];
+

@@ -126,3 +126,4 @@ export const Lightbox: React.FC<LightboxProps> = ({
     </AnimatePresence>
   );
 };
+
