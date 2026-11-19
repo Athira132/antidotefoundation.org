@@ -41,7 +41,7 @@ const iconMap: Record<string, React.ElementType> = {
 export const Programs: React.FC = () => {
   return (
     <div className="space-y-0">
-      
+
       {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full-width background; Mobile: Photo first) */}
       <PageHero
         badge="Intervention Framework"
@@ -93,7 +93,7 @@ export const Programs: React.FC = () => {
                           loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950/80 via-brand-navy-950/20 to-transparent" />
-                        
+
                         <div className="absolute top-4 left-4">
                           <div className="w-10 h-10 rounded-xl bg-white/90 backdrop-blur-md text-brand-navy-900 flex items-center justify-center shadow">
                             <IconComp className="w-5 h-5 text-brand-teal-600" />

@@ -44,3 +44,4 @@ export const StickyContactChip: React.FC = () => {
     </motion.aside>
   );
 };
+
