@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import {
   Image,
-  Eye,
-  Filter,
-  AlertCircle,
-  Sparkles,
   Maximize2
 } from 'lucide-react';
 import { galleryItems, galleryCategories } from '../data/gallery';
@@ -49,48 +45,42 @@ export const Gallery: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
+      {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero
         badge="Visual Documentation"
         badgeVariant="teal"
         badgeIcon={Image}
         title="Our Visual Gallery"
-        subtitle="Capturing the spirit of youth solidarity, campus awareness drives, compassionate counselling, and community outreach."
+        subtitle="Authentic photographic documentation of youth empowerment camps, community consultations, campus initiatives, and outreach."
         breadcrumbs={[{ label: 'Gallery' }]}
-        imageSrc="/images/campaign-awareness.jpg"
-        imageAlt="Antidote Foundation campaign and youth awareness moments"
-        imageBadgeText="Youth-Led Action & Community Moments"
+        imageSrc="/images/gallery_06.jpg"
+        imageAlt="Antidote Foundation youth empowerment and community moments"
+        imageBadgeText="Official Photographic Documentation"
         variant="background"
-        actions={
-          <div className="max-w-2xl p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 text-left text-xs text-slate-200 flex items-start gap-3">
-            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-white font-semibold">Integrity Notice:</strong> In strict adherence to our non-profit truthfulness guidelines, imagery displayed is curated and marked as illustrative representations of field initiatives. We never fabricate fake documentary event records or misrepresent generated visuals.
-            </div>
-          </div>
-        }
       />
 
       {/* 2. Main Gallery Section */}
-      <section className="py-14 sm:py-20 bg-slate-50 min-h-[600px]">
+      <section className="py-12 sm:py-16 bg-slate-50 min-h-[600px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Category Filter Pills */}
-          <FadeUp className="flex flex-wrap items-center justify-center gap-2 mb-10 sm:mb-12">
-            {galleryCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                  selectedCategory === cat
-                    ? 'bg-brand-navy-900 text-white shadow-md scale-105'
-                    : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </FadeUp>
+          {/* Category Filter Pills (rendered only when multiple categories exist) */}
+          {galleryCategories.length > 1 && (
+            <FadeUp className="flex flex-wrap items-center justify-center gap-2 mb-10 sm:mb-12">
+              {galleryCategories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                    selectedCategory === cat
+                      ? 'bg-brand-navy-900 text-white shadow-md scale-105'
+                      : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </FadeUp>
+          )}
 
           {/* Image Grid with Staggered Entrance */}
           <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
