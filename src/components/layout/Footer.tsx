@@ -52,16 +52,18 @@ export const Footer: React.FC = () => {
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-brand-navy-800">
           
-          {/* Col 1 & 2: Brand Identity with New Logo */}
+          {/* Col 1 & 2: Brand Identity with Transparent Logo */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="inline-block bg-white/95 p-3 rounded-2xl shadow-sm hover:opacity-95 transition-opacity">
-              <img
-                src="/logo-new.png"
-                alt="Antidote Foundation of India"
-                className="h-10 sm:h-11 w-auto object-contain max-w-[220px]"
-                width="863"
-                height="289"
-              />
+            <Link to="/" className="inline-block hover:opacity-90 transition-opacity">
+              <div className="relative h-10 sm:h-12 w-auto flex items-center">
+                <img
+                  src="/logo-new.png"
+                  alt="Antidote Foundation of India"
+                  className="h-full w-auto object-contain max-w-[200px] sm:max-w-[240px]"
+                  width="863"
+                  height="289"
+                />
+              </div>
             </Link>
 
             <p className="text-sm text-slate-300 leading-relaxed max-w-sm">
@@ -129,6 +131,9 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/programs-events" className="text-slate-400 hover:text-teal-300 transition-colors">Programs & Events</Link>
+              </li>
+              <li>
+                <Link to="/blog" className="text-slate-400 hover:text-teal-300 transition-colors">Blog</Link>
               </li>
               <li>
                 <Link to="/campaigns" className="text-slate-400 hover:text-teal-300 transition-colors">Active Campaigns</Link>

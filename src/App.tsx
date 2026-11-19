@@ -20,6 +20,7 @@ import { Gallery } from './pages/Gallery';
 import { News } from './pages/News';
 import { NewsArticle } from './pages/NewsArticle';
 import { Contact } from './pages/Contact';
+import { Blog } from './pages/Blog';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfUse } from './pages/TermsOfUse';
 import { ThankYou } from './pages/ThankYou';
@@ -43,6 +44,9 @@ export const App: React.FC = () => {
           <Route path="programs-events/:slug" element={<ProgramDetail />} />
           <Route path="programs" element={<Programs />} />
           <Route path="programs/:slug" element={<ProgramDetail />} />
+
+          {/* Blog */}
+          <Route path="blog" element={<Blog />} />
 
           {/* Contact */}
           <Route path="contact" element={<Contact />} />

@@ -100,27 +100,39 @@ export const Lightbox: React.FC<LightboxProps> = ({
             />
           </div>
 
-          <div className="p-4 sm:p-6 bg-brand-navy-950 border-t border-brand-navy-800 text-white space-y-2">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="text-xs uppercase tracking-wider font-semibold text-teal-400">
-                {item.category}
-              </span>
-              {item.isIllustrative && (
-                <span className="inline-flex items-center gap-1 text-[11px] bg-brand-navy-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">
-                  <AlertCircle className="w-3 h-3 text-amber-400" />
-                  Illustrative Representation
-                </span>
+          {(item.title || item.description || item.isIllustrative) ? (
+            <div className="p-4 sm:p-5 bg-brand-navy-950 border-t border-brand-navy-800 text-white space-y-2">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                {item.category && (
+                  <span className="text-xs uppercase tracking-wider font-semibold text-teal-400">
+                    {item.category}
+                  </span>
+                )}
+                {item.isIllustrative && (
+                  <span className="inline-flex items-center gap-1 text-[11px] bg-brand-navy-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">
+                    <AlertCircle className="w-3 h-3 text-amber-400" />
+                    Illustrative Representation
+                  </span>
+                )}
+              </div>
+
+              {item.title && (
+                <h3 className="text-base sm:text-lg font-bold">
+                  {item.title}
+                </h3>
+              )}
+
+              {item.description && (
+                <p className="text-xs sm:text-sm text-slate-300">
+                  {item.description}
+                </p>
               )}
             </div>
-
-            <h3 className="text-lg sm:text-xl font-bold">
-              {item.title}
-            </h3>
-
-            <p className="text-xs sm:text-sm text-slate-300">
-              {item.description}
-            </p>
-          </div>
+          ) : (
+            <div className="p-3 bg-brand-navy-950/90 text-center text-xs text-slate-400 border-t border-white/10">
+              Antidote Foundation Photographic Archive
+            </div>
+          )}
         </motion.div>
       </motion.div>
     </AnimatePresence>

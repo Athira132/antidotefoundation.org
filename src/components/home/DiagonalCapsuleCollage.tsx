@@ -76,26 +76,10 @@ export const DiagonalCapsuleCollage: React.FC<DiagonalCapsuleCollageProps> = ({
           </defs>
 
           {/* 
-            LAYER 1: Clean White Separation Gaps between the diagonal capsules.
-            Pure white strips precisely nestled in the spaces between adjacent capsules,
-            strictly contained between the straight edges of neighboring capsules so they NEVER protrude past the ends.
-          */}
-          <g fill="#FFFFFF">
-            {/* Gap between Capsule 1 and 2 */}
-            <rect x="160" y="235" width="16" height="260" rx="8" ry="8" transform="rotate(38 350 350)" />
-            {/* Gap between Capsule 2 and 3 */}
-            <rect x="276" y="160" width="16" height="380" rx="8" ry="8" transform="rotate(38 350 350)" />
-            {/* Gap between Capsule 3 and 4 */}
-            <rect x="408" y="160" width="16" height="380" rx="8" ry="8" transform="rotate(38 350 350)" />
-            {/* Gap between Capsule 4 and 5 */}
-            <rect x="524" y="210" width="16" height="280" rx="8" ry="8" transform="rotate(38 350 350)" />
-          </g>
-
-          {/* 
-            LAYER 2: The Continuous Single High-Quality Photograph across all 5 capsules.
+            Continuous Single High-Quality Photograph across all 5 capsules.
             Because it is ONE single image element clipped by the multi-capsule clipPath,
             it maintains 100% seamless visual continuity across all shapes!
-            NO stroke, NO border, NO outline, NO shadow.
+            NO stroke, NO border, NO outline, NO shadow, NO white lines or gaps.
           */}
           <image
             href={imageSrc}

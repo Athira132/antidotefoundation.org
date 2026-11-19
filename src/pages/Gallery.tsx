@@ -93,40 +93,46 @@ export const Gallery: React.FC = () => {
           </FadeUp>
 
           {/* Image Grid with Staggered Entrance */}
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {filteredItems.map((item) => (
               <StaggerItem key={item.id} className="h-full">
                 <div
                   onClick={() => setActiveItem(item)}
-                  className="group relative bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-subtle hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between h-full"
+                  className="group relative bg-white rounded-2xl overflow-hidden border border-slate-200/90 shadow-subtle hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between h-full"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
                     <img
                       src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                      alt={item.title || 'Antidote Foundation gallery photo'}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-brand-navy-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md text-brand-navy-900 flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                        <Maximize2 className="w-5 h-5" />
+                      <div className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md text-brand-navy-900 flex items-center justify-center shadow-lg transform translate-y-1 group-hover:translate-y-0 transition-transform">
+                        <Maximize2 className="w-4 h-4" />
                       </div>
                     </div>
-                    <div className="absolute top-3 left-3">
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-brand-navy-950/80 text-teal-300 backdrop-blur-sm border border-white/10">
-                        {item.category}
-                      </span>
-                    </div>
+                    {item.category && item.category !== 'Field Activities' && (
+                      <div className="absolute top-2.5 left-2.5">
+                        <span className="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold bg-brand-navy-950/80 text-teal-300 backdrop-blur-sm border border-white/10">
+                          {item.category}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
-                  <div className="p-5 space-y-1.5">
-                    <h3 className="font-bold text-base text-brand-navy-950 group-hover:text-brand-teal-700 transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
+                  {item.title ? (
+                    <div className="p-4 space-y-1">
+                      <h3 className="font-bold text-xs sm:text-sm text-brand-navy-950 group-hover:text-brand-teal-700 transition-colors line-clamp-1">
+                        {item.title}
+                      </h3>
+                      {item.description && (
+                        <p className="text-[11px] text-slate-600 line-clamp-2 leading-relaxed">
+                          {item.description}
+                        </p>
+                      )}
+                    </div>
+                  ) : null}
                 </div>
               </StaggerItem>
             ))}

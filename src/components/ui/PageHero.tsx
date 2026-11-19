@@ -39,19 +39,19 @@ export const PageHero: React.FC<PageHeroProps> = ({
   bottomCurve = true
 }) => {
   return (
-    <section className="relative bg-brand-navy-950 text-white overflow-hidden border-b border-brand-navy-900/80 min-h-[460px] flex flex-col justify-between">
+    <section className="relative bg-brand-navy-950 text-white overflow-hidden min-h-[440px] flex flex-col justify-between">
       
-      {/* DESKTOP BACKGROUND IMAGE (Full-width background on md+ screens) */}
+      {/* DESKTOP BACKGROUND IMAGE (Full-width background on md+ screens with left-to-centre dark gradient) */}
       {imageSrc && (
         <div className="absolute inset-0 z-0 hidden md:block overflow-hidden pointer-events-none">
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="w-full h-full object-cover object-center scale-100"
+            className="w-full h-full object-cover object-center"
           />
-          {/* Cinematic dark readable gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy-950/98 via-brand-navy-950/88 to-brand-navy-950/50" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950 via-transparent to-brand-navy-950/30" />
+          {/* Dark gradient from left to centre ensuring text readability while right side stays visible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy-950 via-brand-navy-950/85 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950/60 via-transparent to-brand-navy-950/40" />
         </div>
       )}
 
@@ -141,11 +141,11 @@ export const PageHero: React.FC<PageHeroProps> = ({
             </motion.div>
           )}
 
-          {/* Heading */}
+          {/* Heading animated with smooth fade-in from left */}
           <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.08, ease: smoothEase }}
+            initial={{ opacity: 0, x: -28 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.08, ease: smoothEase }}
             className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-[1.12]"
           >
             {title}

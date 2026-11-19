@@ -10,6 +10,7 @@ export const mainNavLinks: NavLinkItem[] = [
   { label: 'Resources', href: '/resources' },
   { label: 'Find Rehab Centres', href: '/find-rehab-centres' },
   { label: 'Programs & Events', href: '/programs-events' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact Us', href: '/contact' },
   { label: 'Gallery', href: '/gallery' }
 ];

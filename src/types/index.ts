@@ -115,10 +115,10 @@ export interface NewsArticle {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'Awareness Programmes' | 'Events' | 'Volunteers' | 'Schools & Colleges' | 'Campaigns' | 'Community Activities';
+  category: 'Field Activities' | 'Awareness Programmes' | 'Events' | 'Volunteers' | 'Schools & Colleges' | 'Campaigns' | 'Community Activities';
   image: string;
   description: string;
-  isIllustrative: boolean;
+  isIllustrative?: boolean;
 }
 
 export interface EventItem {

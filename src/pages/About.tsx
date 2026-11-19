@@ -8,15 +8,11 @@ import {
   Sparkles,
   Users,
   Compass,
-  CheckCircle2,
   Lock,
   ArrowRight,
-  MapPin,
-  Calendar,
   Building2,
-  PhoneCall
+  Quote
 } from 'lucide-react';
-import { organizationData } from '../data/organization';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
@@ -94,6 +90,55 @@ export const About: React.FC = () => {
     }
   ];
 
+  const leadershipTeam = [
+    {
+      name: 'P.A. Issac',
+      role: 'President & Founder',
+      image: '/images/leader_1_pa_issac.jpg',
+      bio: 'P.A. Issac is the President & Founder of Antidote Foundation, a non-profit organization dedicated to creating a drug-free society through awareness, education, prevention, and community engagement. Driven by a passion for empowering youth and strengthening families, he leads initiatives that promote healthy lifestyles, positive values, and hope for a better future. Under his leadership, the Foundation works with schools, communities, and organizations to inspire lasting social change and prevent substance abuse.'
+    },
+    {
+      name: 'Binu Dinakaran',
+      role: 'Vice President',
+      image: '/images/leader_2_binu_dinakaran.jpg'
+    },
+    {
+      name: 'Advt. Pramod Varaprath',
+      role: 'Vice President',
+      image: '/images/leader_3_pramod_varaprath.jpg'
+    },
+    {
+      name: 'Tomy J Alunkal',
+      role: 'Vice President',
+      image: '/images/leader_4_tomy_j_alunkal.jpg'
+    },
+    {
+      name: 'Advt. Bushra Valappil',
+      role: 'General Secretary',
+      image: '/images/leader_5_bushra_valappil.jpg'
+    },
+    {
+      name: 'George Jacob',
+      role: 'Joint Secretary',
+      image: '/images/leader_6_george_jacob.jpg'
+    },
+    {
+      name: 'Dr. Nakul',
+      role: 'Joint Secretary',
+      image: '/images/leader_7_dr_nakul.jpg'
+    },
+    {
+      name: 'Joju Varghese',
+      role: 'Treasurer',
+      image: '/images/leader_8_joju_varghese.jpg'
+    },
+    {
+      name: 'Praful S Kandath',
+      role: 'Joint Treasurer',
+      image: '/images/leader_9_praful_s_kandath.jpg'
+    }
+  ];
+
   return (
     <div className="space-y-0">
       
@@ -102,7 +147,7 @@ export const About: React.FC = () => {
         badge="About Antidote Foundation of India"
         badgeVariant="teal"
         badgeIcon={ShieldCheck}
-        title="Protecting Young Lives. Building a Drug-Free India."
+        title="Who We Are & Our Journey"
         subtitle="Antidote Foundation of India is a voluntary, youth-focused initiative working to build a drug-free society through awareness, education, community engagement, and family support."
         breadcrumbs={[{ label: 'About Us' }]}
         imageSrc="/images/youth-empowerment.jpg"
@@ -124,11 +169,11 @@ export const About: React.FC = () => {
       />
 
       {/* 2. Mission & Vision Section (Scroll-triggered slide in) */}
-      <section className="py-14 sm:py-20 bg-white border-b border-slate-200">
+      <section className="py-12 sm:py-16 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
             
-            <SlideInLeft className="space-y-6">
+            <SlideInLeft className="space-y-5">
               <div className="space-y-2">
                 <Badge variant="navy">Our Purpose & Charter</Badge>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-brand-navy-950">
@@ -136,7 +181,7 @@ export const About: React.FC = () => {
                 </h2>
               </div>
 
-              <div className="space-y-4 text-xs sm:text-base text-slate-600 leading-relaxed">
+              <div className="space-y-3.5 text-xs sm:text-base text-slate-600 leading-relaxed">
                 <p className="text-base sm:text-lg font-medium text-brand-navy-900">
                   We believe prevention begins with awareness, and recovery begins with empathy. We work directly with youth aged 13–30, schools, colleges, and families across India to break the cycle of substance abuse before it begins.
                 </p>
@@ -152,18 +197,18 @@ export const About: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-4 sm:p-5 rounded-2xl bg-brand-navy-50 border border-brand-navy-100 flex items-start gap-3 sm:gap-4">
-                <Building2 className="w-5 sm:w-6 h-5 sm:h-6 text-brand-navy-800 shrink-0 mt-0.5" />
+              <div className="p-4 rounded-2xl bg-brand-navy-50 border border-brand-navy-100 flex items-start gap-3 sm:gap-4">
+                <Building2 className="w-5 h-5 text-brand-navy-800 shrink-0 mt-0.5" />
                 <div className="text-xs text-brand-navy-950 leading-relaxed">
                   <strong>Registered Non-Profit Secretariat:</strong> No. 38, Lakshman Layout, J. P. Nagar, Bengaluru, Karnataka 560 078. Registered under Society Registration No. <strong className="underline">DRB1/SOR/257/2025-2026</strong>.
                 </div>
               </div>
             </SlideInLeft>
 
-            <SlideInRight className="space-y-6">
-              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-3.5 shadow-subtle hover:shadow-md transition-all">
-                <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center">
-                  <Target className="w-6 h-6" />
+            <SlideInRight className="space-y-5">
+              <div className="bg-slate-50 p-5 sm:p-7 rounded-3xl border border-slate-200 space-y-3 shadow-subtle hover:shadow-md transition-all">
+                <div className="w-11 h-11 rounded-2xl bg-teal-600 text-white flex items-center justify-center">
+                  <Target className="w-5 h-5" />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-brand-navy-950">Our Vision</h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -171,9 +216,9 @@ export const About: React.FC = () => {
                 </p>
               </div>
 
-              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-3.5 shadow-subtle hover:shadow-md transition-all">
-                <div className="w-12 h-12 rounded-2xl bg-brand-navy-900 text-white flex items-center justify-center">
-                  <Compass className="w-6 h-6 text-amber-400" />
+              <div className="bg-slate-50 p-5 sm:p-7 rounded-3xl border border-slate-200 space-y-3 shadow-subtle hover:shadow-md transition-all">
+                <div className="w-11 h-11 rounded-2xl bg-brand-navy-900 text-white flex items-center justify-center">
+                  <Compass className="w-5 h-5 text-amber-400" />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-brand-navy-950">Our Mission</h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -187,7 +232,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* 3. Core Values Section (Staggered Card Grid) */}
-      <section className="py-14 sm:py-20 bg-slate-50">
+      <section className="py-12 sm:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Ethical Foundation"
@@ -195,17 +240,17 @@ export const About: React.FC = () => {
             subtitle="The enduring moral principles that guide our counsellors, educators, and volunteers in every interaction."
           />
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {coreValues.map((val) => {
               const Icon = val.icon;
               return (
                 <StaggerItem key={val.title} className="h-full">
-                  <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/90 shadow-subtle hover:shadow-xl hover:-translate-y-1 transition-all space-y-3 group h-full flex flex-col justify-between">
-                    <div className="space-y-3">
-                      <div className="w-12 h-12 rounded-xl bg-brand-navy-50 text-brand-navy-900 flex items-center justify-center group-hover:bg-brand-navy-900 group-hover:text-white transition-all">
-                        <Icon className="w-6 h-6" />
+                  <div className="bg-white p-5 sm:p-7 rounded-2xl border border-slate-200/90 shadow-subtle hover:shadow-xl hover:-translate-y-1 transition-all space-y-3 group h-full flex flex-col justify-between">
+                    <div className="space-y-2.5">
+                      <div className="w-11 h-11 rounded-xl bg-brand-navy-50 text-brand-navy-900 flex items-center justify-center group-hover:bg-brand-navy-900 group-hover:text-white transition-all">
+                        <Icon className="w-5 h-5" />
                       </div>
-                      <h3 className="font-extrabold text-lg sm:text-xl text-brand-navy-950">
+                      <h3 className="font-extrabold text-base sm:text-lg text-brand-navy-950">
                         {val.title}
                       </h3>
                       <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -221,7 +266,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* 4. Timeline Section (Staggered Milestones) */}
-      <section className="py-14 sm:py-20 bg-white border-y border-slate-200">
+      <section className="py-12 sm:py-16 bg-white border-y border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Institutional Milestones"
@@ -229,20 +274,18 @@ export const About: React.FC = () => {
             subtitle="Verified milestones in establishing a transparent, community-rooted substance awareness movement."
           />
 
-          <StaggerContainer className="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-0.5 before:bg-slate-200">
+          <StaggerContainer className="space-y-6 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-0.5 before:bg-slate-200">
             {milestones.map((m, idx) => (
               <StaggerItem key={m.title}>
                 <div
-                  className={`relative flex flex-col md:flex-row items-start md:items-center gap-6 ${
+                  className={`relative flex flex-col md:flex-row items-start md:items-center gap-5 ${
                     idx % 2 === 0 ? 'md:flex-row-reverse text-left md:text-right' : 'text-left'
                   }`}
                 >
-                  {/* Dot */}
                   <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-teal-500 border-4 border-white shadow-md z-10" />
 
-                  {/* Content Box */}
-                  <div className="ml-10 md:ml-0 md:w-1/2 md:px-8 space-y-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200 inline-block">
+                  <div className="ml-10 md:ml-0 md:w-1/2 md:px-8 space-y-1.5">
+                    <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200 inline-block">
                       {m.year}
                     </span>
                     <h4 className="text-base sm:text-lg font-bold text-brand-navy-950">
@@ -260,7 +303,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* 5. Visual Image Feature (Empathetic Listening) */}
-      <section className="py-14 sm:py-16 bg-slate-50">
+      <section className="py-12 sm:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <SlideInLeft className="rounded-2xl overflow-hidden shadow-elevated border border-slate-200 group">
@@ -268,6 +311,7 @@ export const About: React.FC = () => {
                 src="/images/parent-child-communication.jpg"
                 alt="Supportive parent child communication"
                 className="w-full h-72 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
               />
             </SlideInLeft>
             <SlideInRight className="space-y-4">
@@ -278,7 +322,7 @@ export const About: React.FC = () => {
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 When a family discovers signs of chemical experimentation, initial reactions often lean toward panic, disciplinary hostility, or denial. Our educational and counselling interventions equip mothers, fathers, and teachers with empathetic communication strategies. We transform combative confrontation into collaborative recovery.
               </p>
-              <div className="pt-2">
+              <div className="pt-1">
                 <Button to="/resources#parents" variant="outline" size="sm">
                   <span>Explore Parent Guidance Hub</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -289,11 +333,128 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. Helpline Section */}
+      {/* ============================================================== */}
+      {/* 6. FOUNDER'S MESSAGE (Immediately before Leadership Team)     */}
+      {/* ============================================================== */}
+      <section className="py-12 sm:py-16 bg-white border-t border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left: Founder Photograph (stacked first on mobile) */}
+            <SlideInLeft className="order-1 md:col-span-5 flex justify-center">
+              <div className="relative w-full max-w-sm">
+                <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100 group">
+                  <img
+                    src="/images/leader_1_pa_issac.jpg"
+                    alt="P.A. Issac, President & Founder, Antidote Foundation of India"
+                    className="w-full h-full object-cover object-top group-hover:scale-104 transition-transform duration-500"
+                  />
+                </div>
+                {/* Accent Badge */}
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-brand-navy-950 text-white shadow-lg border border-white/20 text-xs font-bold whitespace-nowrap">
+                  P.A. Issac · Founder & President
+                </div>
+              </div>
+            </SlideInLeft>
+
+            {/* Right: Founder's Message */}
+            <SlideInRight className="order-2 md:col-span-7 space-y-4 pt-4 md:pt-0">
+              <div className="space-y-1.5">
+                <Badge variant="navy">Founder's Message</Badge>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy-950 tracking-tight">
+                  A Promise to Protect Young Lives
+                </h2>
+              </div>
+
+              <div className="relative pl-6 border-l-4 border-brand-teal-500 space-y-3.5 text-xs sm:text-sm md:text-base text-slate-700 leading-relaxed italic">
+                <p>
+                  "I have watched addiction steal childhoods, break families, and silence futures that deserved to be loud. I founded AFOI because I believe the antidote to this crisis already exists inside every informed, empowered young person — we simply need to unlock it."
+                </p>
+                <p>
+                  "Every school we visit, every helpline call we answer, and every family we support is a step toward an India where no young person has to fight this battle alone. Our work is far from finished — in many ways, it has only just begun."
+                </p>
+                <p className="font-semibold text-brand-navy-950 not-italic">
+                  "We are not just an NGO. We are a promise — to India's youth, to their families, and to ourselves — that we will not look away."
+                </p>
+              </div>
+
+              <div className="pt-2 text-sm">
+                <div className="font-extrabold text-brand-navy-950 text-base">P.A. Issac</div>
+                <div className="font-semibold text-teal-700 text-xs">Founder / President</div>
+                <div className="text-slate-500 text-xs">Antidote Foundation of India</div>
+              </div>
+            </SlideInRight>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ============================================================== */}
+      {/* 7. LEADERSHIP TEAM (Equal-sized cards: 4/row desktop, 2 tablet)*/}
+      {/* ============================================================== */}
+      <section className="py-12 sm:py-16 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <SectionHeader
+            badge="Governance & Leadership"
+            title="Leadership Team"
+            subtitle="Dedicated founders, legal advocates, healthcare professionals, and social leaders guiding our mission nationwide."
+          />
+
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {leadershipTeam.map((member) => (
+              <StaggerItem key={member.name} className="h-full">
+                <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col h-full group hover:-translate-y-1">
+                  
+                  {/* Photo with uniform aspect ratio */}
+                  <div className="relative aspect-[4/5] bg-slate-100 overflow-hidden">
+                    <img
+                      src={member.image}
+                      alt={`${member.name} — ${member.role}`}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950/70 via-transparent to-transparent" />
+                    <div className="absolute bottom-2.5 left-3 right-3 text-white">
+                      <div className="text-xs font-bold text-teal-300 uppercase tracking-wider">
+                        {member.role}
+                      </div>
+                      <h3 className="text-base font-extrabold leading-snug">
+                        {member.name}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Body with consistent dimensions and role alignment */}
+                  <div className="p-4 flex-grow flex flex-col justify-between space-y-2.5">
+                    <div>
+                      <div className="text-xs font-semibold text-slate-500">{member.role}</div>
+                      <div className="text-sm font-bold text-brand-navy-950">{member.name}</div>
+                    </div>
+
+                    {/* Only P.A. Issac has the supplied biography */}
+                    {member.bio && (
+                      <p className="text-[11px] text-slate-600 leading-relaxed pt-1.5 border-t border-slate-100 line-clamp-6">
+                        {member.bio}
+                      </p>
+                    )}
+                  </div>
+
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+        </div>
+      </section>
+
+      {/* 8. Helpline Section */}
       <HelplineBanner />
 
-      {/* 7. Governance & Trust Section */}
-      <section className="py-12 bg-white">
+      {/* 9. Governance & Trust Section */}
+      <section className="py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeUp>
             <TrustDisclaimer />
