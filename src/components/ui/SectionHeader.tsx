@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Badge } from './Badge';
 
 interface SectionHeaderProps {
@@ -19,9 +20,15 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   className = ''
 }) => {
   return (
-    <div className={`space-y-3 mb-10 ${centered ? 'text-center mx-auto max-w-3xl' : 'max-w-2xl'} ${className}`}>
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className={`space-y-2.5 mb-8 sm:mb-12 ${centered ? 'text-center mx-auto max-w-3xl' : 'max-w-2xl'} ${className}`}
+    >
       {badge && (
-        <div>
+        <div className="inline-block">
           <Badge variant={badgeVariant}>
             {badge}
           </Badge>
@@ -31,11 +38,10 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         {title}
       </h2>
       {subtitle && (
-        <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+        <p className="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed font-normal">
           {subtitle}
         </p>
       )}
-    </div>
+    </motion.div>
   );
 };
-

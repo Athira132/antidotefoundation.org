@@ -1,17 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PhoneCall, MapPin, Clock, ShieldCheck, Heart, Instagram, Youtube, Facebook, ArrowUpRight, AlertCircle } from 'lucide-react';
+import { PhoneCall, MapPin, Clock, ShieldCheck, Heart, Instagram, Youtube, Facebook, ArrowUpRight, AlertCircle, Sparkles } from 'lucide-react';
 import { organizationData } from '../../data/organization';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-brand-navy-950 text-slate-300 pt-16 pb-12 border-t border-brand-navy-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-brand-navy-950 text-slate-300 pt-16 pb-12 border-t border-brand-navy-900 relative overflow-hidden">
+      {/* Background ambient glow */}
+      <div className="absolute top-0 right-1/3 w-96 h-96 bg-brand-teal-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-brand-navy-800/20 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Top Emergency / Helpline Strip */}
-        <div className="bg-gradient-to-r from-brand-navy-900 to-brand-navy-800 rounded-2xl p-6 sm:p-8 mb-16 border border-brand-navy-700/60 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-gradient-to-r from-brand-navy-900 via-brand-navy-900 to-brand-navy-800/90 rounded-3xl p-6 sm:p-8 mb-16 border border-white/10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 backdrop-blur-md">
           <div className="space-y-1 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 text-amber-400 font-bold text-sm tracking-wide uppercase">
+            <div className="inline-flex items-center gap-2 text-amber-400 font-bold text-xs tracking-wider uppercase">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
@@ -21,15 +25,15 @@ export const Footer: React.FC = () => {
             <h3 className="text-xl sm:text-2xl font-extrabold text-white">
               Someone you love needs help? You are never alone.
             </h3>
-            <p className="text-slate-300 text-sm max-w-2xl">
+            <p className="text-slate-300 text-xs sm:text-sm max-w-2xl">
               Connect with our trained counsellors for confidential, non-judgemental psychological first aid and guided rehabilitation navigation.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">
             <a
               href={`tel:${organizationData.contact.helpline}`}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm rounded-xl shadow-lg transition-transform hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-sm rounded-xl shadow-lg transition-transform hover:-translate-y-0.5"
             >
               <PhoneCall className="w-4 h-4" />
               <span>Call {organizationData.contact.helplineDisplay}</span>
@@ -37,7 +41,7 @@ export const Footer: React.FC = () => {
 
             <Link
               to="/find-rehab-centres"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-navy-800 hover:bg-brand-navy-700 text-white font-semibold text-sm rounded-xl border border-brand-navy-600 transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/15 text-white font-semibold text-sm rounded-xl border border-white/15 transition-colors"
             >
               <span>Find Centres</span>
               <ArrowUpRight className="w-4 h-4 text-teal-400" />
@@ -48,15 +52,15 @@ export const Footer: React.FC = () => {
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-brand-navy-800">
           
-          {/* Col 1 & 2: Brand Identity */}
+          {/* Col 1 & 2: Brand Identity with New Logo */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="inline-block bg-white/95 p-3 rounded-xl shadow-sm">
+            <Link to="/" className="inline-block bg-white/95 p-3 rounded-2xl shadow-sm hover:opacity-95 transition-opacity">
               <img
-                src="/logo.webp"
+                src="/logo-new.png"
                 alt="Antidote Foundation of India"
-                className="h-10 w-auto object-contain"
-                width="639"
-                height="214"
+                className="h-10 sm:h-11 w-auto object-contain max-w-[220px]"
+                width="863"
+                height="289"
               />
             </Link>
 
@@ -84,7 +88,7 @@ export const Footer: React.FC = () => {
                   href={organizationData.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-brand-navy-900 hover:bg-pink-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-brand-navy-800"
+                  className="w-9 h-9 rounded-xl bg-brand-navy-900 hover:bg-pink-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-brand-navy-800"
                   aria-label="AFOI Instagram"
                 >
                   <Instagram className="w-4 h-4" />
@@ -93,7 +97,7 @@ export const Footer: React.FC = () => {
                   href={organizationData.social.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-brand-navy-900 hover:bg-red-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-brand-navy-800"
+                  className="w-9 h-9 rounded-xl bg-brand-navy-900 hover:bg-red-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-brand-navy-800"
                   aria-label="AFOI YouTube"
                 >
                   <Youtube className="w-4 h-4" />
@@ -102,7 +106,7 @@ export const Footer: React.FC = () => {
                   href={organizationData.social.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-brand-navy-900 hover:bg-blue-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-brand-navy-800"
+                  className="w-9 h-9 rounded-xl bg-brand-navy-900 hover:bg-blue-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-brand-navy-800"
                   aria-label="AFOI Facebook"
                 >
                   <Facebook className="w-4 h-4" />
@@ -111,7 +115,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Col 3: Key Links */}
+          {/* Col 3: Key Navigation */}
           <div className="space-y-3">
             <h4 className="text-sm font-bold uppercase tracking-wider text-white">
               Navigation
@@ -144,7 +148,7 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Col 4: Action & Resources */}
+          {/* Col 4: Involvement */}
           <div className="space-y-3">
             <h4 className="text-sm font-bold uppercase tracking-wider text-white">
               Involvement
@@ -235,4 +239,3 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
-

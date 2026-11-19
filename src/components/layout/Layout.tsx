@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { TopBar } from './TopBar';
 import { Header } from './Header';
 import { Footer } from './Footer';
 
@@ -23,9 +22,8 @@ const ScrollToTop: React.FC = () => {
 
 export const Layout: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-800 antialiased selection:bg-brand-navy-900 selection:text-white">
+    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-800 antialiased selection:bg-brand-teal-600 selection:text-white">
       <ScrollToTop />
-      <TopBar />
       <Header />
       <main className="flex-grow">
         <Outlet />
@@ -34,4 +32,3 @@ export const Layout: React.FC = () => {
     </div>
   );
 };
-
