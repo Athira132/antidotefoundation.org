@@ -6,7 +6,6 @@ import {
   PhoneCall,
   Heart,
   Users,
-  Compass,
   ArrowRight,
   BookOpen,
   Sparkles,
@@ -14,9 +13,7 @@ import {
   Calendar,
   Lock,
   HeartHandshake,
-  Building2,
-  CheckCircle2,
-  AlertCircle
+  CheckCircle2
 } from 'lucide-react';
 import { organizationData } from '../data/organization';
 import { programsData } from '../data/programs';
@@ -30,7 +27,6 @@ import { TrustDisclaimer } from '../components/common/TrustDisclaimer';
 import { DiagonalCapsuleCollage } from '../components/home/DiagonalCapsuleCollage';
 import {
   FadeUp,
-  FadeIn,
   SlideInLeft,
   SlideInRight,
   StaggerContainer,
@@ -45,17 +41,15 @@ export const Home: React.FC = () => {
     <div className="space-y-0 overflow-hidden">
       
       {/* ============================================================== */}
-      {/* ============================================================== */}
       {/* 1. DIAGONAL CAPSULE HERO SECTION (Artistic Image Presentation) */}
       {/* ============================================================== */}
-      <section className="relative bg-brand-navy-950 text-white overflow-hidden min-h-[580px] lg:min-h-[680px] flex flex-col justify-between pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24">
+      <section className="relative bg-brand-navy-950 text-white overflow-hidden flex flex-col justify-between pt-6 sm:pt-10 md:pt-12 pb-0">
         
         {/* Ambient Decorative Lighting & Grid */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-brand-teal-500/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute top-10 right-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-10 right-1/3 w-[500px] h-[500px] bg-brand-navy-800/40 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
+          <div className="absolute top-1/4 -left-32 w-80 h-80 bg-brand-teal-500/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-10 right-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute inset-0 bg-grid-pattern opacity-35 pointer-events-none" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex-grow flex flex-col justify-center">
@@ -63,15 +57,15 @@ export const Home: React.FC = () => {
           {/* Asymmetrical 2-Column Hero Grid: Left Content, Right Diagonal Capsule Collage */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
             
-            {/* Left 7 Columns: Hero Heading, Description, CTAs, and Trust Highlights */}
-            <div className="order-2 lg:order-1 lg:col-span-7 space-y-4 sm:space-y-6 text-left">
+            {/* Left 7 Columns: Hero Heading, Description, CTAs, and 2x2 Trust Highlights */}
+            <div className="order-2 lg:order-1 lg:col-span-7 space-y-3.5 sm:space-y-4 text-left">
               
-              {/* EXACT Supporting Label above heading */}
+              {/* Supporting Label above heading */}
               <motion.div
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1, ease: smoothEase }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-teal-500/20 border border-brand-teal-400/40 text-brand-teal-300 text-xs sm:text-sm font-extrabold tracking-widest uppercase shadow-sm backdrop-blur-md"
+                className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-teal-500/20 border border-brand-teal-400/40 text-brand-teal-300 text-xs sm:text-sm font-extrabold tracking-widest uppercase shadow-xs backdrop-blur-md"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
@@ -80,12 +74,12 @@ export const Home: React.FC = () => {
                 <span>FOR YOUTH AGED 13–30</span>
               </motion.div>
 
-              {/* EXACT Main Headline */}
+              {/* Main Headline */}
               <motion.h1
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.15, ease: smoothEase }}
-                className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tight text-white leading-[1.08]"
+                className="text-3xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-6xl font-black tracking-tight text-white leading-[1.08]"
               >
                 Building a{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-200 to-amber-300">
@@ -93,35 +87,35 @@ export const Home: React.FC = () => {
                 </span>
               </motion.h1>
 
-              {/* EXACT Supporting Content */}
+              {/* Supporting Content */}
               <motion.div
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.22, ease: smoothEase }}
-                className="space-y-2"
+                className="space-y-1.5"
               >
-                <p className="text-base sm:text-xl font-bold text-teal-300 tracking-wide">
+                <p className="text-base sm:text-lg font-bold text-teal-300 tracking-wide">
                   Antidote India | A Voluntary Movement for a Drug-Free Generation
                 </p>
                 <p className="text-sm sm:text-base font-semibold text-slate-200">
                   Empowering Youth. Preventing Addiction. Transforming India.
                 </p>
-                <p className="text-xs sm:text-sm text-slate-300/90 font-normal leading-relaxed max-w-2xl pt-1">
+                <p className="text-xs sm:text-sm text-slate-300/90 font-normal leading-relaxed max-w-2xl pt-0.5">
                   Empowering youth aged 13–30 through awareness, education, free counselling and community-driven action.
                 </p>
               </motion.div>
 
-              {/* 3 Call-To-Action Buttons */}
+              {/* 3 Call-To-Action Buttons with entrance & subtle hover lift */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.3, ease: smoothEase }}
-                className="pt-2 sm:pt-3 flex flex-wrap items-center gap-3 sm:gap-4"
+                className="pt-1.5 sm:pt-2 flex flex-wrap items-center gap-3"
               >
                 <Button
                   to="/programs-events"
                   variant="accent"
-                  size="lg"
+                  size="md"
                   className="w-full sm:w-auto shadow-xl"
                 >
                   <span>Join Our Movement</span>
@@ -131,7 +125,7 @@ export const Home: React.FC = () => {
                 <Button
                   to="/volunteer"
                   variant="secondary"
-                  size="lg"
+                  size="md"
                   className="w-full sm:w-auto bg-white/15 hover:bg-white/25 text-white border-white/25 backdrop-blur-md"
                 >
                   <Users className="w-4 h-4 mr-1 text-teal-300" />
@@ -141,7 +135,7 @@ export const Home: React.FC = () => {
                 <Button
                   to="/donate"
                   variant="primary"
-                  size="lg"
+                  size="md"
                   className="w-full sm:w-auto bg-brand-teal-600 hover:bg-brand-teal-500 text-white border border-teal-400/30"
                 >
                   <Heart className="w-4 h-4 mr-1 fill-current text-white group-hover:scale-110 transition-transform" />
@@ -149,50 +143,57 @@ export const Home: React.FC = () => {
                 </Button>
               </motion.div>
 
-              {/* Compact Trust Highlights: Clean responsive grid */}
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                className="pt-4 sm:pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 text-left"
+              {/* Compact 2x2 Trust Highlights on desktop/tablet */}
+              <StaggerContainer
+                staggerDelay={0.08}
+                delayChildren={0.35}
+                className="pt-3 sm:pt-4 border-t border-white/15 grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-xl text-left"
               >
-                <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-amber-400/40 transition-colors">
-                  <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
-                  <div className="text-[11px] sm:text-xs">
-                    <div className="font-bold text-white leading-tight">24/7 Helpline</div>
-                    <div className="text-slate-300 text-[10px]">+91 77779 27742</div>
+                <StaggerItem>
+                  <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-amber-400/40 hover:bg-white/15 transition-all">
+                    <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
+                    <div className="text-[11px] sm:text-xs">
+                      <div className="font-bold text-white leading-tight">24/7 Helpline</div>
+                      <div className="text-slate-300 text-[10px]">+91 77779 27742</div>
+                    </div>
                   </div>
-                </div>
+                </StaggerItem>
 
-                <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-teal-400/40 transition-colors">
-                  <Lock className="w-4 h-4 text-teal-400 shrink-0" />
-                  <div className="text-[11px] sm:text-xs">
-                    <div className="font-bold text-white leading-tight">100% Confidential</div>
-                    <div className="text-slate-300 text-[10px]">Zero stigma or disclosure</div>
+                <StaggerItem>
+                  <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-teal-400/40 hover:bg-white/15 transition-all">
+                    <Lock className="w-4 h-4 text-teal-400 shrink-0" />
+                    <div className="text-[11px] sm:text-xs">
+                      <div className="font-bold text-white leading-tight">100% Confidential</div>
+                      <div className="text-slate-300 text-[10px]">Zero stigma or disclosure</div>
+                    </div>
                   </div>
-                </div>
+                </StaggerItem>
 
-                <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-sky-400/40 transition-colors">
-                  <ShieldCheck className="w-4 h-4 text-sky-400 shrink-0" />
-                  <div className="text-[11px] sm:text-xs">
-                    <div className="font-bold text-white leading-tight">Registered Society</div>
-                    <div className="text-slate-300 text-[10px]">DRB1/SOR/257/2025-2026</div>
+                <StaggerItem>
+                  <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-sky-400/40 hover:bg-white/15 transition-all">
+                    <ShieldCheck className="w-4 h-4 text-sky-400 shrink-0" />
+                    <div className="text-[11px] sm:text-xs">
+                      <div className="font-bold text-white leading-tight">Registered Society</div>
+                      <div className="text-slate-300 text-[10px]">DRB1/SOR/257/2025-2026</div>
+                    </div>
                   </div>
-                </div>
+                </StaggerItem>
 
-                <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-amber-300/40 transition-colors">
-                  <HeartHandshake className="w-4 h-4 text-amber-300 shrink-0" />
-                  <div className="text-[11px] sm:text-xs">
-                    <div className="font-bold text-white leading-tight">Free Counselling</div>
-                    <div className="text-slate-300 text-[10px]">For youth & parents</div>
+                <StaggerItem>
+                  <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-amber-300/40 hover:bg-white/15 transition-all">
+                    <HeartHandshake className="w-4 h-4 text-amber-300 shrink-0" />
+                    <div className="text-[11px] sm:text-xs">
+                      <div className="font-bold text-white leading-tight">Free Counselling</div>
+                      <div className="text-slate-300 text-[10px]">For youth & parents</div>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </StaggerItem>
+              </StaggerContainer>
 
             </div>
 
             {/* Right 5 Columns: The Diagonal Capsule Image Collage (Positioned on the RIGHT side) */}
-            <div className="order-1 lg:order-2 lg:col-span-5 w-full flex items-center justify-center lg:justify-end pb-4 lg:pb-0">
+            <div className="order-1 lg:order-2 lg:col-span-5 w-full flex items-center justify-center lg:justify-end pb-2 lg:pb-0">
               <DiagonalCapsuleCollage
                 imageSrc="/images/hero-youth-leadership.jpg"
                 imageAlt="Empowered Indian youth leaders standing together for a drug-free India"
@@ -203,13 +204,13 @@ export const Home: React.FC = () => {
 
         </div>
 
-        {/* HERO BOTTOM EDGE: Creative Responsive Organic Wave SVG Divider */}
-        <div className="relative w-full overflow-hidden leading-none z-10 -mb-px mt-8">
+        {/* HERO BOTTOM EDGE: Seamless Responsive Organic Wave SVG Divider */}
+        {/* Flush with hero bottom (pb-0), matching next section bg-white, 0 gap, 0 navy stripe */}
+        <div className="relative w-full overflow-hidden leading-none z-10 block pointer-events-none mt-6 sm:mt-8 -mb-[1px]">
           <svg
-            className="relative block w-full h-8 sm:h-14 md:h-18 text-white"
+            className="block w-full h-8 sm:h-12 md:h-16 lg:h-20 text-white fill-current"
             viewBox="0 0 1440 120"
             preserveAspectRatio="none"
-            fill="currentColor"
           >
             <path d="M0,32L48,42.7C96,53,192,75,288,80C384,85,480,75,576,58.7C672,43,768,21,864,21.3C960,21,1056,43,1152,58.7C1248,75,1344,85,1392,90.7L1440,96L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" />
           </svg>
@@ -218,15 +219,15 @@ export const Home: React.FC = () => {
       </section>
 
       {/* ============================================================== */}
-      {/* 2. STATS & VERIFIED FOUNDATIONAL PILLARS (Animated Stagger)    */}
+      {/* 2. STATS & VERIFIED FOUNDATIONAL PILLARS (3-Point Balanced)    */}
       {/* ============================================================== */}
-      <section className="bg-white py-8 sm:py-12 border-b border-slate-200/80">
+      <section className="bg-white pt-2 sm:pt-4 pb-6 sm:pb-8 border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          <StaggerContainer staggerDelay={0.12} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
             
-            <StaggerItem>
-              <div className="p-5 sm:p-6 rounded-2xl bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex items-start gap-4 group h-full">
-                <div className="w-11 h-11 rounded-xl bg-brand-navy-950 text-white flex items-center justify-center shrink-0 group-hover:bg-brand-teal-600 transition-colors">
+            <StaggerItem className="h-full">
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex items-start gap-3.5 group h-full hover:-translate-y-1">
+                <div className="w-10 h-10 rounded-xl bg-brand-navy-950 text-white flex items-center justify-center shrink-0 group-hover:bg-brand-teal-600 transition-colors">
                   <ShieldCheck className="w-5 h-5 text-teal-300" />
                 </div>
                 <div>
@@ -238,9 +239,9 @@ export const Home: React.FC = () => {
               </div>
             </StaggerItem>
 
-            <StaggerItem>
-              <div className="p-5 sm:p-6 rounded-2xl bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex items-start gap-4 group h-full">
-                <div className="w-11 h-11 rounded-xl bg-brand-navy-950 text-white flex items-center justify-center shrink-0 group-hover:bg-amber-500 transition-colors">
+            <StaggerItem className="h-full">
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex items-start gap-3.5 group h-full hover:-translate-y-1">
+                <div className="w-10 h-10 rounded-xl bg-brand-navy-950 text-white flex items-center justify-center shrink-0 group-hover:bg-amber-500 transition-colors">
                   <PhoneCall className="w-5 h-5 text-amber-300" />
                 </div>
                 <div>
@@ -252,9 +253,9 @@ export const Home: React.FC = () => {
               </div>
             </StaggerItem>
 
-            <StaggerItem>
-              <div className="p-5 sm:p-6 rounded-2xl bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex items-start gap-4 group h-full">
-                <div className="w-11 h-11 rounded-xl bg-brand-navy-950 text-white flex items-center justify-center shrink-0 group-hover:bg-brand-navy-800 transition-colors">
+            <StaggerItem className="h-full">
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex items-start gap-3.5 group h-full hover:-translate-y-1">
+                <div className="w-10 h-10 rounded-xl bg-brand-navy-950 text-white flex items-center justify-center shrink-0 group-hover:bg-brand-navy-800 transition-colors">
                   <Users className="w-5 h-5 text-sky-300" />
                 </div>
                 <div>
@@ -271,15 +272,15 @@ export const Home: React.FC = () => {
       </section>
 
       {/* ============================================================== */}
-      {/* 3. WHO WE ARE: A MOVEMENT, NOT JUST AN NGO (Scroll Reveal)     */}
+      {/* 3. WHO WE ARE: A MOVEMENT, NOT JUST AN NGO (Alternating Slide) */}
       {/* ============================================================== */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-slate-50 relative overflow-hidden">
+      <section className="py-8 sm:py-12 lg:py-14 bg-slate-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             
             {/* Left Image with organic curvature & smooth reveal */}
             <SlideInLeft className="relative">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border-4 border-white relative z-10 group">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border-4 border-white relative z-10 group max-h-[360px] sm:max-h-[420px]">
                 <img
                   src="/images/youth-empowerment.jpg"
                   alt="Young people collaborating for healthy drug-free community"
@@ -294,11 +295,11 @@ export const Home: React.FC = () => {
               <FloatingElement
                 duration={6}
                 distance={6}
-                className="absolute -bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl shadow-xl border border-slate-100 max-w-xs"
+                className="absolute -bottom-3 left-4 z-20 bg-white/95 backdrop-blur-md p-3 sm:p-3.5 rounded-2xl shadow-xl border border-slate-100 max-w-xs"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
-                    <HeartHandshake className="w-5 h-5" />
+                  <div className="w-8 h-8 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+                    <HeartHandshake className="w-4 h-4" />
                   </div>
                   <div>
                     <div className="text-xs font-bold text-slate-900">Zero Stigma. Total Care.</div>
@@ -309,10 +310,10 @@ export const Home: React.FC = () => {
             </SlideInLeft>
 
             {/* Right Text Content with staggered fade up */}
-            <SlideInRight className="space-y-4 sm:space-y-5">
-              <div className="space-y-1.5">
+            <SlideInRight className="space-y-3.5 sm:space-y-4">
+              <div className="space-y-1">
                 <Badge variant="navy">Who We Are</Badge>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-navy-950 tracking-tight leading-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-3xl font-extrabold text-brand-navy-950 tracking-tight leading-tight">
                   A Movement, Not Just an NGO
                 </h2>
                 <p className="text-sm sm:text-base font-semibold text-brand-teal-700">
@@ -332,7 +333,8 @@ export const Home: React.FC = () => {
                 Our registered society status in Bengaluru provides an accountable framework for working with educators, mental health specialists, civic volunteers, and public health institutions across the country.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+              {/* 4 Checkpoints in clean 2-column layout */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
                   <span className="text-xs font-semibold text-slate-800">
@@ -359,7 +361,7 @@ export const Home: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-2 flex flex-wrap gap-3">
+              <div className="pt-1.5 flex flex-wrap gap-3">
                 <Button to="/about" variant="primary" size="md">
                   <span>Explore Our Story</span>
                   <ArrowRight className="w-4 h-4" />
@@ -378,7 +380,7 @@ export const Home: React.FC = () => {
       {/* ============================================================== */}
       {/* 4. OUR MISSION JOURNEY: 5 PILLARS (Staggered Interactive)     */}
       {/* ============================================================== */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white border-y border-slate-200/80">
+      <section className="py-8 sm:py-12 lg:py-14 bg-white border-y border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Our Approach"
@@ -386,7 +388,7 @@ export const Home: React.FC = () => {
             subtitle="A structured, compassionate framework spanning early prevention to enduring empowerment."
           />
 
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4">
             {[
               {
                 step: '01',
@@ -422,17 +424,17 @@ export const Home: React.FC = () => {
               const IconComp = pillar.icon;
               return (
                 <StaggerItem key={pillar.step} className="h-full">
-                  <div className="bg-slate-50 hover:bg-slate-100/90 p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group h-full hover:-translate-y-1">
-                    <div className="space-y-3">
+                  <div className="bg-slate-50 hover:bg-slate-100/90 p-4 sm:p-4.5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group h-full hover:-translate-y-1">
+                    <div className="space-y-2.5">
                       <div className="flex items-center justify-between">
                         <span className="text-xl sm:text-2xl font-black text-slate-300 group-hover:text-brand-navy-950 transition-colors">
                           {pillar.step}
                         </span>
-                        <div className="w-9 h-9 rounded-xl bg-white shadow-xs border border-slate-200 flex items-center justify-center text-brand-navy-900 group-hover:bg-brand-navy-950 group-hover:text-white transition-all">
+                        <div className="w-8 h-8 rounded-xl bg-white shadow-xs border border-slate-200 flex items-center justify-center text-brand-navy-900 group-hover:bg-brand-navy-950 group-hover:text-white transition-all">
                           <IconComp className="w-4 h-4" />
                         </div>
                       </div>
-                      <h3 className="font-extrabold text-base text-brand-navy-950">
+                      <h3 className="font-extrabold text-sm sm:text-base text-brand-navy-950">
                         {pillar.title}
                       </h3>
                       <p className="text-xs text-slate-600 leading-relaxed">
@@ -448,9 +450,9 @@ export const Home: React.FC = () => {
       </section>
 
       {/* ============================================================== */}
-      {/* 5. SIX CORE PROGRAMMES (Staggered Cards with Zoom)            */}
+      {/* 5. SIX CORE PROGRAMMES (Compact 3x2 Grid with Stagger)        */}
       {/* ============================================================== */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-slate-50">
+      <section className="py-8 sm:py-12 lg:py-14 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Action Framework"
@@ -458,11 +460,11 @@ export const Home: React.FC = () => {
             subtitle="Tailored interventions addressing adolescents, families, campuses, workplaces, and public policy."
           />
 
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {programsData.map((prog) => (
               <StaggerItem key={prog.id} className="h-full">
                 <div className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col group h-full hover:-translate-y-1">
-                  <div className="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
+                  <div className="relative h-38 sm:h-42 overflow-hidden bg-slate-100">
                     <img
                       src={prog.image}
                       alt={prog.title}
@@ -470,7 +472,7 @@ export const Home: React.FC = () => {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950/75 to-transparent" />
-                    <div className="absolute bottom-3 left-4 right-4">
+                    <div className="absolute bottom-2.5 left-3.5 right-3.5">
                       <span className="text-[10px] font-bold tracking-wide text-teal-300 uppercase">
                         Core Initiative
                       </span>
@@ -480,7 +482,7 @@ export const Home: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="p-5 flex-grow flex flex-col justify-between space-y-3">
+                  <div className="p-4 sm:p-4.5 flex-grow flex flex-col justify-between space-y-2.5">
                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
                       {prog.shortDescription}
                     </p>
@@ -501,7 +503,7 @@ export const Home: React.FC = () => {
             ))}
           </StaggerContainer>
 
-          <FadeUp delay={0.2} className="mt-8 sm:mt-10 text-center">
+          <FadeUp delay={0.15} className="mt-6 sm:mt-8 text-center">
             <Button to="/programs" variant="outline" size="md">
               <span>View Full Programme Architecture</span>
               <ArrowRight className="w-4 h-4" />
@@ -511,15 +513,15 @@ export const Home: React.FC = () => {
       </section>
 
       {/* ============================================================== */}
-      {/* 6. FIND A REHABILITATION CENTRE STRIP (Scroll Reveal)          */}
+      {/* 6. FIND A REHABILITATION CENTRE STRIP (Compact 2-Column)       */}
       {/* ============================================================== */}
-      <section className="py-12 sm:py-16 bg-gradient-to-br from-brand-navy-950 via-[#0C2340] to-brand-navy-950 text-white relative overflow-hidden">
+      <section className="py-8 sm:py-10 bg-gradient-to-br from-brand-navy-950 via-[#0C2340] to-brand-navy-950 text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center">
             
-            <SlideInLeft className="space-y-3.5">
+            <SlideInLeft className="space-y-3">
               <Badge variant="amber">Public Guidance Service</Badge>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-3xl font-extrabold text-white leading-tight">
                 Find a Verified De-Addiction & Rehabilitation Centre
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -541,12 +543,12 @@ export const Home: React.FC = () => {
               </div>
             </SlideInLeft>
 
-            <SlideInRight className="bg-white/10 backdrop-blur-md p-5 sm:p-7 rounded-2xl border border-white/15 space-y-3">
+            <SlideInRight className="bg-white/10 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-white/15 space-y-2.5">
               <h3 className="font-bold text-base text-white flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-teal-400" />
                 <span>Our Directory Standards</span>
               </h3>
-              <ul className="space-y-2 text-xs text-slate-300">
+              <ul className="space-y-1.5 text-xs text-slate-300">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-teal-400 shrink-0 mt-0.5" />
                   <span>Only verified government hospitals and accredited autonomous psychiatric departments.</span>
@@ -560,7 +562,7 @@ export const Home: React.FC = () => {
                   <span>Immediate access to 24/7 telephonic assistance for patient guidance.</span>
                 </li>
               </ul>
-              <div className="pt-2 text-[10px] text-slate-400 border-t border-white/10">
+              <div className="pt-1.5 text-[10px] text-slate-400 border-t border-white/10">
                 To submit an accredited public or recognized clinical centre for directory verification, contact our Bengaluru secretariat.
               </div>
             </SlideInRight>
@@ -570,9 +572,9 @@ export const Home: React.FC = () => {
       </section>
 
       {/* ============================================================== */}
-      {/* 7. ACTIVE CAMPAIGNS (Staggered Cards)                         */}
+      {/* 7. ACTIVE CAMPAIGNS (Compact 3-Column Grid)                   */}
       {/* ============================================================== */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-slate-50">
+      <section className="py-8 sm:py-12 lg:py-14 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Public Action"
@@ -580,26 +582,26 @@ export const Home: React.FC = () => {
             subtitle="High-impact initiatives uniting youth, educators, and communities across India."
           />
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {campaignsData.slice(0, 3).map((camp) => (
               <StaggerItem key={camp.id} className="h-full">
                 <div className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-xl transition-all flex flex-col justify-between group h-full hover:-translate-y-1">
                   <div>
-                    <div className="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
+                    <div className="relative h-38 sm:h-42 overflow-hidden bg-slate-100">
                       <img
                         src={camp.image}
                         alt={camp.title}
                         className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                         loading="lazy"
                       />
-                      <div className="absolute top-3 left-3">
+                      <div className="absolute top-2.5 left-2.5">
                         <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-brand-navy-950/80 text-teal-300 backdrop-blur-sm border border-white/10">
                           {camp.badge}
                         </span>
                       </div>
                     </div>
 
-                    <div className="p-5 space-y-2.5">
+                    <div className="p-4 sm:p-4.5 space-y-2">
                       {camp.regionalTitle && (
                         <div className="text-[11px] font-semibold text-brand-teal-700">
                           {camp.regionalTitle}
@@ -614,8 +616,8 @@ export const Home: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="p-5 pt-0 border-t border-slate-100 mt-2">
-                    <div className="flex items-center justify-between text-xs pt-2.5">
+                  <div className="p-4 sm:p-4.5 pt-0 border-t border-slate-100 mt-2">
+                    <div className="flex items-center justify-between text-xs pt-2">
                       <span className="font-semibold text-slate-500 text-[11px]">Status: <strong className="text-teal-700 font-bold">{camp.status}</strong></span>
                       <Link
                         to={`/campaigns/${camp.slug}`}
@@ -631,7 +633,7 @@ export const Home: React.FC = () => {
             ))}
           </StaggerContainer>
 
-          <FadeUp delay={0.2} className="mt-8 sm:mt-10 text-center">
+          <FadeUp delay={0.15} className="mt-6 sm:mt-8 text-center">
             <Button to="/campaigns" variant="secondary" size="md">
               <span>View All Campaigns</span>
               <ArrowRight className="w-4 h-4" />
@@ -641,9 +643,9 @@ export const Home: React.FC = () => {
       </section>
 
       {/* ============================================================== */}
-      {/* 8. UPCOMING EVENTS & WEBINARS (Staggered Cards)               */}
+      {/* 8. UPCOMING EVENTS & WEBINARS (Compact 3-Point Balanced Grid)  */}
       {/* ============================================================== */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white border-t border-slate-200/80">
+      <section className="py-8 sm:py-12 lg:py-14 bg-white border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Community Calendar"
@@ -651,11 +653,11 @@ export const Home: React.FC = () => {
             subtitle="Empowering educational webinars and interactive assemblies scheduled for 2026–2027."
           />
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
             {upcomingEvents.map((evt) => (
               <StaggerItem key={evt.id} className="h-full">
-                <div className="bg-slate-50 p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-xs hover:border-slate-300 hover:shadow-md transition-all flex flex-col justify-between space-y-3.5 h-full hover:-translate-y-1">
-                  <div className="space-y-2.5">
+                <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:border-slate-300 hover:shadow-md transition-all flex flex-col justify-between space-y-3 h-full hover:-translate-y-1">
+                  <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <Badge variant="teal">{evt.category}</Badge>
                       <span className="text-[10px] font-semibold text-slate-400">Open Public Registration</span>
@@ -676,12 +678,12 @@ export const Home: React.FC = () => {
                       </div>
                     </div>
 
-                    <p className="text-xs text-slate-600 leading-relaxed pt-1">
+                    <p className="text-xs text-slate-600 leading-relaxed pt-0.5">
                       {evt.description}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-200/60">
+                  <div className="pt-2.5 border-t border-slate-200/60">
                     <Button to="/contact?subject=Event+Registration" variant="outline" size="sm" fullWidth>
                       <span>Register to Attend</span>
                     </Button>
@@ -699,16 +701,16 @@ export const Home: React.FC = () => {
       <HelplineBanner />
 
       {/* ============================================================== */}
-      {/* 10. VOLUNTEER & DONATE DUAL CALL TO ACTION (Staggered Cards)  */}
+      {/* 10. VOLUNTEER & DONATE DUAL CALL TO ACTION (Compact Layout)   */}
       {/* ============================================================== */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-slate-50">
+      <section className="py-8 sm:py-12 lg:py-14 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+          <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
             
             {/* Volunteer Card */}
             <StaggerItem className="h-full">
-              <div className="bg-gradient-to-br from-brand-navy-950 via-brand-navy-900 to-brand-navy-950 text-white rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col justify-between shadow-xl relative overflow-hidden group border border-white/10 h-full hover:shadow-2xl transition-all">
-                <div className="space-y-3.5 relative z-10">
+              <div className="bg-gradient-to-br from-brand-navy-950 via-brand-navy-900 to-brand-navy-950 text-white rounded-3xl p-5 sm:p-7 md:p-8 flex flex-col justify-between shadow-xl relative overflow-hidden group border border-white/10 h-full hover:shadow-2xl transition-all">
+                <div className="space-y-3 relative z-10">
                   <Badge variant="teal">Join The Movement</Badge>
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white">
                     Be the Change. Become a Volunteer.
@@ -716,19 +718,19 @@ export const Home: React.FC = () => {
                   <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                     Join our passionate network of Campus Ambassadors, Event Coordinators, Counsellors, and Community Leaders standing up for healthy, substance-free lives.
                   </p>
-                  <ul className="space-y-1.5 text-xs text-slate-300 pt-1">
+                  <ul className="space-y-1.5 text-xs text-slate-300 pt-0.5">
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-teal-400 shrink-0" />
                       <span>Free workshop training on adolescent psychology & peer leadership</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-teal-400 shrink-0" />
                       <span>Lead awareness drives in your college or neighbourhood</span>
                     </li>
                   </ul>
                 </div>
 
-                <div className="pt-6 relative z-10">
+                <div className="pt-5 relative z-10">
                   <Button to="/volunteer" variant="accent" size="lg">
                     <span>Sign Up as a Volunteer</span>
                     <ArrowRight className="w-4 h-4 ml-1" />
@@ -739,8 +741,8 @@ export const Home: React.FC = () => {
 
             {/* Donate Card */}
             <StaggerItem className="h-full">
-              <div className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 md:p-10 border border-slate-200/90 flex flex-col justify-between shadow-md relative overflow-hidden group h-full hover:shadow-xl transition-all">
-                <div className="space-y-3.5 relative z-10">
+              <div className="bg-white text-slate-900 rounded-3xl p-5 sm:p-7 md:p-8 border border-slate-200/90 flex flex-col justify-between shadow-md relative overflow-hidden group h-full hover:shadow-xl transition-all">
+                <div className="space-y-3 relative z-10">
                   <Badge variant="amber">Support Our Mission</Badge>
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-brand-navy-950">
                     Every Contribution Can Protect a Young Life.
@@ -748,7 +750,7 @@ export const Home: React.FC = () => {
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     Your contribution directly funds student guidance workbooks, free telephonic counselling sessions, school awareness toolkits, and community recovery assistance.
                   </p>
-                  <div className="grid grid-cols-3 gap-2 pt-1 text-center">
+                  <div className="grid grid-cols-3 gap-2 pt-0.5 text-center">
                     <div className="bg-slate-50 p-2 sm:p-2.5 rounded-xl border border-slate-200/80">
                       <div className="font-extrabold text-brand-navy-950 text-xs sm:text-sm">₹500</div>
                       <div className="text-[9px] sm:text-[10px] text-slate-500">Counselling Session</div>
@@ -764,7 +766,7 @@ export const Home: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-6 relative z-10">
+                <div className="pt-5 relative z-10">
                   <Button to="/donate" variant="primary" size="lg">
                     <Heart className="w-4 h-4 fill-current text-white mr-1" />
                     <span>Donate to AFOI</span>
@@ -776,7 +778,7 @@ export const Home: React.FC = () => {
           </StaggerContainer>
 
           {/* Trust Disclaimer Notice */}
-          <FadeUp delay={0.2} className="mt-10 sm:mt-12">
+          <FadeUp delay={0.15} className="mt-8 sm:mt-10">
             <TrustDisclaimer />
           </FadeUp>
 

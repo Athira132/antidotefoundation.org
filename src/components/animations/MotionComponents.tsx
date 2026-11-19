@@ -2,14 +2,15 @@ import React from 'react';
 import { motion, HTMLMotionProps, Variants, useReducedMotion } from 'framer-motion';
 
 // Easing presets
-export const smoothEase = [0.22, 1, 0.36, 1]; // Custom cubic-bezier for snappy, premium feel
+export const smoothEase = [0.16, 1, 0.3, 1]; // Responsive snappy cubic-bezier for premium feel
 export const gentleEase = [0.25, 0.1, 0.25, 1];
 
-// Viewport default config to ensure animations trigger reliably without staying hidden
+// Viewport default config: triggers smoothly as soon as 5% of element touches viewport
+// Zero negative margin prevents elements from getting stuck hidden on mobile or during quick scrolls
 export const defaultViewport = {
   once: true,
-  amount: 0.08,
-  margin: '-20px'
+  amount: 0.05,
+  margin: '0px 0px -20px 0px'
 };
 
 // ============================================================================
