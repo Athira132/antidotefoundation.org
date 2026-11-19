@@ -9,13 +9,20 @@ import {
   Share2,
   Clock,
   Building,
-  PhoneCall
+  PhoneCall,
+  FileText
 } from 'lucide-react';
 import { newsArticles } from '../data/news';
 import { organizationData } from '../data/organization';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import {
+  FadeUp,
+  SlideInLeft,
+  SlideInRight
+} from '../components/animations/MotionComponents';
 
 export const NewsArticle: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -28,50 +35,44 @@ export const NewsArticle: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* Hero Header */}
-      <section className="bg-brand-navy-950 text-white py-16 lg:py-20 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
-          <Link
-            to="/news"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-teal-300 hover:text-white transition-colors mb-4"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to All News</span>
-          </Link>
+      {/* 1. DISTINCTIVE HERO BANNER */}
+      <PageHero
+        badge={article.category}
+        badgeVariant="teal"
+        badgeIcon={FileText}
+        title={article.title}
+        subtitle={article.excerpt}
+        breadcrumbs={[
+          { label: 'News & Dispatches', href: '/news' },
+          { label: article.title }
+        ]}
+        imageSrc={article.image}
+        imageAlt={article.title}
+        imageBadgeText={`Published: ${article.date} • ${article.verificationStatus}`}
+        variant="split"
+        actions={
+          <Button to="/news" variant="secondary" size="md" className="bg-white/10 hover:bg-white/20 text-white border-white/20">
+            <ArrowLeft className="w-4 h-4 mr-1" />
+            <span>Back to All Dispatches</span>
+          </Button>
+        }
+      />
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Badge variant="teal">{article.category}</Badge>
-            <span className="text-xs text-slate-300 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5" />
-              <span>{article.date}</span>
-            </span>
-          </div>
-
-          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
-            {article.title}
-          </h1>
-
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-light">
-            {article.excerpt}
-          </p>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <section className="py-16 bg-white">
+      {/* 2. Main Content */}
+      <section className="py-14 sm:py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           
-          {/* Main Image */}
-          <div className="rounded-3xl overflow-hidden shadow-elevated border border-slate-200">
+          {/* Main Image with subtle zoom */}
+          <FadeUp className="rounded-3xl overflow-hidden shadow-elevated border border-slate-200 group">
             <img
               src={article.image}
               alt={article.title}
-              className="w-full h-80 sm:h-96 object-cover"
+              className="w-full h-80 sm:h-96 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             />
-          </div>
+          </FadeUp>
 
           {/* Verification Box */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-start gap-3">
+          <FadeUp delay={0.1} className="p-4 sm:p-5 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
             <div className="space-y-1">
               <strong className="block font-bold">Editorial Verification Protocol:</strong>
@@ -79,17 +80,17 @@ export const NewsArticle: React.FC = () => {
                 Status: <strong className="underline">{article.verificationStatus}</strong>. {article.verificationNote || 'Verified per registered institutional record and official public filing.'}
               </p>
             </div>
-          </div>
+          </FadeUp>
 
           {/* Article Body */}
-          <div className="space-y-5 text-slate-700 leading-relaxed text-sm sm:text-base font-normal">
+          <FadeUp delay={0.15} className="space-y-5 text-slate-700 leading-relaxed text-sm sm:text-base font-normal">
             {article.content.map((p, idx) => (
               <p key={idx}>{p}</p>
             ))}
-          </div>
+          </FadeUp>
 
           {/* Registered Non-profit Signature */}
-          <div className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500">
+          <FadeUp delay={0.2} className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500">
             <div>
               <strong className="text-brand-navy-950">Published by Secretariat:</strong> Antidote Foundation of India
               <div className="text-[11px] text-slate-400">Reg No: {organizationData.registrationNumber} • Bengaluru, Karnataka</div>
@@ -97,9 +98,9 @@ export const NewsArticle: React.FC = () => {
 
             <Button to="/news" variant="outline" size="sm">
               <span>More News Dispatches</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-3.5 h-3.5 ml-1" />
             </Button>
-          </div>
+          </FadeUp>
 
         </div>
       </section>

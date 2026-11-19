@@ -17,7 +17,13 @@ import { organizationData } from '../data/organization';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import {
+  FadeUp,
+  StaggerContainer,
+  StaggerItem
+} from '../components/animations/MotionComponents';
 
 export const Volunteer: React.FC = () => {
   const navigate = useNavigate();
@@ -86,7 +92,6 @@ export const Volunteer: React.FC = () => {
     e.preventDefault();
     if (validate()) {
       setSubmitting(true);
-      // Simulate frontend submission handling with safety notice
       setTimeout(() => {
         setSubmitting(false);
         navigate('/volunteer/thank-you', { state: { volunteerName: formData.name, role: formData.preferredRole } });
@@ -97,21 +102,31 @@ export const Volunteer: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* Hero Header */}
-      <section className="bg-brand-navy-950 text-white py-20 lg:py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto relative z-10">
-          <Badge variant="teal" className="mb-4">Youth Empowerment Movement</Badge>
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-            Be the Change. Become a Volunteer.
-          </h1>
-          <p className="mt-6 text-base sm:text-xl text-slate-300 font-light leading-relaxed">
-            Stand with Antidote Foundation of India. Empower fellow young adults, break the silence on mental wellness, and protect communities from addiction.
-          </p>
-        </div>
-      </section>
+      {/* 1. DISTINCTIVE HERO BANNER */}
+      <PageHero
+        badge="Youth Empowerment Movement"
+        badgeVariant="teal"
+        badgeIcon={Users}
+        title="Be the Change. Become a Volunteer."
+        subtitle="Stand with Antidote Foundation of India. Empower fellow young adults, break the silence on mental wellness, and protect communities from addiction."
+        breadcrumbs={[{ label: 'Volunteer' }]}
+        imageSrc="/images/community-volunteering.jpg"
+        imageAlt="AFOI youth volunteers and community leaders"
+        imageBadgeText="Over 500+ active student leaders nationwide"
+        variant="split"
+        actions={
+          <a
+            href="#volunteer-form"
+            className="shimmer-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-extrabold text-sm shadow-xl hover:-translate-y-0.5 transition-all"
+          >
+            <span>Fill Volunteer Application</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        }
+      />
 
-      {/* Roles & Opportunities */}
-      <section className="py-20 bg-white border-b border-slate-200">
+      {/* 2. Roles & Opportunities (Staggered Cards) */}
+      <section className="py-14 sm:py-20 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Opportunities"
@@ -119,31 +134,32 @@ export const Volunteer: React.FC = () => {
             subtitle="Choose a volunteer pathway that matches your skills, academic background, and passion."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {roles.map((r) => {
               const IconComp = r.icon;
               return (
-                <div
-                  key={r.title}
-                  className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-subtle hover:shadow-elevated transition-all space-y-3 group"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-brand-navy-900 text-white flex items-center justify-center group-hover:bg-brand-teal-600 transition-colors">
-                    <IconComp className="w-6 h-6 text-teal-300 group-hover:text-white" />
+                <StaggerItem key={r.title} className="h-full">
+                  <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-subtle hover:shadow-xl hover:-translate-y-1 transition-all space-y-3 group h-full flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="w-12 h-12 rounded-2xl bg-brand-navy-900 text-white flex items-center justify-center group-hover:bg-brand-teal-600 transition-colors">
+                        <IconComp className="w-6 h-6 text-teal-300 group-hover:text-white" />
+                      </div>
+                      <h3 className="font-extrabold text-lg text-brand-navy-950">
+                        {r.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        {r.desc}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="font-extrabold text-lg text-brand-navy-950">
-                    {r.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    {r.desc}
-                  </p>
-                </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerContainer>
 
           {/* Volunteer Benefits */}
-          <div className="mt-16 bg-brand-navy-50 p-8 sm:p-10 rounded-3xl border border-brand-navy-100">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <FadeUp delay={0.2} className="mt-14 bg-brand-navy-50 p-6 sm:p-10 rounded-3xl border border-brand-navy-100">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               <div className="space-y-2">
                 <div className="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center">
                   <Award className="w-5 h-5" />
@@ -177,16 +193,16 @@ export const Volunteer: React.FC = () => {
             <div className="mt-6 pt-4 border-t border-brand-navy-200/60 text-[11px] text-slate-500">
               * Note on certifications: Official community service certificates and academic credits are awarded based on verified active attendance and completion of assigned institutional hours.
             </div>
-          </div>
+          </FadeUp>
 
         </div>
       </section>
 
-      {/* Registration Form Section */}
-      <section className="py-20 bg-slate-50">
+      {/* 3. Registration Form Section */}
+      <section id="volunteer-form" className="py-14 sm:py-20 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 shadow-elevated space-y-8">
+          <FadeUp className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-12 shadow-elevated space-y-8">
             <div className="text-center space-y-2">
               <Badge variant="teal">Enrollment Application</Badge>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy-950">
@@ -399,7 +415,7 @@ export const Volunteer: React.FC = () => {
               </div>
 
             </form>
-          </div>
+          </FadeUp>
 
         </div>
       </section>
@@ -410,4 +426,3 @@ export const Volunteer: React.FC = () => {
     </div>
   );
 };
-

@@ -16,7 +16,15 @@ import { organizationData } from '../data/organization';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import {
+  FadeUp,
+  SlideInLeft,
+  SlideInRight,
+  StaggerContainer,
+  StaggerItem
+} from '../components/animations/MotionComponents';
 
 export const Contact: React.FC = () => {
   const location = useLocation();
@@ -90,27 +98,31 @@ export const Contact: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* Hero Header */}
-      <section className="bg-brand-navy-950 text-white py-20 lg:py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto relative z-10">
-          <Badge variant="teal" className="mb-4">Get in Touch</Badge>
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-            We Are Here to Help.
-          </h1>
-          <p className="mt-5 text-base sm:text-xl text-slate-300 font-light leading-relaxed">
-            Reach out for free confidential youth counselling, volunteer engagement, school workshop partnerships, or institutional collaborations.
-          </p>
-        </div>
-      </section>
+      {/* 1. DISTINCTIVE HERO BANNER */}
+      <PageHero
+        badge="Get in Touch"
+        badgeVariant="teal"
+        badgeIcon={MessageSquare}
+        title="We Are Here to Help."
+        subtitle="Reach out for free confidential youth counselling, volunteer engagement, school workshop partnerships, or institutional collaborations."
+        breadcrumbs={[{ label: 'Contact Us' }]}
+        variant="centered"
+        stats={[
+          { label: 'Helpline', value: '24/7 Active' },
+          { label: 'Confidentiality', value: '100% Protected' },
+          { label: 'Location', value: 'Bengaluru, India' },
+          { label: 'Response', value: '< 24 Hours' }
+        ]}
+      />
 
-      {/* Main Content: Info Cards & Form */}
-      <section className="py-20 bg-slate-50">
+      {/* 2. Main Content: Info Cards & Form */}
+      <section className="py-14 sm:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
             
             {/* Left 5 Cols: Contact Information */}
-            <div className="lg:col-span-5 space-y-6">
+            <SlideInLeft className="lg:col-span-5 space-y-6">
               
               {/* 24/7 Helpline Card */}
               <div className="bg-gradient-to-br from-brand-navy-900 to-brand-navy-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-4 border border-brand-navy-800">
@@ -188,10 +200,10 @@ export const Contact: React.FC = () => {
                 </div>
               </div>
 
-            </div>
+            </SlideInLeft>
 
             {/* Right 7 Cols: Contact Form */}
-            <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-elevated space-y-6">
+            <SlideInRight className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-elevated space-y-6">
               
               <div className="space-y-1">
                 <Badge variant="teal">Send an Enquiry</Badge>
@@ -240,15 +252,17 @@ export const Contact: React.FC = () => {
                   {/* Name */}
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                      Your Name *
+                      Your Full Name *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Ramesh Kumar"
+                      placeholder="e.g. Rahul Nambiar"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500"
+                      className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
+                        errors.name ? 'border-rose-500 bg-rose-50/50' : 'border-slate-200 focus:border-brand-teal-500'
+                      }`}
                     />
                     {errors.name && <p className="text-xs text-rose-600 mt-1">{errors.name}</p>}
                   </div>
@@ -257,7 +271,7 @@ export const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                        Phone Number *
+                        Phone / WhatsApp *
                       </label>
                       <input
                         type="tel"
@@ -265,7 +279,9 @@ export const Contact: React.FC = () => {
                         placeholder="+91 98765 43210"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500"
+                        className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
+                          errors.phone ? 'border-rose-500 bg-rose-50/50' : 'border-slate-200 focus:border-brand-teal-500'
+                        }`}
                       />
                       {errors.phone && <p className="text-xs text-rose-600 mt-1">{errors.phone}</p>}
                     </div>
@@ -277,16 +293,18 @@ export const Contact: React.FC = () => {
                       <input
                         type="email"
                         required
-                        placeholder="e.g. ramesh@gmail.com"
+                        placeholder="e.g. rahul@domain.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500"
+                        className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
+                          errors.email ? 'border-rose-500 bg-rose-50/50' : 'border-slate-200 focus:border-brand-teal-500'
+                        }`}
                       />
                       {errors.email && <p className="text-xs text-rose-600 mt-1">{errors.email}</p>}
                     </div>
                   </div>
 
-                  {/* Subject */}
+                  {/* Subject Dropdown */}
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                       Subject / Enquiry Type *
@@ -305,7 +323,7 @@ export const Contact: React.FC = () => {
                   {/* Message */}
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                      Your Message or Request *
+                      Message / Request Details *
                     </label>
                     <textarea
                       rows={5}
@@ -313,7 +331,9 @@ export const Contact: React.FC = () => {
                       placeholder="Please describe how we can assist you..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500"
+                      className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
+                        errors.message ? 'border-rose-500 bg-rose-50/50' : 'border-slate-200 focus:border-brand-teal-500'
+                      }`}
                     />
                     {errors.message && <p className="text-xs text-rose-600 mt-1">{errors.message}</p>}
                   </div>
@@ -328,7 +348,7 @@ export const Contact: React.FC = () => {
                         className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-navy-900 focus:ring-brand-teal-500"
                       />
                       <span className="text-xs text-slate-600 leading-relaxed">
-                        I agree to the <a href="/privacy-policy" className="text-brand-navy-900 font-semibold underline">Privacy Policy</a> and authorize AFOI to contact me regarding this enquiry. My information will remain confidential.
+                        I agree to the <a href="/privacy-policy" className="text-brand-navy-900 font-semibold underline">Privacy Policy</a> and authorize Antidote Foundation of India to contact me regarding this enquiry.
                       </span>
                     </label>
                     {errors.privacyConsent && (
@@ -336,8 +356,8 @@ export const Contact: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Submit */}
-                  <div className="pt-3">
+                  {/* Submit CTA */}
+                  <div className="pt-2">
                     <Button
                       type="submit"
                       variant="primary"
@@ -345,59 +365,17 @@ export const Contact: React.FC = () => {
                       fullWidth
                       disabled={submitting}
                     >
-                      <Send className="w-4 h-4 mr-2" />
-                      <span>{submitting ? 'Submitting Message...' : 'Send Message'}</span>
+                      <Send className="w-4 h-4 mr-1" />
+                      <span>{submitting ? 'Sending Message...' : 'Submit Message'}</span>
                     </Button>
-                  </div>
-
-                  <div className="text-center text-[11px] text-slate-400">
-                    Need immediate emergency intervention? Call <strong>112</strong> or our 24/7 Helpline: <strong>{organizationData.contact.helplineDisplay}</strong>
                   </div>
 
                 </form>
               )}
 
-            </div>
+            </SlideInRight>
 
           </div>
-
-          {/* Map Representation Section */}
-          <div className="mt-16 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle space-y-4">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-              <div>
-                <h3 className="font-extrabold text-base text-brand-navy-950 flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-teal-600" />
-                  <span>Our Registered Location in Bengaluru</span>
-                </h3>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  No. 38, Lakshman Layout, J. P. Nagar, Bengaluru, Karnataka 560 078, India
-                </p>
-              </div>
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=Lakshman+Layout+JP+Nagar+Bengaluru+560078"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-bold text-brand-navy-900 hover:text-teal-700 underline"
-              >
-                Open in Google Maps →
-              </a>
-            </div>
-
-            <div className="w-full h-72 sm:h-80 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 relative">
-              <iframe
-                title="Antidote Foundation Registered Location"
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                scrolling="no"
-                marginHeight={0}
-                marginWidth={0}
-                src="https://www.openstreetmap.org/export/embed.html?bbox=77.5750%2C12.8950%2C77.6150%2C12.9250&amp;layer=mapnik&amp;marker=12.9100%2C77.5950"
-                className="w-full h-full"
-              />
-            </div>
-          </div>
-
         </div>
       </section>
 
@@ -407,4 +385,3 @@ export const Contact: React.FC = () => {
     </div>
   );
 };
-

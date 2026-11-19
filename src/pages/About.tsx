@@ -20,8 +20,16 @@ import { organizationData } from '../data/organization';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
 import { TrustDisclaimer } from '../components/common/TrustDisclaimer';
+import {
+  FadeUp,
+  SlideInLeft,
+  SlideInRight,
+  StaggerContainer,
+  StaggerItem
+} from '../components/animations/MotionComponents';
 
 export const About: React.FC = () => {
   const coreValues = [
@@ -89,33 +97,46 @@ export const About: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* Hero Header */}
-      <section className="bg-brand-navy-950 text-white py-20 lg:py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-4xl mx-auto">
-          <Badge variant="teal" className="mb-4">About Antidote Foundation of India</Badge>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-            Protecting Young Lives. Building a Drug-Free India.
-          </h1>
-          <p className="mt-6 text-base sm:text-xl text-slate-300 font-light leading-relaxed">
-            We are an autonomous, registered non-profit society dedicated to empowering youth aged 13–30, mitigating substance risks, and fostering compassionate community recovery.
-          </p>
-        </div>
-      </section>
+      {/* 1. DISTINCTIVE HERO BANNER (Split layout with youth imagery) */}
+      <PageHero
+        badge="About Antidote Foundation of India"
+        badgeVariant="teal"
+        badgeIcon={ShieldCheck}
+        title="Protecting Young Lives. Building a Drug-Free India."
+        subtitle="We are an autonomous, registered non-profit society dedicated to empowering youth aged 13–30, mitigating substance risks, and fostering compassionate community recovery."
+        breadcrumbs={[{ label: 'About Us' }]}
+        imageSrc="/images/youth-empowerment.jpg"
+        imageAlt="AFOI youth movement leadership and educators"
+        imageBadgeText="Registered Society (Reg: DRB1/SOR/257/2025-2026)"
+        variant="split"
+        actions={
+          <>
+            <Button to="/programs" variant="accent" size="md">
+              <span>Our Programmes</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+            <Button to="/volunteer" variant="secondary" size="md" className="bg-white/10 hover:bg-white/20 text-white border-white/20">
+              <Users className="w-4 h-4 mr-1 text-teal-300" />
+              <span>Join Volunteer Force</span>
+            </Button>
+          </>
+        }
+      />
 
-      {/* Mission & Vision Section */}
-      <section className="py-20 bg-white border-b border-slate-200">
+      {/* 2. Mission & Vision Section (Scroll-triggered slide in) */}
+      <section className="py-14 sm:py-20 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             
-            <div className="space-y-6">
+            <SlideInLeft className="space-y-6">
               <div className="space-y-2">
                 <Badge variant="navy">Our Purpose & Charter</Badge>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-navy-950">
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-brand-navy-950">
                   Empowering Youth. Preventing Addiction. Transforming India.
                 </h2>
               </div>
 
-              <div className="space-y-4 text-sm sm:text-base text-slate-600 leading-relaxed">
+              <div className="space-y-4 text-xs sm:text-base text-slate-600 leading-relaxed">
                 <p>
                   Substance dependency among adolescents is rarely a failure of moral character; it is a complex, neurobiological and psycho-social challenge triggered by anxiety, peer pressure, curiosity, academic strain, or domestic distress.
                 </p>
@@ -127,42 +148,42 @@ export const About: React.FC = () => {
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-brand-navy-50 border border-brand-navy-100 flex items-start gap-4">
-                <Building2 className="w-6 h-6 text-brand-navy-800 shrink-0 mt-0.5" />
+              <div className="p-4 sm:p-5 rounded-2xl bg-brand-navy-50 border border-brand-navy-100 flex items-start gap-3 sm:gap-4">
+                <Building2 className="w-5 sm:w-6 h-5 sm:h-6 text-brand-navy-800 shrink-0 mt-0.5" />
                 <div className="text-xs text-brand-navy-950 leading-relaxed">
                   <strong>Registered Non-Profit Secretariat:</strong> No. 38, Lakshman Layout, J. P. Nagar, Bengaluru, Karnataka 560 078. Registered under Society Registration No. <strong className="underline">DRB1/SOR/257/2025-2026</strong>.
                 </div>
               </div>
-            </div>
+            </SlideInLeft>
 
-            <div className="space-y-6">
-              <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200 space-y-4 shadow-subtle">
+            <SlideInRight className="space-y-6">
+              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-3.5 shadow-subtle hover:shadow-md transition-all">
                 <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center">
                   <Target className="w-6 h-6" />
                 </div>
-                <h3 className="text-2xl font-bold text-brand-navy-950">Our Vision</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-bold text-brand-navy-950">Our Vision</h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   An India where every adolescent and young adult is equipped with the knowledge, emotional resilience, and community support necessary to reject harmful substances and realize their full leadership potential in a drug-free society.
                 </p>
               </div>
 
-              <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200 space-y-4 shadow-subtle">
+              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-3.5 shadow-subtle hover:shadow-md transition-all">
                 <div className="w-12 h-12 rounded-2xl bg-brand-navy-900 text-white flex items-center justify-center">
                   <Compass className="w-6 h-6 text-amber-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-brand-navy-950">Our Mission</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-bold text-brand-navy-950">Our Mission</h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   To deliver scientific drug awareness education in schools and colleges, provide confidential psychological first aid and parent guidance through our 24/7 helpline, and foster compassionate community recovery pathways without stigma or punishment.
                 </p>
               </div>
-            </div>
+            </SlideInRight>
 
           </div>
         </div>
       </section>
 
-      {/* Core Values Section */}
-      <section className="py-20 bg-slate-50">
+      {/* 3. Core Values Section (Staggered Card Grid) */}
+      <section className="py-14 sm:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Ethical Foundation"
@@ -170,32 +191,33 @@ export const About: React.FC = () => {
             subtitle="The enduring moral principles that guide our counsellors, educators, and volunteers in every interaction."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {coreValues.map((val) => {
               const Icon = val.icon;
               return (
-                <div
-                  key={val.title}
-                  className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/90 shadow-subtle hover:shadow-elevated transition-all space-y-3 group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-brand-navy-50 text-brand-navy-900 flex items-center justify-center group-hover:bg-brand-navy-900 group-hover:text-white transition-all">
-                    <Icon className="w-6 h-6" />
+                <StaggerItem key={val.title} className="h-full">
+                  <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/90 shadow-subtle hover:shadow-xl hover:-translate-y-1 transition-all space-y-3 group h-full flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="w-12 h-12 rounded-xl bg-brand-navy-50 text-brand-navy-900 flex items-center justify-center group-hover:bg-brand-navy-900 group-hover:text-white transition-all">
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <h3 className="font-extrabold text-lg sm:text-xl text-brand-navy-950">
+                        {val.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        {val.desc}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="font-extrabold text-xl text-brand-navy-950">
-                    {val.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    {val.desc}
-                  </p>
-                </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <section className="py-20 bg-white border-y border-slate-200">
+      {/* 4. Timeline Section (Staggered Milestones) */}
+      <section className="py-14 sm:py-20 bg-white border-y border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             badge="Institutional Milestones"
@@ -203,47 +225,48 @@ export const About: React.FC = () => {
             subtitle="Verified milestones in establishing a transparent, community-rooted substance awareness movement."
           />
 
-          <div className="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-0.5 before:bg-slate-200">
+          <StaggerContainer className="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-0.5 before:bg-slate-200">
             {milestones.map((m, idx) => (
-              <div
-                key={m.title}
-                className={`relative flex flex-col md:flex-row items-start md:items-center gap-6 ${
-                  idx % 2 === 0 ? 'md:flex-row-reverse text-left md:text-right' : 'text-left'
-                }`}
-              >
-                {/* Dot */}
-                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-teal-500 border-4 border-white shadow-md z-10" />
+              <StaggerItem key={m.title}>
+                <div
+                  className={`relative flex flex-col md:flex-row items-start md:items-center gap-6 ${
+                    idx % 2 === 0 ? 'md:flex-row-reverse text-left md:text-right' : 'text-left'
+                  }`}
+                >
+                  {/* Dot */}
+                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-teal-500 border-4 border-white shadow-md z-10" />
 
-                {/* Content Box */}
-                <div className="ml-10 md:ml-0 md:w-1/2 md:px-8 space-y-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200">
-                    {m.year}
-                  </span>
-                  <h4 className="text-lg font-bold text-brand-navy-950">
-                    {m.title}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    {m.desc}
-                  </p>
+                  {/* Content Box */}
+                  <div className="ml-10 md:ml-0 md:w-1/2 md:px-8 space-y-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200 inline-block">
+                      {m.year}
+                    </span>
+                    <h4 className="text-base sm:text-lg font-bold text-brand-navy-950">
+                      {m.title}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {m.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
-      {/* Visual Image Feature */}
-      <section className="py-16 bg-slate-50">
+      {/* 5. Visual Image Feature (Empathetic Listening) */}
+      <section className="py-14 sm:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="rounded-2xl overflow-hidden shadow-elevated border border-slate-200">
+            <SlideInLeft className="rounded-2xl overflow-hidden shadow-elevated border border-slate-200 group">
               <img
                 src="/images/parent-child-communication.jpg"
                 alt="Supportive parent child communication"
-                className="w-full h-80 object-cover"
+                className="w-full h-72 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-            </div>
-            <div className="space-y-4">
+            </SlideInLeft>
+            <SlideInRight className="space-y-4">
               <Badge variant="teal">Community-Driven Approach</Badge>
               <h3 className="text-2xl sm:text-3xl font-bold text-brand-navy-950">
                 Healing Starts with Empathetic Listening
@@ -257,22 +280,23 @@ export const About: React.FC = () => {
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Button>
               </div>
-            </div>
+            </SlideInRight>
           </div>
         </div>
       </section>
 
-      {/* Helpline Section */}
+      {/* 6. Helpline Section */}
       <HelplineBanner />
 
-      {/* Governance & Trust Section */}
+      {/* 7. Governance & Trust Section */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <TrustDisclaimer />
+          <FadeUp>
+            <TrustDisclaimer />
+          </FadeUp>
         </div>
       </section>
 
     </div>
   );
 };
-

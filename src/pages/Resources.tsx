@@ -19,7 +19,15 @@ import { organizationData } from '../data/organization';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import {
+  FadeUp,
+  SlideInLeft,
+  SlideInRight,
+  StaggerContainer,
+  StaggerItem
+} from '../components/animations/MotionComponents';
 
 export const Resources: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'all' | 'students' | 'parents' | 'teachers' | 'downloads'>('all');
@@ -32,19 +40,17 @@ export const Resources: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* Hero Header */}
-      <section className="bg-brand-navy-950 text-white py-20 lg:py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto relative z-10">
-          <Badge variant="teal" className="mb-4">Knowledge & Intervention Hub</Badge>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-            Educational Resources & Toolkits
-          </h1>
-          <p className="mt-5 text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-            Evidence-based guides, early indicator checklists, and practical action frameworks for students, parents, and educators.
-          </p>
-
-          {/* Golden Rule Banner */}
-          <div className="mt-10 inline-flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-6 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-extrabold text-amber-300">
+      {/* 1. DISTINCTIVE HERO BANNER */}
+      <PageHero
+        badge="Knowledge & Intervention Hub"
+        badgeVariant="teal"
+        badgeIcon={BookOpen}
+        title="Educational Resources & Toolkits"
+        subtitle="Evidence-based guides, early indicator checklists, and practical action frameworks for students, parents, and educators."
+        breadcrumbs={[{ label: 'Resources' }]}
+        variant="centered"
+        actions={
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-6 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-extrabold text-amber-300">
             <span>FOR EVERYONE:</span>
             <span className="text-white">NOTICE</span>
             <span className="text-teal-400">→</span>
@@ -52,8 +58,8 @@ export const Resources: React.FC = () => {
             <span className="text-teal-400">→</span>
             <span className="text-teal-300">GET HELP</span>
           </div>
-        </div>
-      </section>
+        }
+      />
 
       {/* Category Tabs Navigation */}
       <section className="bg-white border-b border-slate-200 sticky top-16 z-30 shadow-xs">
@@ -89,282 +95,278 @@ export const Resources: React.FC = () => {
       </section>
 
       {/* 1. STUDENT SECTION */}
-      <section id="students" className="py-20 bg-slate-50 border-b border-slate-200 scroll-mt-28">
+      <section id="students" className="py-14 sm:py-20 bg-slate-50 border-b border-slate-200 scroll-mt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             
-            <div className="lg:col-span-4 space-y-4 lg:sticky lg:top-36">
+            <SlideInLeft className="lg:col-span-4 space-y-4 lg:sticky lg:top-36">
               <Badge variant="teal">Youth & Adolescents</Badge>
-              <h2 className="text-3xl font-extrabold text-brand-navy-950 leading-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy-950 leading-tight">
                 Know the Risks. Know Your Choices.
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Navigating peer pressure, academic anxiety, and modern chemical temptations with clarity, courage, and self-respect.
+                Curiosity, peer pressure, exam anxiety, or seeking a temporary escape are natural feelings, but turning to chemical substances has long-term neurological consequences.
               </p>
-
-              <div className="rounded-2xl overflow-hidden shadow-subtle border border-slate-200">
-                <img
-                  src="/images/youth-empowerment.jpg"
-                  alt="Young Indian students smiling confidently"
-                  className="w-full h-56 object-cover"
-                />
-              </div>
-
-              <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 text-xs font-bold leading-relaxed">
-                "{studentResource?.takeawayQuote}"
-              </div>
-            </div>
-
-            <div className="lg:col-span-8 space-y-8">
-              {/* Warning Signs Box */}
-              <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle space-y-4">
-                <div className="flex items-center gap-2 text-rose-700 font-extrabold text-base">
-                  <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0" />
-                  <span>Crucial Warning Signs & Pressures to Recognize:</span>
+              
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-2">
+                <span className="font-bold text-xs text-brand-navy-950 block">Got Questions Without The Lecture?</span>
+                <p className="text-xs text-slate-500">
+                  Our youth helpline is completely confidential. We do not report callers or notify schools.
+                </p>
+                <div className="pt-1">
+                  <a
+                    href={`tel:${organizationData.contact.helpline}`}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700 hover:text-amber-800"
+                  >
+                    <PhoneCall className="w-3.5 h-3.5" />
+                    <span>Call {organizationData.contact.helplineDisplay}</span>
+                  </a>
                 </div>
+              </div>
+            </SlideInLeft>
+
+            <SlideInRight className="lg:col-span-8 space-y-6">
+              
+              {/* Myth Busters */}
+              <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-4">
+                <h3 className="font-bold text-lg text-brand-navy-950 flex items-center gap-2">
+                  <AlertTriangle className="w-5 h-5 text-amber-500" />
+                  <span>Common Myths vs. Scientific Reality</span>
+                </h3>
+                
+                <div className="space-y-4 text-xs sm:text-sm">
+                  <div className="p-4 rounded-2xl bg-slate-50 space-y-1">
+                    <strong className="text-rose-700 block">Myth: "Vapes and modern synthetic herbs are completely harmless."</strong>
+                    <p className="text-slate-600">
+                      <strong>Fact:</strong> E-cigarettes and designer synthetics contain ultra-concentrated nicotine, heavy metals, and uncontrolled chemical stimulants that cause accelerated neuro-addiction and respiratory inflammation in adolescent lungs.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-slate-50 space-y-1">
+                    <strong className="text-rose-700 block">Myth: "Prescription pills for ADHD or sleep are safe to share with friends."</strong>
+                    <p className="text-slate-600">
+                      <strong>Fact:</strong> Non-prescribed pharmaceutical misuse (opioids, sedatives, methylphenidate) carries severe risk of chemical dependency, cardiac irregularity, and lethal overdose when combined with other agents.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Peer Refusal Strategies */}
+              <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-4">
+                <h3 className="font-bold text-lg text-brand-navy-950 flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-teal-600" />
+                  <span>Confidence Script: How to Say 'No' Without Losing Face</span>
+                </h3>
                 <ul className="space-y-3 text-xs sm:text-sm text-slate-700">
-                  {studentResource?.warningSigns?.map((sign, i) => (
-                    <li key={i} className="flex items-start gap-3 bg-rose-50/40 p-3 rounded-xl border border-rose-100">
-                      <span className="w-5 h-5 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
-                        {i + 1}
-                      </span>
-                      <span className="leading-relaxed font-medium">{sign}</span>
-                    </li>
-                  ))}
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                    <span><strong>The Direct Blame Shift:</strong> "I’ve got medical sports training / coach blood tests early tomorrow — can’t touch anything."</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                    <span><strong>The Firm Alternative:</strong> "I’m good with a soda. You guys do what you want, I’m chilling."</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                    <span><strong>The Code Exit:</strong> Agree on a safe code emoji with an older sibling or parent so they call and demand you return home immediately.</span>
+                  </li>
                 </ul>
               </div>
 
-              {/* Practical Tips Box */}
-              <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle space-y-4">
-                <div className="flex items-center gap-2 text-teal-800 font-extrabold text-base">
-                  <CheckCircle2 className="w-5 h-5 text-teal-600 shrink-0" />
-                  <span>Practical Strategies for Making Confident Choices:</span>
-                </div>
-                <ul className="space-y-3 text-xs sm:text-sm text-slate-700">
-                  {studentResource?.actionableSteps?.map((tip, i) => (
-                    <li key={i} className="flex items-start gap-3 bg-teal-50/40 p-3 rounded-xl border border-teal-100">
-                      <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                      <span className="leading-relaxed">{tip}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="flex items-center justify-between p-5 rounded-2xl bg-brand-navy-900 text-white">
-                <div className="text-xs">
-                  <div className="font-bold text-amber-300">Need to talk to someone right now?</div>
-                  <div className="text-slate-300">Free, private, zero stigma. We are here to listen.</div>
-                </div>
-                <a
-                  href={`tel:${organizationData.contact.helpline}`}
-                  className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl transition-all shrink-0"
-                >
-                  Call Helpline
-                </a>
-              </div>
-
-            </div>
+            </SlideInRight>
 
           </div>
-
         </div>
       </section>
 
       {/* 2. PARENT SECTION */}
-      <section id="parents" className="py-20 bg-white border-b border-slate-200 scroll-mt-28">
+      <section id="parents" className="py-14 sm:py-20 bg-white border-b border-slate-200 scroll-mt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             
-            <div className="lg:col-span-4 space-y-4 lg:sticky lg:top-36">
-              <Badge variant="navy">Parents & Families</Badge>
-              <h2 className="text-3xl font-extrabold text-brand-navy-950 leading-tight">
-                Notice. Listen. Support.
+            <SlideInLeft className="lg:col-span-4 space-y-4 lg:sticky lg:top-36">
+              <Badge variant="amber">Parents & Families</Badge>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy-950 leading-tight">
+                Listening Without Accusation
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                How parents can identify early changes in behaviour, replace combative friction with open dialogue, and navigate medical recovery.
+                Finding suspected substance paraphernalia or sudden behavioural shifts triggers natural panic. Your reaction in the first 48 hours determines whether your child isolates or accepts help.
               </p>
-
-              <div className="rounded-2xl overflow-hidden shadow-subtle border border-slate-200">
-                <img
-                  src="/images/parent-child-communication.jpg"
-                  alt="Supportive Indian parents communicating warmly with adolescent"
-                  className="w-full h-56 object-cover"
-                />
-              </div>
-
-              <div className="p-4 rounded-xl bg-teal-50 border border-teal-200 text-teal-950 text-xs font-bold leading-relaxed">
-                "{parentResource?.takeawayQuote}"
-              </div>
-            </div>
-
-            <div className="lg:col-span-8 space-y-8">
               
-              {/* Warning Signs for Parents */}
-              <div className="bg-slate-50 rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle space-y-4">
-                <div className="flex items-center gap-2 text-brand-navy-950 font-extrabold text-base">
-                  <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0" />
-                  <span>Early Indicators & Behavioural Shifts to Notice:</span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700">
-                  {parentResource?.warningSigns?.map((sign, i) => (
-                    <div key={i} className="p-3 bg-white rounded-xl border border-slate-200 flex items-start gap-2.5">
-                      <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0 mt-1.5" />
-                      <span className="leading-relaxed font-medium">{sign}</span>
-                    </div>
-                  ))}
+              <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 space-y-2">
+                <span className="font-bold text-xs text-brand-navy-950 block">Need Parent Coaching?</span>
+                <p className="text-xs text-amber-900">
+                  Our family counsellors guide parents through non-combative confrontation and clinical assessment navigation.
+                </p>
+                <div className="pt-1">
+                  <Button to="/contact?subject=Parent+Counselling" variant="primary" size="sm" fullWidth>
+                    <span>Request Family Consultation</span>
+                  </Button>
                 </div>
               </div>
+            </SlideInLeft>
 
-              {/* Guidance Protocol */}
-              <div className="bg-slate-50 rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle space-y-4">
-                <div className="flex items-center gap-2 text-brand-navy-950 font-extrabold text-base">
-                  <HeartHandshake className="w-5 h-5 text-teal-600 shrink-0" />
-                  <span>Step-by-Step Compassionate Action Framework:</span>
-                </div>
-                <div className="space-y-3 text-xs sm:text-sm text-slate-700">
-                  {parentResource?.guidancePoints?.map((pt, i) => (
-                    <div key={i} className="p-4 bg-white rounded-xl border border-slate-200 space-y-1">
-                      <div className="font-bold text-brand-navy-950 flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" />
-                        <span>{pt.split(':')[0]}</span>
-                      </div>
-                      <div className="text-slate-600 pl-6 leading-relaxed">
-                        {pt.split(':')[1]}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* 3. TEACHER SECTION */}
-      <section id="teachers" className="py-20 bg-slate-50 border-b border-slate-200 scroll-mt-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
-            <div className="lg:col-span-4 space-y-4 lg:sticky lg:top-36">
-              <Badge variant="teal">Educators & Schools</Badge>
-              <h2 className="text-3xl font-extrabold text-brand-navy-950 leading-tight">
-                Observe. Understand. Act.
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Campus safeguarding protocols, identifying emotional disengagement, and adhering to professional child-protection standards.
-              </p>
-
-              <div className="rounded-2xl overflow-hidden shadow-subtle border border-slate-200">
-                <img
-                  src="/images/school-awareness.jpg"
-                  alt="Educator interacting positively with high school students"
-                  className="w-full h-56 object-cover"
-                />
-              </div>
-
-              <div className="p-4 rounded-xl bg-brand-navy-900 text-white text-xs font-bold leading-relaxed">
-                "{teacherResource?.takeawayQuote}"
-              </div>
-            </div>
-
-            <div className="lg:col-span-8 space-y-8">
+            <SlideInRight className="lg:col-span-8 space-y-6">
               
-              {/* Teacher Warning Signs */}
-              <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle space-y-4">
-                <div className="flex items-center gap-2 text-brand-navy-950 font-extrabold text-base">
-                  <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0" />
-                  <span>Campus Behavioural Indicators:</span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700">
-                  {teacherResource?.warningSigns?.map((sign, i) => (
-                    <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2.5">
-                      <span className="w-2 h-2 rounded-full bg-teal-600 shrink-0 mt-1.5" />
-                      <span className="leading-relaxed font-medium">{sign}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Teacher Guidance Steps */}
-              <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle space-y-4">
-                <div className="flex items-center gap-2 text-brand-navy-950 font-extrabold text-base">
-                  <ShieldCheck className="w-5 h-5 text-teal-600 shrink-0" />
-                  <span>Institutional Safeguarding Code:</span>
-                </div>
-                <div className="space-y-3 text-xs sm:text-sm text-slate-700">
-                  {teacherResource?.guidancePoints?.map((pt, i) => (
-                    <div key={i} className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                      <div className="font-bold text-brand-navy-950 flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" />
-                        <span>{pt.split(':')[0]}</span>
-                      </div>
-                      <div className="text-slate-600 pl-6 leading-relaxed">
-                        {pt.split(':')[1]}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* 4. DOWNLOADS SECTION */}
-      <section id="downloads" className="py-20 bg-white scroll-mt-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            badge="Free Toolkits"
-            title="Downloadable Printables & Policy Templates"
-            subtitle="Free vector posters, family guidance handbooks, and school safeguarding documentation."
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {downloadResources.map((dl) => (
-              <div
-                key={dl.id}
-                className="bg-slate-50 rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle flex flex-col justify-between space-y-6 group hover:border-slate-300 transition-all"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200">
-                      {dl.fileFormat}
-                    </span>
-                    <span className="text-xs text-slate-400 font-medium">
-                      {dl.downloadSize}
-                    </span>
+              {/* Warning Signs */}
+              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-4">
+                <h3 className="font-bold text-lg text-brand-navy-950">
+                  Observable Warning Signs to Note (Not Conclusive Proof Alone)
+                </h3>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-2">
+                    <strong className="text-brand-navy-950 block font-bold">Behavioural & Academic</strong>
+                    <ul className="space-y-1.5 text-slate-600 text-xs">
+                      <li>• Sudden drop in school grades & unexplained absenteeism</li>
+                      <li>• Abrupt change in friendship circles, secretive phone locks</li>
+                      <li>• Uncharacteristic cash requests or missing household valuables</li>
+                    </ul>
                   </div>
 
-                  <h3 className="font-extrabold text-lg text-brand-navy-950">
-                    {dl.title}
-                  </h3>
-
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {dl.summary}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-slate-200">
-                  <a
-                    href={`/contact?subject=Download+Request+${encodeURIComponent(dl.title)}`}
-                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-brand-navy-900 hover:bg-brand-navy-800 text-white text-xs font-bold rounded-xl transition-all"
-                  >
-                    <Download className="w-4 h-4" />
-                    <span>Download Resource Package</span>
-                  </a>
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-2">
+                    <strong className="text-brand-navy-950 block font-bold">Physical & Emotional</strong>
+                    <ul className="space-y-1.5 text-slate-600 text-xs">
+                      <li>• Drastic appetite changes, rapid weight fluctuation</li>
+                      <li>• Severe mood swings, explosive hostility or extreme lethargy</li>
+                      <li>• Bloodshot eyes, dilated pupils, heavy reliance on eye drops</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            ))}
+
+              {/* Dialogue Guide */}
+              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-4">
+                <h3 className="font-bold text-lg text-brand-navy-950">
+                  Recommended Dialogue Rules
+                </h3>
+                <div className="space-y-3 text-xs sm:text-sm text-slate-700">
+                  <div className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong>Choose Calm Timing:</strong> Never start a confrontation when either you or your child is angry, intoxicated, or running late for school.
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong>Use 'I' Statements:</strong> Say <em>"I noticed you've seemed exhausted and withdrawn lately, and I love you too much not to ask"</em> instead of <em>"What are you hiding from me?"</em>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong>Separate the Person from the Behaviour:</strong> Reassure your adolescent that your love is unconditional, but substance risk must be medically managed together.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </SlideInRight>
+
           </div>
+        </div>
+      </section>
+
+      {/* 3. TEACHER & EDUCATOR SECTION */}
+      <section id="teachers" className="py-14 sm:py-20 bg-slate-50 border-b border-slate-200 scroll-mt-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            
+            <SlideInLeft className="lg:col-span-4 space-y-4 lg:sticky lg:top-36">
+              <Badge variant="teal">Teachers & Educational Institutions</Badge>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy-950 leading-tight">
+                Campus Safeguarding Framework
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Secondary schools and universities are critical lines of defence. Punitive expulsion often pushes a struggling student deeper into predatory networks; structured restorative guidance saves lives.
+              </p>
+              
+              <div className="pt-2">
+                <Button to="/contact?subject=School+Safeguarding+Workshop" variant="primary" size="sm">
+                  <span>Book Teacher Training Module</span>
+                </Button>
+              </div>
+            </SlideInLeft>
+
+            <SlideInRight className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-6">
+              <h3 className="font-bold text-lg text-brand-navy-950">
+                Institutional SOP (Standard Operating Procedure) for Classrooms
+              </h3>
+
+              <div className="space-y-4 text-xs sm:text-sm">
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-xl bg-brand-navy-900 text-white flex items-center justify-center shrink-0 font-bold">1</div>
+                  <div className="space-y-1">
+                    <strong className="text-brand-navy-950 block">Discreet Clinical Observation</strong>
+                    <p className="text-slate-600">Document observable facts (attendance, changes in physical appearance) without making public accusations in front of peers.</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-xl bg-brand-navy-900 text-white flex items-center justify-center shrink-0 font-bold">2</div>
+                  <div className="space-y-1">
+                    <strong className="text-brand-navy-950 block">Designated Counsellor Referral</strong>
+                    <p className="text-slate-600">Direct the student to the school psychologist or internal guidance committee under confidential protection.</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-xl bg-brand-navy-900 text-white flex items-center justify-center shrink-0 font-bold">3</div>
+                  <div className="space-y-1">
+                    <strong className="text-brand-navy-950 block">Supportive Parent Conference</strong>
+                    <p className="text-slate-600">Engage the family as care partners rather than disciplinary adversaries, providing external public de-addiction directory referrals.</p>
+                  </div>
+                </div>
+              </div>
+            </SlideInRight>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 4. DOWNLOADABLE GUIDES */}
+      <section id="downloads" className="py-14 sm:py-20 bg-white scroll-mt-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            badge="Verified Printables"
+            title="Downloadable Prevention Materials"
+            subtitle="Free PDF toolkits, infographics, and awareness flyers developed for distribution across Indian campuses."
+          />
+
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {downloadResources.map((dl) => (
+              <StaggerItem key={dl.id} className="h-full">
+                <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200/90 shadow-subtle hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-4 h-full">
+                  <div className="space-y-3">
+                    <div className="w-10 h-10 rounded-xl bg-white text-brand-navy-900 flex items-center justify-center shadow-xs">
+                      <FileText className="w-5 h-5 text-teal-600" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-bold text-teal-700 uppercase">{dl.fileFormat || 'PDF Document'}</span>
+                      <h4 className="font-bold text-base text-brand-navy-950">{dl.title}</h4>
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {dl.summary}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-200/60">
+                    <Link
+                      to={`/resources/${dl.slug}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy-900 hover:text-brand-teal-600 transition-colors"
+                    >
+                      <span>Access Guide Details</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
         </div>
       </section>
 
@@ -374,4 +376,3 @@ export const Resources: React.FC = () => {
     </div>
   );
 };
-

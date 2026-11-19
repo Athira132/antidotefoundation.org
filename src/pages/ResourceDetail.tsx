@@ -14,7 +14,15 @@ import { resourcesData } from '../data/resources';
 import { organizationData } from '../data/organization';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import {
+  FadeUp,
+  SlideInLeft,
+  SlideInRight,
+  StaggerContainer,
+  StaggerItem
+} from '../components/animations/MotionComponents';
 
 export const ResourceDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -27,42 +35,50 @@ export const ResourceDetail: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* Hero Header */}
-      <section className="bg-brand-navy-950 text-white py-16 lg:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <Link
-            to="/resources"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-teal-300 hover:text-white transition-colors mb-6"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to All Resources</span>
-          </Link>
+      {/* 1. DISTINCTIVE HERO BANNER */}
+      <PageHero
+        badge={resource.tagline}
+        badgeVariant="teal"
+        badgeIcon={BookOpen}
+        title={resource.title}
+        subtitle={resource.summary}
+        breadcrumbs={[
+          { label: 'Resources', href: '/resources' },
+          { label: resource.title }
+        ]}
+        imageSrc={resource.image}
+        imageAlt={resource.title}
+        variant="split"
+        actions={
+          <>
+            <Button to="/resources" variant="secondary" size="md" className="bg-white/10 hover:bg-white/20 text-white border-white/20">
+              <ArrowLeft className="w-4 h-4 mr-1" />
+              <span>All Resources</span>
+            </Button>
+            <a
+              href={`tel:${organizationData.contact.helpline}`}
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs transition-all"
+            >
+              <PhoneCall className="w-3.5 h-3.5" />
+              <span>Ask a Specialist</span>
+            </a>
+          </>
+        }
+      />
 
-          <div className="max-w-4xl space-y-3">
-            <Badge variant="teal">{resource.tagline}</Badge>
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              {resource.title}
-            </h1>
-            <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-              {resource.summary}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <section className="py-16 bg-white">
+      {/* 2. Main Content */}
+      <section className="py-14 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-12">
             
-            <div className="lg:col-span-2 space-y-10">
+            <SlideInLeft className="lg:col-span-2 space-y-10">
               
               {resource.image && (
-                <div className="rounded-3xl overflow-hidden shadow-elevated border border-slate-200">
+                <div className="rounded-3xl overflow-hidden shadow-elevated border border-slate-200 group">
                   <img
                     src={resource.image}
                     alt={resource.title}
-                    className="w-full h-80 sm:h-96 object-cover"
+                    className="w-full h-80 sm:h-96 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                 </div>
               )}
@@ -92,50 +108,68 @@ export const ResourceDetail: React.FC = () => {
                     <CheckCircle2 className="w-5 h-5 text-teal-600 shrink-0" />
                     <span>Actionable Recommendations & Protocol</span>
                   </div>
-                  <div className="space-y-3 text-xs sm:text-sm text-slate-700">
+                  <StaggerContainer className="space-y-3 text-xs sm:text-sm text-slate-700">
                     {(resource.actionableSteps || resource.guidancePoints)?.map((step, idx) => (
-                      <div key={idx} className="p-4 bg-white rounded-xl border border-slate-200 space-y-1">
-                        <span className="leading-relaxed font-medium">{step}</span>
-                      </div>
+                      <StaggerItem key={idx}>
+                        <div className="p-4 bg-white rounded-xl border border-slate-200 space-y-1">
+                          <span className="leading-relaxed font-medium">{step}</span>
+                        </div>
+                      </StaggerItem>
                     ))}
-                  </div>
+                  </StaggerContainer>
                 </div>
               )}
 
-              {resource.takeawayQuote && (
-                <div className="p-6 rounded-2xl bg-brand-navy-900 text-white text-sm sm:text-base font-bold italic leading-relaxed text-center">
-                  "{resource.takeawayQuote}"
-                </div>
-              )}
-
-            </div>
+            </SlideInLeft>
 
             {/* Sidebar */}
-            <div className="space-y-6">
-              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-5 shadow-subtle sticky top-28">
-                <Badge variant="teal">Need Help?</Badge>
-                <h3 className="text-xl font-bold text-brand-navy-950">
-                  Speak to a Counsellor
+            <SlideInRight className="space-y-6">
+              
+              <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200 space-y-4">
+                <h3 className="font-extrabold text-base text-brand-navy-950">
+                  Resource Quick Facts
                 </h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Have a specific question about an adolescent or need guidance navigating a loved one's situation?
-                </p>
+                <div className="space-y-2.5 text-xs">
+                  <div>
+                    <span className="font-semibold text-slate-400 block text-[10px] uppercase">Category</span>
+                    <span className="font-bold text-brand-navy-950 capitalize">{resource.category}</span>
+                  </div>
+                  <div className="pt-2 border-t border-slate-200">
+                    <span className="font-semibold text-slate-400 block text-[10px] uppercase">Format</span>
+                    <span className="text-slate-700">Clinical practice guide / educational overview</span>
+                  </div>
+                  <div className="pt-2 border-t border-slate-200">
+                    <span className="font-semibold text-slate-400 block text-[10px] uppercase">Issued By</span>
+                    <span className="text-slate-700">Antidote Foundation of India Guidance Desk</span>
+                  </div>
+                </div>
 
-                <div className="space-y-3">
-                  <a
-                    href={`tel:${organizationData.contact.helpline}`}
-                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl shadow transition-all"
-                  >
-                    <PhoneCall className="w-4 h-4" />
-                    <span>Call {organizationData.contact.helplineDisplay}</span>
-                  </a>
-
-                  <Button to="/find-rehab-centres" variant="secondary" size="md" fullWidth>
-                    <span>Find Rehab Centres</span>
+                <div className="pt-2">
+                  <Button to="/contact?subject=Resource+Toolkit+Order" variant="primary" size="sm" fullWidth>
+                    <span>Request Physical Print Copies</span>
                   </Button>
                 </div>
               </div>
-            </div>
+
+              {/* 24/7 Helpline Card */}
+              <div className="bg-brand-navy-950 text-white p-6 rounded-3xl space-y-3">
+                <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                  <PhoneCall className="w-4 h-4" />
+                  <span>24/7 Helpline</span>
+                </div>
+                <h4 className="text-base font-bold">Need Personal Guidance?</h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Call our toll-free counselling team for private advice on any substance questions.
+                </p>
+                <a
+                  href={`tel:${organizationData.contact.helpline}`}
+                  className="block text-center py-2 px-4 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs rounded-xl transition-all"
+                >
+                  Call {organizationData.contact.helplineDisplay}
+                </a>
+              </div>
+
+            </SlideInRight>
 
           </div>
         </div>
@@ -147,4 +181,3 @@ export const ResourceDetail: React.FC = () => {
     </div>
   );
 };
-

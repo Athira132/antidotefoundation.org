@@ -15,7 +15,15 @@ import { campaignsData } from '../data/campaigns';
 import { organizationData } from '../data/organization';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import {
+  FadeUp,
+  SlideInLeft,
+  SlideInRight,
+  StaggerContainer,
+  StaggerItem
+} from '../components/animations/MotionComponents';
 
 export const CampaignDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -28,57 +36,56 @@ export const CampaignDetail: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* Hero Header */}
-      <section className="bg-brand-navy-950 text-white py-16 lg:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          <Link
-            to="/campaigns"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-teal-300 hover:text-white transition-colors mb-6"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to All Campaigns</span>
-          </Link>
-
-          <div className="max-w-4xl space-y-3">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="teal">{campaign.badge}</Badge>
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-teal-500 text-slate-950">
-                {campaign.status}
-              </span>
-            </div>
-
+      {/* 1. DISTINCTIVE HERO BANNER */}
+      <PageHero
+        badge={campaign.badge}
+        badgeVariant="teal"
+        badgeIcon={Megaphone}
+        title={
+          <div>
             {campaign.regionalTitle && (
-              <div className="text-sm sm:text-base font-semibold text-teal-300">
+              <div className="text-sm sm:text-base font-semibold text-teal-300 mb-1">
                 {campaign.regionalTitle}
               </div>
             )}
-
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              {campaign.title}
-            </h1>
-
-            <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-              {campaign.summary}
-            </p>
+            {campaign.title}
           </div>
+        }
+        subtitle={campaign.summary}
+        breadcrumbs={[
+          { label: 'Campaigns', href: '/campaigns' },
+          { label: campaign.title }
+        ]}
+        imageSrc={campaign.image}
+        imageAlt={campaign.title}
+        imageBadgeText={`Status: ${campaign.status}`}
+        variant="split"
+        actions={
+          <>
+            <Button to="/volunteer" variant="accent" size="md">
+              <span>Volunteer for this Campaign</span>
+            </Button>
+            <Button to="/campaigns" variant="secondary" size="md" className="bg-white/10 hover:bg-white/20 text-white border-white/20">
+              <ArrowLeft className="w-4 h-4 mr-1" />
+              <span>All Campaigns</span>
+            </Button>
+          </>
+        }
+      />
 
-        </div>
-      </section>
-
-      {/* Main Campaign Details */}
-      <section className="py-16 bg-white">
+      {/* 2. Main Campaign Details */}
+      <section className="py-14 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
             
             {/* Left 2 Cols: Content & Narrative */}
-            <div className="lg:col-span-2 space-y-10">
+            <SlideInLeft className="lg:col-span-2 space-y-10">
               
-              <div className="rounded-3xl overflow-hidden shadow-elevated border border-slate-200">
+              <div className="rounded-3xl overflow-hidden shadow-elevated border border-slate-200 group">
                 <img
                   src={campaign.image}
                   alt={campaign.title}
-                  className="w-full h-80 sm:h-96 object-cover"
+                  className="w-full h-80 sm:h-96 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
 
@@ -98,94 +105,90 @@ export const CampaignDetail: React.FC = () => {
               <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-4">
                 <h3 className="text-xl font-bold text-brand-navy-950 flex items-center gap-2">
                   <Megaphone className="w-5 h-5 text-teal-600" />
-                  <span>Strategic Campaign Deliverables</span>
+                  <span>Key Actions & Deliverables</span>
                 </h3>
-                <div className="space-y-3 pt-2">
-                  {campaign.objectives.map((obj, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
-                      <span className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
-                        {obj}
-                      </span>
-                    </div>
+                <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  {campaign.objectives.map((h, i) => (
+                    <StaggerItem key={i}>
+                      <div className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
+                        <span className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                          {h}
+                        </span>
+                      </div>
+                    </StaggerItem>
                   ))}
-                </div>
+                </StaggerContainer>
               </div>
 
-              {/* Target Locations */}
-              <div className="p-6 rounded-2xl bg-brand-navy-50 border border-brand-navy-100 space-y-2">
-                <div className="flex items-center gap-2 text-brand-navy-950 font-bold text-sm">
-                  <MapPin className="w-4 h-4 text-teal-600" />
-                  <span>Active & Planned Operational Locations</span>
-                </div>
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {campaign.targetLocations.map((loc) => (
-                    <span key={loc} className="text-xs font-semibold bg-white text-brand-navy-900 px-3 py-1 rounded-lg border border-slate-200 shadow-xs">
-                      {loc}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            </SlideInLeft>
 
-            </div>
-
-            {/* Right Sidebar: Volunteer & Help */}
-            <div className="space-y-6">
+            {/* Right Column: Campaign Metadata & Actions */}
+            <SlideInRight className="space-y-6">
               
-              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-6 shadow-subtle sticky top-28">
-                <div className="space-y-2">
-                  <Badge variant="teal">Take Action</Badge>
-                  <h3 className="text-xl font-extrabold text-brand-navy-950">
-                    Support this Campaign
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Become a campus volunteer, request a workshop at your institution, or contribute to awareness toolkits.
-                  </p>
+              <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200 space-y-4">
+                <h3 className="font-extrabold text-lg text-brand-navy-950">
+                  Campaign Details
+                </h3>
+
+                <div className="space-y-3 text-xs sm:text-sm">
+                  <div>
+                    <span className="font-semibold text-slate-400 block text-[11px] uppercase tracking-wider">
+                      Operational Status
+                    </span>
+                    <span className="font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200 inline-block mt-0.5">
+                      {campaign.status}
+                    </span>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-200">
+                    <span className="font-semibold text-slate-400 block text-[11px] uppercase tracking-wider">
+                      Regional Scope
+                    </span>
+                    <span className="text-slate-700">
+                      Bengaluru Secretariat coordinating student assemblies, distribution of vernacular literature, and statewide awareness rallies.
+                    </span>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-200">
+                    <span className="font-semibold text-slate-400 block text-[11px] uppercase tracking-wider">
+                      Target Audience
+                    </span>
+                    <span className="text-slate-700">
+                      Adolescents aged 13–19, university students aged 18–25, parents, and secondary school educators.
+                    </span>
+                  </div>
                 </div>
 
-                <div className="space-y-3">
-                  <Button
-                    to="/volunteer"
-                    variant="accent"
-                    size="md"
-                    fullWidth
-                  >
-                    <span>Volunteer for this Campaign</span>
+                <div className="pt-3 border-t border-slate-200 flex flex-col gap-2.5">
+                  <Button to="/volunteer" variant="accent" size="md" fullWidth>
+                    <span>Become a Campaign Volunteer</span>
                   </Button>
-
-                  <Button
-                    to={`/contact?subject=Campaign+Partnership+${encodeURIComponent(campaign.title)}`}
-                    variant="secondary"
-                    size="md"
-                    fullWidth
-                  >
-                    <span>Partner with AFOI</span>
+                  <Button to="/donate" variant="primary" size="md" fullWidth>
+                    <span>Sponsor Campaign Materials</span>
                   </Button>
-
-                  <Button
-                    to="/donate"
-                    variant="primary"
-                    size="md"
-                    fullWidth
-                  >
-                    <span>Donate to Campaign Funds</span>
-                  </Button>
-                </div>
-
-                <div className="pt-6 border-t border-slate-200 space-y-2 text-xs text-slate-500">
-                  <div className="font-bold text-slate-700">Need Immediate Help?</div>
-                  <p>Our 24/7 confidential helpline is open for youth and family members needing immediate guidance.</p>
-                  <a
-                    href={`tel:${organizationData.contact.helpline}`}
-                    className="inline-flex items-center gap-1.5 font-bold text-amber-600 hover:text-amber-700"
-                  >
-                    <PhoneCall className="w-4 h-4" />
-                    <span>{organizationData.contact.helplineDisplay}</span>
-                  </a>
                 </div>
               </div>
 
-            </div>
+              {/* 24/7 Helpline Card */}
+              <div className="bg-brand-navy-950 text-white p-6 rounded-3xl space-y-3">
+                <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                  <PhoneCall className="w-4 h-4" />
+                  <span>Confidential Support</span>
+                </div>
+                <h4 className="text-base font-bold">Have Questions About This Campaign?</h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Connect with our public engagement team or seek confidential telephonic advice.
+                </p>
+                <a
+                  href={`tel:${organizationData.contact.helpline}`}
+                  className="block text-center py-2 px-4 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs rounded-xl transition-all"
+                >
+                  Call {organizationData.contact.helplineDisplay}
+                </a>
+              </div>
+
+            </SlideInRight>
 
           </div>
         </div>
@@ -197,4 +200,3 @@ export const CampaignDetail: React.FC = () => {
     </div>
   );
 };
-

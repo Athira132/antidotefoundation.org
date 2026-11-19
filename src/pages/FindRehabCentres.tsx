@@ -18,7 +18,13 @@ import { RehabCentre } from '../types';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import {
+  FadeUp,
+  StaggerContainer,
+  StaggerItem
+} from '../components/animations/MotionComponents';
 
 export const FindRehabCentres: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -85,25 +91,29 @@ export const FindRehabCentres: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* Header Banner */}
-      <section className="bg-brand-navy-950 text-white py-16 lg:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto relative z-10">
-          <Badge variant="teal" className="mb-4">Verified Public Care Directory</Badge>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-            Find Accredited Rehabilitation & De-Addiction Centres
-          </h1>
-          <p className="mt-5 text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-            Search recognized government medical colleges, autonomous psychiatric institutes, and state mission facilities across India.
-          </p>
-        </div>
-      </section>
+      {/* 1. DISTINCTIVE HERO BANNER */}
+      <PageHero
+        badge="Verified Public Care Directory"
+        badgeVariant="teal"
+        badgeIcon={ShieldCheck}
+        title="Find Accredited Rehabilitation & De-Addiction Centres"
+        subtitle="Search recognized government medical colleges, autonomous psychiatric institutes, and state mission facilities across India."
+        breadcrumbs={[{ label: 'Find Rehab Centres' }]}
+        variant="centered"
+        stats={[
+          { label: 'Public Facilities', value: `${verifiedRehabCentres.length}+` },
+          { label: 'Accreditation', value: '100% Gov/Autonomous' },
+          { label: 'Assistance', value: '24/7 Helpline' },
+          { label: 'Commercial Bias', value: 'Zero' }
+        ]}
+      />
 
-      {/* Main Search & Directory */}
+      {/* 2. Main Search & Directory */}
       <section className="py-14 bg-slate-50 min-h-[600px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Search & Filter Card */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-subtle mb-10 space-y-6">
+          {/* Search & Filter Card with entrance reveal */}
+          <FadeUp className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-subtle mb-10 space-y-6">
             
             {/* Search Input Bar */}
             <div className="relative">
@@ -214,11 +224,11 @@ export const FindRehabCentres: React.FC = () => {
               </div>
             </div>
 
-          </div>
+          </FadeUp>
 
-          {/* Directory Listings Grid */}
+          {/* Directory Listings Grid (Staggered Entrance) */}
           {filteredCentres.length === 0 ? (
-            <div className="bg-white p-12 rounded-3xl border border-slate-200 text-center max-w-xl mx-auto space-y-4">
+            <FadeUp className="bg-white p-12 rounded-3xl border border-slate-200 text-center max-w-xl mx-auto space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
                 <Search className="w-6 h-6" />
               </div>
@@ -243,100 +253,99 @@ export const FindRehabCentres: React.FC = () => {
                   <span>Call 24/7 Helpline</span>
                 </a>
               </div>
-            </div>
+            </FadeUp>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {filteredCentres.map((centre) => (
-                <div
-                  key={centre.id}
-                  className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-subtle hover:shadow-elevated transition-all flex flex-col justify-between space-y-5"
-                >
-                  <div className="space-y-3">
-                    
-                    {/* Header */}
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-teal-800 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200 inline-block mb-1">
-                          {centre.type}
-                        </span>
-                        <h3 className="text-lg sm:text-xl font-bold text-brand-navy-950 leading-snug">
-                          {centre.name}
-                        </h3>
-                      </div>
-                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 shrink-0">
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>Verified</span>
-                      </span>
-                    </div>
-
-                    {/* Address & Contact Details */}
-                    <div className="space-y-2 text-xs sm:text-sm text-slate-600 pt-1">
-                      <div className="flex items-start gap-2.5">
-                        <MapPin className="w-4 h-4 text-brand-navy-700 shrink-0 mt-0.5" />
-                        <span className="leading-relaxed">{centre.address}</span>
-                      </div>
-
-                      <div className="flex items-center gap-2.5">
-                        <PhoneCall className="w-4 h-4 text-brand-navy-700 shrink-0" />
-                        <span>Contact / EPABX: <strong className="text-brand-navy-950">{centre.phone}</strong></span>
-                      </div>
-                    </div>
-
-                    {/* Services Tags */}
-                    <div className="pt-2">
-                      <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
-                        Specialized Clinical Services:
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {centre.services.map((svc) => (
-                          <span
-                            key={svc}
-                            className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg"
-                          >
-                            {svc}
+                <StaggerItem key={centre.id} className="h-full">
+                  <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-subtle hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-5 h-full">
+                    <div className="space-y-3">
+                      
+                      {/* Header */}
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-teal-800 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200 inline-block mb-1">
+                            {centre.type}
                           </span>
-                        ))}
+                          <h3 className="text-lg sm:text-xl font-bold text-brand-navy-950 leading-snug">
+                            {centre.name}
+                          </h3>
+                        </div>
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 shrink-0">
+                          <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>Verified</span>
+                        </span>
                       </div>
+
+                      {/* Address & Contact Details */}
+                      <div className="space-y-2 text-xs sm:text-sm text-slate-600 pt-1">
+                        <div className="flex items-start gap-2.5">
+                          <MapPin className="w-4 h-4 text-brand-navy-700 shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{centre.address}</span>
+                        </div>
+
+                        <div className="flex items-center gap-2.5">
+                          <PhoneCall className="w-4 h-4 text-brand-navy-700 shrink-0" />
+                          <span>Contact / EPABX: <strong className="text-brand-navy-950">{centre.phone}</strong></span>
+                        </div>
+                      </div>
+
+                      {/* Services Tags */}
+                      <div className="pt-2">
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                          Specialized Clinical Services:
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          {centre.services.map((svc) => (
+                            <span
+                              key={svc}
+                              className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg"
+                            >
+                              {svc}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Notes */}
+                      {centre.notes && (
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-500 leading-relaxed">
+                          <strong className="text-slate-700 font-semibold">Institutional Note:</strong> {centre.notes}
+                        </div>
+                      )}
+
                     </div>
 
-                    {/* Notes */}
-                    {centre.notes && (
-                      <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-500 leading-relaxed">
-                        <strong className="text-slate-700 font-semibold">Institutional Note:</strong> {centre.notes}
-                      </div>
-                    )}
+                    {/* Actions */}
+                    <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                      <button
+                        onClick={() => {
+                          setSelectedCentreForAssistance(centre);
+                          setAssistanceSent(false);
+                        }}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-brand-navy-900 hover:bg-brand-navy-800 text-white text-xs font-bold rounded-xl transition-colors"
+                      >
+                        <HeartHandshake className="w-3.5 h-3.5 text-teal-400" />
+                        <span>Request Guided Assistance</span>
+                      </button>
+
+                      <a
+                        href={`tel:${centre.phone.replace(/[^0-9]/g, '')}`}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-brand-navy-800 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors"
+                      >
+                        <PhoneCall className="w-3.5 h-3.5" />
+                        <span>Call Centre</span>
+                      </a>
+                    </div>
 
                   </div>
-
-                  {/* Actions */}
-                  <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                    <button
-                      onClick={() => {
-                        setSelectedCentreForAssistance(centre);
-                        setAssistanceSent(false);
-                      }}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-brand-navy-900 hover:bg-brand-navy-800 text-white text-xs font-bold rounded-xl transition-colors"
-                    >
-                      <HeartHandshake className="w-3.5 h-3.5 text-teal-400" />
-                      <span>Request Guided Assistance</span>
-                    </button>
-
-                    <a
-                      href={`tel:${centre.phone.replace(/[^0-9]/g, '')}`}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-brand-navy-800 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors"
-                    >
-                      <PhoneCall className="w-3.5 h-3.5" />
-                      <span>Call Centre</span>
-                    </a>
-                  </div>
-
-                </div>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           )}
 
           {/* Integration & Verification Standards Box */}
-          <div className="mt-12 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-subtle space-y-3">
+          <FadeUp delay={0.2} className="mt-12 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-subtle space-y-3">
             <div className="flex items-center gap-2 text-brand-navy-950 font-bold text-base">
               <ShieldCheck className="w-5 h-5 text-teal-600" />
               <span>Verified Database & Hospital Integration Notice</span>
@@ -347,7 +356,7 @@ export const FindRehabCentres: React.FC = () => {
             <p className="text-xs text-slate-500 leading-relaxed">
               <strong>Database Integration Point:</strong> State de-addiction missions and medical directorates seeking API or dataset synchronization can establish direct interoperability with our public assistance registry by contacting the AFOI technical committee.
             </p>
-          </div>
+          </FadeUp>
 
         </div>
       </section>
@@ -452,4 +461,3 @@ export const FindRehabCentres: React.FC = () => {
     </div>
   );
 };
-

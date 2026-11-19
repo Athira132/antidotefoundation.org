@@ -15,7 +15,15 @@ import { programsData } from '../data/programs';
 import { organizationData } from '../data/organization';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import {
+  FadeUp,
+  SlideInLeft,
+  SlideInRight,
+  StaggerContainer,
+  StaggerItem
+} from '../components/animations/MotionComponents';
 
 export const ProgramDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -28,45 +36,48 @@ export const ProgramDetail: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* Top Breadcrumb & Hero */}
-      <section className="bg-brand-navy-950 text-white py-16 lg:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          <Link
-            to="/programs"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-teal-300 hover:text-white transition-colors mb-6"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to All Programs</span>
-          </Link>
+      {/* 1. DISTINCTIVE HERO BANNER */}
+      <PageHero
+        badge={program.tagline}
+        badgeVariant="teal"
+        badgeIcon={BookOpen}
+        title={program.title}
+        subtitle={program.shortDescription}
+        breadcrumbs={[
+          { label: 'Programs & Events', href: '/programs' },
+          { label: program.title }
+        ]}
+        imageSrc={program.image}
+        imageAlt={program.title}
+        imageBadgeText={`Target: ${program.targetAudience.split(',')[0]}`}
+        variant="split"
+        actions={
+          <>
+            <Button to="/contact?subject=Program+Partnership" variant="accent" size="md">
+              <span>Partner on this Initiative</span>
+            </Button>
+            <Button to="/programs" variant="secondary" size="md" className="bg-white/10 hover:bg-white/20 text-white border-white/20">
+              <ArrowLeft className="w-4 h-4 mr-1" />
+              <span>All Programs</span>
+            </Button>
+          </>
+        }
+      />
 
-          <div className="max-w-4xl space-y-4">
-            <Badge variant="teal">{program.tagline}</Badge>
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              {program.title}
-            </h1>
-            <p className="text-base sm:text-xl text-slate-300 font-light leading-relaxed">
-              {program.shortDescription}
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Main Content Area */}
-      <section className="py-16 bg-white">
+      {/* 2. Main Content Area */}
+      <section className="py-14 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
             
             {/* Left 2 Cols: Deep Program Description & Objectives */}
-            <div className="lg:col-span-2 space-y-10">
+            <SlideInLeft className="lg:col-span-2 space-y-10">
               
-              {/* Feature Image */}
-              <div className="rounded-3xl overflow-hidden shadow-elevated border border-slate-200">
+              {/* Feature Image with subtle zoom */}
+              <div className="rounded-3xl overflow-hidden shadow-elevated border border-slate-200 group">
                 <img
                   src={program.image}
                   alt={program.title}
-                  className="w-full h-80 sm:h-96 object-cover"
+                  className="w-full h-72 sm:h-96 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
 
@@ -88,94 +99,88 @@ export const ProgramDetail: React.FC = () => {
                   <Target className="w-5 h-5 text-teal-600" />
                   <span>Strategic Objectives & Focus Areas</span>
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   {program.keyObjectives.map((obj, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
-                      <span className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
-                        {obj}
-                      </span>
-                    </div>
+                    <StaggerItem key={i}>
+                      <div className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
+                        <span className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                          {obj}
+                        </span>
+                      </div>
+                    </StaggerItem>
                   ))}
-                </div>
+                </StaggerContainer>
               </div>
 
-              {/* Target Demographic */}
-              <div className="p-6 rounded-2xl bg-teal-50 border border-teal-200 flex items-start gap-4">
-                <Users className="w-6 h-6 text-teal-700 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-sm text-teal-950">Primary Target Group</h4>
-                  <p className="text-xs sm:text-sm text-teal-800 mt-1">
-                    {program.targetAudience}
-                  </p>
-                </div>
-              </div>
+            </SlideInLeft>
 
-            </div>
-
-            {/* Right Sidebar: Take Action */}
-            <div className="space-y-6">
+            {/* Right Column: Quick Stats & Direct Action Box */}
+            <SlideInRight className="space-y-6">
               
-              {/* Action Box */}
-              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-6 shadow-subtle sticky top-28">
-                <div className="space-y-2">
-                  <Badge variant="navy">Get Involved</Badge>
-                  <h3 className="text-xl font-extrabold text-brand-navy-950">
-                    Collaborate on this Initiative
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Whether you are an institution leader, student coordinator, or community volunteer, help us scale this program.
-                  </p>
+              <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200 space-y-5">
+                <h3 className="font-extrabold text-lg text-brand-navy-950">
+                  Program Overview
+                </h3>
+
+                <div className="space-y-3 text-xs sm:text-sm">
+                  <div>
+                    <span className="font-semibold text-slate-400 block text-[11px] uppercase tracking-wider">
+                      Target Demographics
+                    </span>
+                    <span className="font-bold text-brand-navy-950">
+                      {program.targetAudience}
+                    </span>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-200">
+                    <span className="font-semibold text-slate-400 block text-[11px] uppercase tracking-wider">
+                      Methodology
+                    </span>
+                    <span className="text-slate-700 leading-relaxed">
+                      Clinical psycho-education, student peer ambassadorship, parent dialogue modules, and telephonic follow-ups.
+                    </span>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-200">
+                    <span className="font-semibold text-slate-400 block text-[11px] uppercase tracking-wider">
+                      Geographic Availability
+                    </span>
+                    <span className="text-slate-700 leading-relaxed">
+                      Karnataka headquarters (Bengaluru) with pan-India webinar, bilingual toolkit distribution, and helpline coverage.
+                    </span>
+                  </div>
                 </div>
 
-                <div className="space-y-3">
-                  <Button
-                    to={`/contact?subject=Program+Collaboration+${encodeURIComponent(program.title)}`}
-                    variant="primary"
-                    size="md"
-                    fullWidth
-                  >
+                <div className="pt-2 border-t border-slate-200 flex flex-col gap-2.5">
+                  <Button to="/contact?subject=Book+Session" variant="primary" size="md" fullWidth>
                     <span>Request Institutional Session</span>
                   </Button>
-
-                  <Button
-                    to="/volunteer"
-                    variant="secondary"
-                    size="md"
-                    fullWidth
-                  >
-                    <span>Join as Program Volunteer</span>
+                  <Button to="/volunteer" variant="outline" size="md" fullWidth>
+                    <span>Volunteer for this Program</span>
                   </Button>
-
-                  <Button
-                    to="/donate"
-                    variant="outline"
-                    size="md"
-                    fullWidth
-                  >
-                    <span>Sponsor this Program</span>
-                  </Button>
-                </div>
-
-                {/* 24/7 Helpline Box */}
-                <div className="pt-6 border-t border-slate-200 space-y-2">
-                  <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                    Immediate Support
-                  </div>
-                  <div className="text-xs text-slate-600">
-                    Need confidential tele-counselling regarding this issue?
-                  </div>
-                  <a
-                    href={`tel:${organizationData.contact.helpline}`}
-                    className="inline-flex items-center gap-2 text-xs font-bold text-amber-600 hover:text-amber-700"
-                  >
-                    <PhoneCall className="w-4 h-4" />
-                    <span>24/7 Line: {organizationData.contact.helplineDisplay}</span>
-                  </a>
                 </div>
               </div>
 
-            </div>
+              {/* Confidential Help Quick Card */}
+              <div className="bg-brand-navy-950 text-white p-6 rounded-3xl space-y-4">
+                <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                  <PhoneCall className="w-4 h-4" />
+                  <span>Direct Guidance</span>
+                </div>
+                <h4 className="text-lg font-bold">Facing Urgent Substance Concerns?</h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Speak directly with an accredited counsellor without revealing your identity.
+                </p>
+                <a
+                  href={`tel:${organizationData.contact.helpline}`}
+                  className="block text-center py-2.5 px-4 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-sm rounded-xl transition-all"
+                >
+                  Call {organizationData.contact.helplineDisplay}
+                </a>
+              </div>
+
+            </SlideInRight>
 
           </div>
         </div>
@@ -187,4 +192,3 @@ export const ProgramDetail: React.FC = () => {
     </div>
   );
 };
-

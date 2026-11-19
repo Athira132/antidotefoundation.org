@@ -17,7 +17,15 @@ import { organizationData } from '../data/organization';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import {
+  FadeUp,
+  SlideInLeft,
+  SlideInRight,
+  StaggerContainer,
+  StaggerItem
+} from '../components/animations/MotionComponents';
 
 export const Donate: React.FC = () => {
   const navigate = useNavigate();
@@ -87,27 +95,31 @@ export const Donate: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* Hero Header */}
-      <section className="bg-brand-navy-950 text-white py-20 lg:py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto relative z-10">
-          <Badge variant="amber" className="mb-4">Support Our Cause</Badge>
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-            Every Contribution Can Protect a Young Life.
-          </h1>
-          <p className="mt-6 text-base sm:text-xl text-slate-300 font-light leading-relaxed">
-            Your generous partnership funds free adolescent tele-counselling, school prevention toolkits, parent guidance, and community recovery assistance.
-          </p>
-        </div>
-      </section>
+      {/* 1. DISTINCTIVE HERO BANNER */}
+      <PageHero
+        badge="Support Our Cause"
+        badgeVariant="amber"
+        badgeIcon={Heart}
+        title="Every Contribution Can Protect a Young Life."
+        subtitle="Your generous partnership funds free adolescent tele-counselling, school prevention toolkits, parent guidance, and community recovery assistance."
+        breadcrumbs={[{ label: 'Donate' }]}
+        variant="centered"
+        stats={[
+          { label: 'Free Helpline', value: '100% Free' },
+          { label: 'Youth Reached', value: '5,000+' },
+          { label: 'Transparency', value: 'Public Society' },
+          { label: 'Audit Standard', value: 'Ethical Non-Profit' }
+        ]}
+      />
 
-      {/* Main Donation Container */}
-      <section className="py-20 bg-slate-50">
+      {/* 2. Main Donation Container */}
+      <section className="py-14 sm:py-20 bg-slate-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             
             {/* Left 7 Cols: Donation Selector & Form */}
-            <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-elevated space-y-8">
+            <SlideInLeft className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-elevated space-y-8">
               
               {/* Step 1: Frequency */}
               <div>
@@ -349,10 +361,10 @@ export const Donate: React.FC = () => {
 
               </form>
 
-            </div>
+            </SlideInLeft>
 
             {/* Right 5 Cols: Transparency & Tax Status */}
-            <div className="lg:col-span-5 space-y-6">
+            <SlideInRight className="lg:col-span-5 space-y-6">
               
               <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle space-y-5">
                 <div className="flex items-center gap-2">
@@ -410,7 +422,7 @@ export const Donate: React.FC = () => {
                 </div>
               </div>
 
-            </div>
+            </SlideInRight>
 
           </div>
         </div>
@@ -422,4 +434,3 @@ export const Donate: React.FC = () => {
     </div>
   );
 };
-
