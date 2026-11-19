@@ -49,7 +49,7 @@ export const Gallery: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER */}
+      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero
         badge="Visual Documentation"
         badgeVariant="teal"
@@ -57,9 +57,12 @@ export const Gallery: React.FC = () => {
         title="Our Visual Gallery"
         subtitle="Capturing the spirit of youth solidarity, campus awareness drives, compassionate counselling, and community outreach."
         breadcrumbs={[{ label: 'Gallery' }]}
-        variant="centered"
+        imageSrc="/images/campaign-awareness.jpg"
+        imageAlt="Antidote Foundation campaign and youth awareness moments"
+        imageBadgeText="Youth-Led Action & Community Moments"
+        variant="background"
         actions={
-          <div className="max-w-2xl mx-auto p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 text-left text-xs text-slate-300 flex items-start gap-3">
+          <div className="max-w-2xl p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 text-left text-xs text-slate-200 flex items-start gap-3">
             <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
             <div>
               <strong className="text-white font-semibold">Integrity Notice:</strong> In strict adherence to our non-profit truthfulness guidelines, imagery displayed is curated and marked as illustrative representations of field initiatives. We never fabricate fake documentary event records or misrepresent generated visuals.

@@ -91,7 +91,7 @@ export const FindRehabCentres: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER */}
+      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero
         badge="Verified Public Care Directory"
         badgeVariant="teal"
@@ -99,7 +99,10 @@ export const FindRehabCentres: React.FC = () => {
         title="Find Accredited Rehabilitation & De-Addiction Centres"
         subtitle="Search recognized government medical colleges, autonomous psychiatric institutes, and state mission facilities across India."
         breadcrumbs={[{ label: 'Find Rehab Centres' }]}
-        variant="centered"
+        imageSrc="/images/rehabilitation-recovery.jpg"
+        imageAlt="Verified government rehabilitation and psychiatric care facilities"
+        imageBadgeText="100% Non-Commercial Healthcare Directory"
+        variant="background"
         stats={[
           { label: 'Public Facilities', value: `${verifiedRehabCentres.length}+` },
           { label: 'Accreditation', value: '100% Gov/Autonomous' },

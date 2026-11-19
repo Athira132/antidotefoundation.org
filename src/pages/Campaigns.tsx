@@ -32,7 +32,7 @@ export const Campaigns: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER */}
+      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero
         badge="Grassroots Public Action"
         badgeVariant="teal"
@@ -40,7 +40,10 @@ export const Campaigns: React.FC = () => {
         title="Our Public Campaigns"
         subtitle="From regional campus assemblies to high-visibility public drives, our campaigns unite youth, schools, parents, and civic leaders to defend young lives."
         breadcrumbs={[{ label: 'Campaigns' }]}
-        variant="centered"
+        imageSrc="/images/campaign-awareness.jpg"
+        imageAlt="Antidote Foundation public anti-drug campaigns"
+        imageBadgeText="Grassroots Action & Public Assemblies"
+        variant="background"
         actions={
           <div className="flex items-center justify-center gap-2 pt-2">
             {(['All', 'Active', 'Ongoing'] as const).map((status) => (

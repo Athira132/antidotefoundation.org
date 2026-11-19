@@ -102,7 +102,7 @@ export const Volunteer: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER */}
+      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full-width background; Mobile: Photo first) */}
       <PageHero
         badge="Youth Empowerment Movement"
         badgeVariant="teal"
@@ -113,7 +113,7 @@ export const Volunteer: React.FC = () => {
         imageSrc="/images/community-volunteering.jpg"
         imageAlt="AFOI youth volunteers and community leaders"
         imageBadgeText="Over 500+ active student leaders nationwide"
-        variant="split"
+        variant="background"
         actions={
           <a
             href="#volunteer-form"

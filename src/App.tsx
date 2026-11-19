@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 
 // Pages
@@ -32,45 +32,33 @@ export const App: React.FC = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          
-          {/* Programs */}
-          <Route path="programs" element={<Programs />} />
-          <Route path="programs/:slug" element={<ProgramDetail />} />
-
-          {/* Campaigns */}
-          <Route path="campaigns" element={<Campaigns />} />
-          <Route path="campaigns/:slug" element={<CampaignDetail />} />
-
-          {/* Rehab Finder */}
-          <Route path="find-rehab-centres" element={<FindRehabCentres />} />
-
-          {/* Volunteer */}
           <Route path="volunteer" element={<Volunteer />} />
           <Route path="volunteer/thank-you" element={<VolunteerThankYou />} />
-
-          {/* Donate */}
-          <Route path="donate" element={<Donate />} />
-          <Route path="donate/thank-you" element={<DonateThankYou />} />
-
-          {/* Resources */}
           <Route path="resources" element={<Resources />} />
           <Route path="resources/:slug" element={<ResourceDetail />} />
-
-          {/* Gallery */}
-          <Route path="gallery" element={<Gallery />} />
-
-          {/* News */}
-          <Route path="news" element={<News />} />
-          <Route path="news/:slug" element={<NewsArticle />} />
+          <Route path="find-rehab-centres" element={<FindRehabCentres />} />
+          
+          {/* Programs & Events primary route */}
+          <Route path="programs-events" element={<Programs />} />
+          <Route path="programs-events/:slug" element={<ProgramDetail />} />
+          <Route path="programs" element={<Programs />} />
+          <Route path="programs/:slug" element={<ProgramDetail />} />
 
           {/* Contact */}
           <Route path="contact" element={<Contact />} />
 
-          {/* Legal */}
+          {/* Gallery */}
+          <Route path="gallery" element={<Gallery />} />
+
+          {/* Secondary routes */}
+          <Route path="campaigns" element={<Campaigns />} />
+          <Route path="campaigns/:slug" element={<CampaignDetail />} />
+          <Route path="news" element={<News />} />
+          <Route path="news/:slug" element={<NewsArticle />} />
+          <Route path="donate" element={<Donate />} />
+          <Route path="donate/thank-you" element={<DonateThankYou />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
           <Route path="terms-of-use" element={<TermsOfUse />} />
-
-          {/* Extra utility routes */}
           <Route path="thank-you" element={<ThankYou />} />
           <Route path="*" element={<NotFound />} />
         </Route>
@@ -80,4 +68,3 @@ export const App: React.FC = () => {
 };
 
 export default App;
-

@@ -95,7 +95,7 @@ export const Donate: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER */}
+      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero
         badge="Support Our Cause"
         badgeVariant="amber"
@@ -103,7 +103,10 @@ export const Donate: React.FC = () => {
         title="Every Contribution Can Protect a Young Life."
         subtitle="Your generous partnership funds free adolescent tele-counselling, school prevention toolkits, parent guidance, and community recovery assistance."
         breadcrumbs={[{ label: 'Donate' }]}
-        variant="centered"
+        imageSrc="/images/donation-impact.jpg"
+        imageAlt="AFOI youth impact and donation support"
+        imageBadgeText="100% Directed Towards Youth Interventions"
+        variant="background"
         stats={[
           { label: 'Free Helpline', value: '100% Free' },
           { label: 'Youth Reached', value: '5,000+' },

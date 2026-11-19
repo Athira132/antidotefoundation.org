@@ -44,207 +44,178 @@ export const Home: React.FC = () => {
     <div className="space-y-0 overflow-hidden">
       
       {/* ============================================================== */}
-      {/* 1. CREATIVE ASYMMETRICAL EDITORIAL HERO SECTION               */}
+      {/* 1. CINEMATIC FULL-WIDTH BACKGROUND HERO SECTION                */}
       {/* ============================================================== */}
-      <section className="relative bg-gradient-to-b from-brand-navy-950 via-[#07162C] to-brand-navy-950 text-white overflow-hidden pt-10 sm:pt-14 md:pt-18 lg:pt-22 pb-16 sm:pb-24 lg:pb-28">
+      <section className="relative bg-brand-navy-950 text-white overflow-hidden min-h-[520px] lg:min-h-[640px] flex flex-col justify-between pt-6 sm:pt-10 md:pt-14 pb-16 sm:pb-24">
         
-        {/* Giant Subtle Ambient Typography in Background */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none">
-          <span className="text-[14vw] font-black uppercase text-white/[0.025] tracking-widest translate-y-12 whitespace-nowrap">
-            DRUG-FREE
-          </span>
+        {/* DESKTOP BACKGROUND IMAGE (Full-width background on md+ screens) */}
+        <div className="absolute inset-0 z-0 hidden md:block overflow-hidden pointer-events-none">
+          <img
+            src="/images/hero-youth-leadership.jpg"
+            alt="Empowered Indian youth standing together for a drug-free India"
+            className="w-full h-full object-cover object-center"
+            loading="eager"
+          />
+          {/* Multi-stop dark gradient overlay for 100% text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy-950/98 via-brand-navy-950/90 to-brand-navy-950/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950/80 via-transparent to-brand-navy-950/40" />
         </div>
 
-        {/* Abstract Glowing Atmospheric Circles, Rings & Lighting Elements */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-brand-teal-500/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-10 right-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 right-1/4 w-[500px] h-[500px] bg-brand-navy-800/40 rounded-full blur-3xl pointer-events-none" />
+        {/* Ambient Decorative Lighting */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-brand-teal-500/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-10 right-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
+        </div>
 
-        {/* Subtle geometric line curves & abstract background rings */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none" />
-        
-        <FloatingElement duration={8} distance={8} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border border-white/5 rounded-full pointer-events-none hidden lg:block" />
-        <FloatingElement duration={11} distance={12} delay={1} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[950px] border border-brand-teal-500/10 rounded-full pointer-events-none hidden lg:block" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex-grow flex flex-col justify-center">
           
-          {/* Asymmetrical Editorial Hero Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* MOBILE VIEW: Photograph MUST appear FIRST at top of hero */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: smoothEase }}
+            className="block md:hidden w-full mb-6"
+          >
+            <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/20 bg-brand-navy-900">
+              <img
+                src="/images/hero-youth-leadership.jpg"
+                alt="Empowered Indian youth standing together for a drug-free India"
+                className="w-full h-full object-cover object-center"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-3 left-3 right-3 px-3 py-1.5 rounded-lg bg-brand-navy-950/85 backdrop-blur-md text-[11px] text-teal-300 font-semibold border border-white/10 flex items-center justify-between">
+                <span>Youth Empowerment Movement</span>
+                <span className="text-amber-300 font-bold">Ages 13–30</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Hero Content Block: Left-aligned, readable, editorial */}
+          <div className="max-w-3xl lg:max-w-4xl space-y-4 sm:space-y-6 text-left">
             
-            {/* Left 7 Columns: Editorial Typography & CTAs */}
+            {/* EXACT Supporting Label above heading */}
             <motion.div
-              initial={{ opacity: 0, x: -36 }}
+              initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, ease: smoothEase }}
-              className="lg:col-span-7 space-y-4 sm:space-y-6 text-left"
+              transition={{ duration: 0.5, delay: 0.1, ease: smoothEase }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-teal-500/20 border border-brand-teal-400/40 text-brand-teal-300 text-xs sm:text-sm font-extrabold tracking-widest uppercase shadow-sm backdrop-blur-md"
             >
-              
-              {/* EXACT Supporting Label above heading */}
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1, ease: smoothEase }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-teal-500/15 border border-brand-teal-400/30 text-brand-teal-300 text-xs sm:text-sm font-extrabold tracking-widest uppercase shadow-sm"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400"></span>
-                </span>
-                <span>FOR YOUTH AGED 13–30</span>
-              </motion.div>
-
-              {/* EXACT Main Headline: Strongest Visual Element on Homepage */}
-              <motion.h1
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.15, ease: smoothEase }}
-                className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tight text-white leading-[1.08]"
-              >
-                Building a{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-200 to-amber-300">
-                  Drug-Free India
-                </span>
-              </motion.h1>
-
-              {/* Description */}
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.25, ease: smoothEase }}
-                className="text-sm sm:text-base md:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl"
-              >
-                Empowering youth aged 13–30 through awareness, education, free counselling and community-driven action.
-              </motion.p>
-
-              {/* 3 Call-To-Action Buttons: Distinctive with entrance and hover feedback */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.35, ease: smoothEase }}
-                className="pt-2 sm:pt-4 flex flex-wrap items-center gap-2.5 sm:gap-4"
-              >
-                <Button
-                  to="/programs"
-                  variant="accent"
-                  size="lg"
-                  className="w-full sm:w-auto shadow-xl"
-                >
-                  <span>Join Our Movement</span>
-                  <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </Button>
-
-                <Button
-                  to="/volunteer"
-                  variant="secondary"
-                  size="lg"
-                  className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-md"
-                >
-                  <Users className="w-4 h-4 mr-1 text-teal-300" />
-                  <span>Become a Volunteer</span>
-                </Button>
-
-                <Button
-                  to="/donate"
-                  variant="primary"
-                  size="lg"
-                  className="w-full sm:w-auto bg-brand-teal-600 hover:bg-brand-teal-500 text-white border border-teal-400/30"
-                >
-                  <Heart className="w-4 h-4 mr-1 fill-current text-white group-hover:scale-110 transition-transform" />
-                  <span>Donate Now</span>
-                </Button>
-              </motion.div>
-
-              {/* Compact Trust Highlights: Clean responsive grid with staggered reveal */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.45 }}
-                className="pt-4 sm:pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-left"
-              >
-                <div className="flex items-center gap-2.5 bg-white/5 p-2 sm:p-2.5 rounded-xl border border-white/10 hover:border-amber-400/40 transition-colors">
-                  <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
-                  <div className="text-[11px] sm:text-xs">
-                    <div className="font-bold text-white leading-tight">24/7 Helpline</div>
-                    <div className="text-slate-400 text-[10px]">Toll-free crisis aid</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2.5 bg-white/5 p-2 sm:p-2.5 rounded-xl border border-white/10 hover:border-teal-400/40 transition-colors">
-                  <Lock className="w-4 h-4 text-teal-400 shrink-0" />
-                  <div className="text-[11px] sm:text-xs">
-                    <div className="font-bold text-white leading-tight">100% Confidential</div>
-                    <div className="text-slate-400 text-[10px]">Zero stigma or disclosure</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2.5 bg-white/5 p-2 sm:p-2.5 rounded-xl border border-white/10 hover:border-sky-400/40 transition-colors">
-                  <ShieldCheck className="w-4 h-4 text-sky-400 shrink-0" />
-                  <div className="text-[11px] sm:text-xs">
-                    <div className="font-bold text-white leading-tight">Registered Society</div>
-                    <div className="text-slate-400 text-[10px]">Reg: DRB1/SOR/257</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2.5 bg-white/5 p-2 sm:p-2.5 rounded-xl border border-white/10 hover:border-amber-300/40 transition-colors">
-                  <HeartHandshake className="w-4 h-4 text-amber-300 shrink-0" />
-                  <div className="text-[11px] sm:text-xs">
-                    <div className="font-bold text-white leading-tight">Free Counselling</div>
-                    <div className="text-slate-400 text-[10px]">For youth & parents</div>
-                  </div>
-                </div>
-              </motion.div>
-
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400"></span>
+              </span>
+              <span>FOR YOUTH AGED 13–30</span>
             </motion.div>
 
-            {/* Right 5 Columns: Dynamic Layered Visual Composition */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.94, x: 30 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: smoothEase }}
-              className="lg:col-span-5 relative mt-4 lg:mt-0"
+            {/* EXACT Main Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.15, ease: smoothEase }}
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08]"
             >
-              {/* Outer decorative glowing ring */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-brand-teal-500/20 via-sky-500/10 to-amber-500/20 rounded-3xl blur-2xl pointer-events-none" />
+              Building a{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-200 to-amber-300">
+                Drug-Free India
+              </span>
+            </motion.h1>
 
-              {/* Main Image Frame with Luxury Corner Accents */}
-              <div className="relative rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-brand-navy-900 group">
-                <img
-                  src="/images/hero-youth-leadership.jpg"
-                  alt="Empowered Indian youth standing together for a drug-free India"
-                  className="w-full h-56 sm:h-72 md:h-80 lg:h-[430px] object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                  loading="eager"
-                />
-                
-                {/* Subtle gradient vignette to blend with dark mode */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950/80 via-transparent to-transparent pointer-events-none" />
+            {/* EXACT Supporting Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.22, ease: smoothEase }}
+              className="space-y-2"
+            >
+              <p className="text-base sm:text-xl font-bold text-teal-300 tracking-wide">
+                Antidote India | A Voluntary Movement for a Drug-Free Generation
+              </p>
+              <p className="text-sm sm:text-base font-semibold text-slate-200">
+                Empowering Youth. Preventing Addiction. Transforming India.
+              </p>
+              <p className="text-xs sm:text-sm text-slate-300/90 font-normal leading-relaxed max-w-2xl pt-1">
+                Empowering youth aged 13–30 through awareness, education, free counselling and community-driven action.
+              </p>
+            </motion.div>
 
-                {/* Floating Bottom Card over photo */}
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-brand-navy-950/85 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/15 flex items-center justify-between gap-3 shadow-xl">
-                  <div className="space-y-0.5">
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-teal-400 flex items-center gap-1.5">
-                      <Sparkles className="w-3 h-3 text-amber-400" />
-                      <span>Empowering Youth • Ages 13–30</span>
-                    </div>
-                    <div className="text-xs sm:text-sm font-extrabold text-white">
-                      Protect Young Lives. Build a Drug-Free India.
-                    </div>
-                  </div>
-                  <span className="shrink-0 px-2.5 py-1 rounded-xl text-[10px] font-bold bg-brand-teal-500/20 text-teal-300 border border-teal-400/30">
-                    Active
-                  </span>
+            {/* 3 Call-To-Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.3, ease: smoothEase }}
+              className="pt-2 sm:pt-3 flex flex-wrap items-center gap-3 sm:gap-4"
+            >
+              <Button
+                to="/programs-events"
+                variant="accent"
+                size="lg"
+                className="w-full sm:w-auto shadow-xl"
+              >
+                <span>Join Our Movement</span>
+                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              </Button>
+
+              <Button
+                to="/volunteer"
+                variant="secondary"
+                size="lg"
+                className="w-full sm:w-auto bg-white/15 hover:bg-white/25 text-white border-white/25 backdrop-blur-md"
+              >
+                <Users className="w-4 h-4 mr-1 text-teal-300" />
+                <span>Become a Volunteer</span>
+              </Button>
+
+              <Button
+                to="/donate"
+                variant="primary"
+                size="lg"
+                className="w-full sm:w-auto bg-brand-teal-600 hover:bg-brand-teal-500 text-white border border-teal-400/30"
+              >
+                <Heart className="w-4 h-4 mr-1 fill-current text-white group-hover:scale-110 transition-transform" />
+                <span>Donate Now</span>
+              </Button>
+            </motion.div>
+
+            {/* Compact Trust Highlights: Clean responsive grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="pt-4 sm:pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 text-left"
+            >
+              <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-amber-400/40 transition-colors">
+                <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
+                <div className="text-[11px] sm:text-xs">
+                  <div className="font-bold text-white leading-tight">24/7 Helpline</div>
+                  <div className="text-slate-300 text-[10px]">+91 77779 27742</div>
                 </div>
               </div>
 
-              {/* Floating Decorative Accent Badge on top corner (desktop only) */}
-              <FloatingElement
-                duration={5}
-                distance={6}
-                className="hidden sm:flex absolute -top-4 -right-3 bg-white/95 text-brand-navy-950 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-xl border border-slate-200 items-center gap-2 text-xs font-extrabold z-20"
-              >
-                <ShieldCheck className="w-4 h-4 text-brand-teal-600" />
-                <span>Zero Stigma • Total Care</span>
-              </FloatingElement>
+              <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-teal-400/40 transition-colors">
+                <Lock className="w-4 h-4 text-teal-400 shrink-0" />
+                <div className="text-[11px] sm:text-xs">
+                  <div className="font-bold text-white leading-tight">100% Confidential</div>
+                  <div className="text-slate-300 text-[10px]">Zero stigma or disclosure</div>
+                </div>
+              </div>
 
+              <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-sky-400/40 transition-colors">
+                <ShieldCheck className="w-4 h-4 text-sky-400 shrink-0" />
+                <div className="text-[11px] sm:text-xs">
+                  <div className="font-bold text-white leading-tight">Registered Society</div>
+                  <div className="text-slate-300 text-[10px]">DRB1/SOR/257/2025-2026</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 bg-white/10 p-2 sm:p-2.5 rounded-xl border border-white/15 backdrop-blur-md hover:border-amber-300/40 transition-colors">
+                <HeartHandshake className="w-4 h-4 text-amber-300 shrink-0" />
+                <div className="text-[11px] sm:text-xs">
+                  <div className="font-bold text-white leading-tight">Free Counselling</div>
+                  <div className="text-slate-300 text-[10px]">For youth & parents</div>
+                </div>
+              </div>
             </motion.div>
 
           </div>
@@ -252,9 +223,9 @@ export const Home: React.FC = () => {
         </div>
 
         {/* HERO BOTTOM EDGE: Creative Responsive Organic Wave SVG Divider */}
-        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-10 pointer-events-none">
+        <div className="relative w-full overflow-hidden leading-none z-10 -mb-px mt-8">
           <svg
-            className="relative block w-full h-8 sm:h-14 md:h-18 lg:h-22 text-white"
+            className="relative block w-full h-8 sm:h-14 md:h-18 text-white"
             viewBox="0 0 1440 120"
             preserveAspectRatio="none"
             fill="currentColor"

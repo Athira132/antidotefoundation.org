@@ -99,8 +99,8 @@ const staggerContainerVariants = (stagger: number, delay: number): Variants => (
 });
 
 export const StaggerContainer: React.FC<StaggerContainerProps> = ({
-  staggerDelay = 0.1,
-  delayChildren = 0.05,
+  staggerDelay = 0.18,
+  delayChildren = 0.08,
   className = '',
   children,
   ...props
@@ -128,15 +128,15 @@ interface StaggerItemProps extends HTMLMotionProps<'div'> {
 const staggerItemVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 28,
-    scale: 0.98
+    y: 32,
+    scale: 0.97
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.55,
+      duration: 0.65,
       ease: smoothEase
     }
   }

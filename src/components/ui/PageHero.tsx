@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronRight, Sparkles, Shield, Compass } from 'lucide-react';
+import { ChevronRight, Shield } from 'lucide-react';
 import { Badge } from './Badge';
 import { smoothEase, FloatingElement } from '../animations/MotionComponents';
 
@@ -16,7 +16,7 @@ export interface PageHeroProps {
   imageAlt?: string;
   imageBadgeText?: string;
   actions?: React.ReactNode;
-  variant?: 'split' | 'centered' | 'editorial' | 'compact';
+  variant?: 'background' | 'split' | 'centered' | 'editorial' | 'compact';
   stats?: Array<{ label: string; value: string }>;
   children?: React.ReactNode;
   bottomCurve?: boolean;
@@ -30,54 +30,61 @@ export const PageHero: React.FC<PageHeroProps> = ({
   subtitle,
   breadcrumbs,
   imageSrc,
-  imageAlt = 'Antidote Foundation hero imagery',
+  imageAlt = 'Antidote Foundation hero photograph',
   imageBadgeText,
   actions,
-  variant = 'split',
+  variant = 'background',
   stats,
   children,
   bottomCurve = true
 }) => {
   return (
-    <section className="relative bg-brand-navy-950 text-white overflow-hidden border-b border-brand-navy-800/80">
-      {/* Background Decorative Ambience */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Soft glowing mesh circles */}
-        <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-brand-teal-500/15 blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-cyan-600/10 blur-3xl" />
-        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-64 h-64 rounded-full bg-amber-500/10 blur-3xl" />
+    <section className="relative bg-brand-navy-950 text-white overflow-hidden border-b border-brand-navy-900/80 min-h-[460px] flex flex-col justify-between">
+      
+      {/* DESKTOP BACKGROUND IMAGE (Full-width background on md+ screens) */}
+      {imageSrc && (
+        <div className="absolute inset-0 z-0 hidden md:block overflow-hidden pointer-events-none">
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            className="w-full h-full object-cover object-center scale-100"
+          />
+          {/* Cinematic dark readable gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy-950/98 via-brand-navy-950/88 to-brand-navy-950/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950 via-transparent to-brand-navy-950/30" />
+        </div>
+      )}
 
-        {/* Subtle geometric line pattern */}
+      {/* Decorative Ambience for No-Image or Subtle Accents */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
+        <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-brand-teal-500/10 blur-3xl" />
+        <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-cyan-600/10 blur-3xl" />
         <div
-          className="absolute inset-0 opacity-[0.035]"
+          className="absolute inset-0 opacity-[0.025]"
           style={{
             backgroundImage:
               'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
             backgroundSize: '40px 40px'
           }}
         />
-
-        {/* Ambient floating ring */}
-        <FloatingElement duration={7} distance={10} className="absolute top-12 right-1/4 hidden lg:block">
-          <div className="w-48 h-48 rounded-full border border-teal-500/15" />
-        </FloatingElement>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10 sm:pt-14 pb-14 sm:pb-20">
+      {/* Main Content Area */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8 sm:pt-12 pb-12 sm:pb-16 w-full flex-grow flex flex-col justify-center">
         
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (
           <motion.nav
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: smoothEase }}
-            className="flex items-center gap-2 text-xs text-slate-400 mb-6 flex-wrap"
+            className="flex items-center gap-2 text-xs text-slate-400 mb-5 flex-wrap"
             aria-label="Breadcrumb"
           >
             <Link to="/" className="hover:text-teal-300 transition-colors">
               Home
             </Link>
-            {breadcrumbs.map((crumb, idx) => (
+            {breadcrumbs.map((crumb) => (
               <React.Fragment key={crumb.label}>
                 <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
                 {crumb.href ? (
@@ -92,276 +99,105 @@ export const PageHero: React.FC<PageHeroProps> = ({
           </motion.nav>
         )}
 
-        {/* Variant: CENTERED */}
-        {variant === 'centered' && (
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            {badge && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.45, ease: smoothEase }}
-                className="inline-flex justify-center"
-              >
-                <Badge variant={badgeVariant} className="px-3.5 py-1 text-xs uppercase tracking-wider font-bold">
-                  {BadgeIcon && <BadgeIcon className="w-3.5 h-3.5 mr-1.5" />}
-                  {badge}
-                </Badge>
-              </motion.div>
-            )}
-
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1, ease: smoothEase }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]"
-            >
-              {title}
-            </motion.h1>
-
-            {subtitle && (
-              <motion.p
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.2, ease: smoothEase }}
-                className="text-base sm:text-xl text-slate-300 font-light leading-relaxed max-w-3xl mx-auto"
-              >
-                {subtitle}
-              </motion.p>
-            )}
-
-            {actions && (
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3, ease: smoothEase }}
-                className="flex flex-wrap items-center justify-center gap-3 pt-2"
-              >
-                {actions}
-              </motion.div>
-            )}
-
-            {stats && stats.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.35, ease: smoothEase }}
-                className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 max-w-3xl mx-auto"
-              >
-                {stats.map((s) => (
-                  <div key={s.label} className="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-                    <div className="text-xl sm:text-2xl font-extrabold text-teal-300">{s.value}</div>
-                    <div className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-0.5">{s.label}</div>
-                  </div>
-                ))}
-              </motion.div>
-            )}
-
-            {children}
-          </div>
+        {/* MOBILE VIEW: Photograph MUST appear FIRST at top of hero */}
+        {imageSrc && (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: smoothEase }}
+            className="block md:hidden w-full mb-6"
+          >
+            <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-brand-navy-900">
+              <img
+                src={imageSrc}
+                alt={imageAlt}
+                className="w-full h-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950/75 via-transparent to-transparent pointer-events-none" />
+              {imageBadgeText && (
+                <div className="absolute bottom-3 left-3 right-3 px-3 py-1.5 rounded-lg bg-brand-navy-950/85 backdrop-blur-md text-[11px] text-teal-300 font-medium border border-white/10">
+                  {imageBadgeText}
+                </div>
+              )}
+            </div>
+          </motion.div>
         )}
 
-        {/* Variant: EDITORIAL (Left aligned with optional stats) */}
-        {variant === 'editorial' && (
-          <div className="max-w-4xl space-y-6">
-            {badge && (
-              <motion.div
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.45, ease: smoothEase }}
-              >
-                <Badge variant={badgeVariant} className="px-3.5 py-1 text-xs uppercase tracking-wider font-bold">
-                  {BadgeIcon && <BadgeIcon className="w-3.5 h-3.5 mr-1.5" />}
-                  {badge}
-                </Badge>
-              </motion.div>
-            )}
-
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1, ease: smoothEase }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight"
+        {/* Text and Actions Layout */}
+        <div className={`space-y-5 ${variant === 'centered' ? 'max-w-4xl mx-auto text-center' : 'max-w-3xl lg:max-w-4xl'}`}>
+          
+          {/* Badge / Label */}
+          {badge && (
+            <motion.div
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.45, ease: smoothEase }}
+              className={variant === 'centered' ? 'inline-flex justify-center' : ''}
             >
-              {title}
-            </motion.h1>
+              <Badge variant={badgeVariant} className="px-3.5 py-1 text-xs uppercase tracking-wider font-extrabold shadow-sm">
+                {BadgeIcon && <BadgeIcon className="w-3.5 h-3.5 mr-1.5" />}
+                {badge}
+              </Badge>
+            </motion.div>
+          )}
 
-            {subtitle && (
-              <motion.p
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.2, ease: smoothEase }}
-                className="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-2xl"
-              >
-                {subtitle}
-              </motion.p>
-            )}
+          {/* Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.08, ease: smoothEase }}
+            className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-[1.12]"
+          >
+            {title}
+          </motion.h1>
 
-            {actions && (
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3, ease: smoothEase }}
-                className="flex flex-wrap items-center gap-3 pt-2"
-              >
-                {actions}
-              </motion.div>
-            )}
+          {/* Subtitle / Description */}
+          {subtitle && (
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.16, ease: smoothEase }}
+              className="text-base sm:text-lg lg:text-xl text-slate-200/90 font-normal leading-relaxed max-w-3xl"
+            >
+              {subtitle}
+            </motion.div>
+          )}
 
-            {children}
-          </div>
-        )}
-
-        {/* Variant: COMPACT (Legal / Utility) */}
-        {variant === 'compact' && (
-          <div className="max-w-3xl space-y-4">
-            {badge && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-              >
-                <Badge variant={badgeVariant} className="px-3 py-1 text-[11px] font-bold">
-                  {BadgeIcon && <BadgeIcon className="w-3 h-3 mr-1" />}
-                  {badge}
-                </Badge>
-              </motion.div>
-            )}
-
-            <motion.h1
+          {/* Actions / Buttons */}
+          {actions && (
+            <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.08, ease: smoothEase }}
-              className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white"
+              transition={{ duration: 0.5, delay: 0.24, ease: smoothEase }}
+              className={`flex flex-wrap items-center gap-3 pt-2 ${variant === 'centered' ? 'justify-center' : ''}`}
             >
-              {title}
-            </motion.h1>
+              {actions}
+            </motion.div>
+          )}
 
-            {subtitle && (
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.16, ease: smoothEase }}
-                className="text-sm sm:text-base text-slate-300 font-light leading-relaxed"
-              >
-                {subtitle}
-              </motion.p>
-            )}
-
-            {actions && <div className="pt-2">{actions}</div>}
-            {children}
-          </div>
-        )}
-
-        {/* Variant: SPLIT (Text left, image right) */}
-        {variant === 'split' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            <div className="lg:col-span-7 space-y-6">
-              {badge && (
-                <motion.div
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.45, ease: smoothEase }}
-                >
-                  <Badge variant={badgeVariant} className="px-3.5 py-1 text-xs uppercase tracking-wider font-bold">
-                    {BadgeIcon && <BadgeIcon className="w-3.5 h-3.5 mr-1.5" />}
-                    {badge}
-                  </Badge>
-                </motion.div>
-              )}
-
-              <motion.h1
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.1, ease: smoothEase }}
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight"
-              >
-                {title}
-              </motion.h1>
-
-              {subtitle && (
-                <motion.p
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, delay: 0.2, ease: smoothEase }}
-                  className="text-base sm:text-lg text-slate-300 font-light leading-relaxed"
-                >
-                  {subtitle}
-                </motion.p>
-              )}
-
-              {actions && (
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3, ease: smoothEase }}
-                  className="flex flex-wrap items-center gap-3 pt-1"
-                >
-                  {actions}
-                </motion.div>
-              )}
-
-              {stats && stats.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.35, ease: smoothEase }}
-                  className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4"
-                >
-                  {stats.map((s) => (
-                    <div key={s.label} className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                      <div className="text-xl font-bold text-teal-300">{s.value}</div>
-                      <div className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">{s.label}</div>
-                    </div>
-                  ))}
-                </motion.div>
-              )}
-
-              {children}
-            </div>
-
-            {/* Right Column: Visual Frame */}
-            {imageSrc && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.94, x: 20 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ duration: 0.65, delay: 0.15, ease: smoothEase }}
-                className="lg:col-span-5 relative"
-              >
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-brand-navy-900 group">
-                  <img
-                    src={imageSrc}
-                    alt={imageAlt}
-                    className="w-full h-64 sm:h-80 lg:h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-950/80 via-transparent to-transparent pointer-events-none" />
-
-                  {imageBadgeText && (
-                    <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-brand-navy-950/80 backdrop-blur-md border border-white/15 text-xs text-slate-200">
-                      <span className="font-semibold text-teal-300">Antidote Focus:</span> {imageBadgeText}
-                    </div>
-                  )}
+          {/* Key Stats Counter */}
+          {stats && stats.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.32, ease: smoothEase }}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-5 max-w-3xl"
+            >
+              {stats.map((s) => (
+                <div key={s.label} className="p-3.5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md shadow-sm">
+                  <div className="text-xl sm:text-2xl font-extrabold text-teal-300">{s.value}</div>
+                  <div className="text-[11px] text-slate-300 uppercase tracking-wider font-semibold mt-0.5">{s.label}</div>
                 </div>
+              ))}
+            </motion.div>
+          )}
 
-                {/* Floating decorative badge */}
-                <FloatingElement
-                  duration={6}
-                  distance={6}
-                  delay={1}
-                  className="absolute -top-3 -right-3 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-navy-900/90 border border-teal-500/30 text-[11px] text-teal-300 shadow-xl backdrop-blur-md"
-                >
-                  <Shield className="w-3.5 h-3.5 text-teal-400" />
-                  <span>Verified Public Charter</span>
-                </FloatingElement>
-              </motion.div>
-            )}
-
-          </div>
-        )}
+          {children}
+        </div>
 
       </div>
 
-      {/* Hero Bottom Curved SVG Transition */}
+      {/* Hero Bottom Organic Curved SVG Transition */}
       {bottomCurve && (
         <div className="relative w-full overflow-hidden leading-none z-10 -mb-px">
           <svg
@@ -377,4 +213,3 @@ export const PageHero: React.FC<PageHeroProps> = ({
     </section>
   );
 };
-

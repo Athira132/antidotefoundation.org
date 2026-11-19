@@ -98,7 +98,7 @@ export const Contact: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER */}
+      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero
         badge="Get in Touch"
         badgeVariant="teal"
@@ -106,7 +106,10 @@ export const Contact: React.FC = () => {
         title="We Are Here to Help."
         subtitle="Reach out for free confidential youth counselling, volunteer engagement, school workshop partnerships, or institutional collaborations."
         breadcrumbs={[{ label: 'Contact Us' }]}
-        variant="centered"
+        imageSrc="/images/counselling-support.jpg"
+        imageAlt="Free and confidential counselling support"
+        imageBadgeText="100% Confidential Psychological Aid"
+        variant="background"
         stats={[
           { label: 'Helpline', value: '24/7 Active' },
           { label: 'Confidentiality', value: '100% Protected' },

@@ -97,25 +97,25 @@ export const About: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER (Split layout with youth imagery) */}
+      {/* 1. DISTINCTIVE HERO BANNER (Full-width background on desktop, photo first on mobile) */}
       <PageHero
         badge="About Antidote Foundation of India"
         badgeVariant="teal"
         badgeIcon={ShieldCheck}
         title="Protecting Young Lives. Building a Drug-Free India."
-        subtitle="We are an autonomous, registered non-profit society dedicated to empowering youth aged 13–30, mitigating substance risks, and fostering compassionate community recovery."
+        subtitle="Antidote Foundation of India is a voluntary, youth-focused initiative working to build a drug-free society through awareness, education, community engagement, and family support."
         breadcrumbs={[{ label: 'About Us' }]}
         imageSrc="/images/youth-empowerment.jpg"
         imageAlt="AFOI youth movement leadership and educators"
         imageBadgeText="Registered Society (Reg: DRB1/SOR/257/2025-2026)"
-        variant="split"
+        variant="background"
         actions={
           <>
-            <Button to="/programs" variant="accent" size="md">
-              <span>Our Programmes</span>
+            <Button to="/programs-events" variant="accent" size="md">
+              <span>Our Programmes & Events</span>
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
-            <Button to="/volunteer" variant="secondary" size="md" className="bg-white/10 hover:bg-white/20 text-white border-white/20">
+            <Button to="/volunteer" variant="secondary" size="md" className="bg-white/15 hover:bg-white/25 text-white border-white/25 backdrop-blur-md">
               <Users className="w-4 h-4 mr-1 text-teal-300" />
               <span>Join Volunteer Force</span>
             </Button>
@@ -137,15 +137,19 @@ export const About: React.FC = () => {
               </div>
 
               <div className="space-y-4 text-xs sm:text-base text-slate-600 leading-relaxed">
+                <p className="text-base sm:text-lg font-medium text-brand-navy-900">
+                  We believe prevention begins with awareness, and recovery begins with empathy. We work directly with youth aged 13–30, schools, colleges, and families across India to break the cycle of substance abuse before it begins.
+                </p>
+                <p>
+                  What began as awareness programmes in a few colleges has grown into a statewide movement. Today, Antidote Foundation of India conducts school workshops, college awareness drives, community campaigns, and provides free, confidential counselling to youth and families across India.
+                </p>
                 <p>
                   Substance dependency among adolescents is rarely a failure of moral character; it is a complex, neurobiological and psycho-social challenge triggered by anxiety, peer pressure, curiosity, academic strain, or domestic distress.
                 </p>
-                <p>
-                  The <strong className="text-brand-navy-950">Antidote Foundation of India (AFOI)</strong> operates on the bedrock belief that early, evidence-based prevention is immeasurably more effective than delayed crisis response. By opening honest, stigma-free conversations in classrooms, collegiate lecture halls, and living rooms, we empower young people to make healthy, self-respecting choices.
-                </p>
-                <p>
-                  Our registered society status in Bengaluru provides an accountable framework for working with educators, mental health specialists, civic volunteers, and public health institutions across the country.
-                </p>
+                <div className="p-3.5 rounded-xl bg-teal-50 border border-teal-200 text-teal-900 font-bold text-sm flex items-center gap-2.5">
+                  <Sparkles className="w-4 h-4 text-teal-600 shrink-0" />
+                  <span>Know the Signs. Know What to Do.</span>
+                </div>
               </div>
 
               <div className="p-4 sm:p-5 rounded-2xl bg-brand-navy-50 border border-brand-navy-100 flex items-start gap-3 sm:gap-4">

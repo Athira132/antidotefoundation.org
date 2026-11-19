@@ -38,7 +38,7 @@ export const News: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER */}
+      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero
         badge="Official Communiques"
         badgeVariant="teal"
@@ -46,7 +46,10 @@ export const News: React.FC = () => {
         title="News & Press Dispatches"
         subtitle="Verified institutional updates, legal notices, campaign announcements, and public health engagements from the Antidote Foundation of India."
         breadcrumbs={[{ label: 'News & Updates' }]}
-        variant="centered"
+        imageSrc="/images/youth-empowerment.jpg"
+        imageAlt="Antidote Foundation news and press dispatches"
+        imageBadgeText="Official Press & Public Dispatches"
+        variant="background"
         actions={
           <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
             {categories.map((cat) => (

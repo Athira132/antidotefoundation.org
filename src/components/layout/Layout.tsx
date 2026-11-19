@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { StickyContactChip } from '../ui/StickyContactChip';
 import { smoothEase } from '../animations/MotionComponents';
 
 const ScrollToTop: React.FC = () => {
@@ -42,6 +43,7 @@ export const Layout: React.FC = () => {
           </motion.div>
         </AnimatePresence>
       </main>
+      <StickyContactChip />
       <Footer />
     </div>
   );

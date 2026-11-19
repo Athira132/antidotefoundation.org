@@ -12,9 +12,13 @@ import {
   ArrowRight,
   ShieldCheck,
   FileText,
-  HeartHandshake
+  HeartHandshake,
+  Sparkles,
+  Eye,
+  MessageCircle,
+  LifeBuoy
 } from 'lucide-react';
-import { resourcesData, resourceCategories } from '../data/resources';
+import { resourcesData } from '../data/resources';
 import { organizationData } from '../data/organization';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
@@ -30,39 +34,80 @@ import {
 } from '../components/animations/MotionComponents';
 
 export const Resources: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'all' | 'students' | 'parents' | 'teachers' | 'downloads'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'students' | 'parents' | 'teachers' | 'everyone' | 'downloads'>('all');
 
-  const studentResource = resourcesData.find(r => r.category === 'students');
-  const parentResource = resourcesData.find(r => r.category === 'parents');
-  const teacherResource = resourcesData.find(r => r.category === 'teachers');
   const downloadResources = resourcesData.filter(r => r.category === 'downloads');
+
+  const substanceRisks = [
+    {
+      name: 'Alcohol & Binge Drinking',
+      risk: 'Adolescent brain development, memory impairment, alcohol poisoning, and risk of traumatic injury.',
+      warning: 'Binge drinking among youth impairs prefrontal cortex development and accelerates dependency patterns.'
+    },
+    {
+      name: 'Nicotine & Vaping',
+      risk: 'Severe lung inflammation from synthetic chemicals, rapid cognitive dependence, and behavioral irritability.',
+      warning: 'E-cigarettes often contain unregulated chemical concentrations equivalent to dozens of cigarettes.'
+    },
+    {
+      name: 'Cannabis',
+      risk: 'Reduced motivation, memory retention deficit, triggered psychosis in genetically vulnerable adolescents.',
+      warning: 'Modern high-potency cannabis extracts have drastically elevated THC levels causing psychoactive harm.'
+    },
+    {
+      name: 'Prescription Drug Misuse',
+      risk: 'Sedatives, painkillers (opioids), and ADHD stimulants misused without strict clinical supervision.',
+      warning: 'Mixing prescription tranquilizers with alcohol can cause fatal respiratory depression within minutes.'
+    },
+    {
+      name: 'Synthetic Drugs (MDMA, Meth, etc.)',
+      risk: 'Hyperthermia, serotonin syndrome, acute cardiac distress, paranoia, and severe psychological crashes.',
+      warning: 'Street pills are frequently adulterated with lethal fentanyl or chemical contaminants.'
+    },
+    {
+      name: 'Inhalants',
+      risk: 'Sudden Sniffing Death Syndrome (SSDS), permanent neurological damage, asphyxiation, and organ toxicity.',
+      warning: 'Household chemicals and solvent glues starve the brain of oxygen and destroy myelin sheaths.'
+    }
+  ];
 
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER */}
+      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero
         badge="Knowledge & Intervention Hub"
         badgeVariant="teal"
         badgeIcon={BookOpen}
-        title="Educational Resources & Toolkits"
-        subtitle="Evidence-based guides, early indicator checklists, and practical action frameworks for students, parents, and educators."
+        title="Educational Resources & Practical Toolkits"
+        subtitle="Empowering youth, parents, and educators across India with scientific drug awareness, warning indicator checklists, and life-saving guidance."
         breadcrumbs={[{ label: 'Resources' }]}
-        variant="centered"
+        imageSrc="/images/educational-resources.jpg"
+        imageAlt="AFOI youth educational workshops and resources"
+        imageBadgeText="Evidence-Based Prevention Materials"
+        variant="background"
         actions={
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-6 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-extrabold text-amber-300">
-            <span>FOR EVERYONE:</span>
-            <span className="text-white">NOTICE</span>
-            <span className="text-teal-400">→</span>
-            <span className="text-white">TALK</span>
-            <span className="text-teal-400">→</span>
-            <span className="text-teal-300">GET HELP</span>
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-extrabold text-amber-300">
+              <span className="text-white">NOTICE</span>
+              <span className="text-teal-400">→</span>
+              <span className="text-white">TALK</span>
+              <span className="text-teal-400">→</span>
+              <span className="text-teal-300">GET HELP</span>
+            </div>
+            <a
+              href="#downloads"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-brand-teal-600 hover:bg-brand-teal-500 text-white text-xs sm:text-sm font-bold shadow-md transition-all"
+            >
+              <Download className="w-4 h-4" />
+              <span>Download Free PDFs</span>
+            </a>
           </div>
         }
       />
 
       {/* Category Tabs Navigation */}
-      <section className="bg-white border-b border-slate-200 sticky top-16 z-30 shadow-xs">
+      <section className="bg-white border-b border-slate-200 sticky top-14 z-30 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto py-3 no-scrollbar">
             {[
@@ -70,6 +115,7 @@ export const Resources: React.FC = () => {
               { id: 'students', label: 'For Students' },
               { id: 'parents', label: 'For Parents' },
               { id: 'teachers', label: 'For Teachers' },
+              { id: 'everyone', label: 'For Everyone (3 Steps)' },
               { id: 'downloads', label: 'Downloadable Guides' }
             ].map((tab) => (
               <button
@@ -81,7 +127,7 @@ export const Resources: React.FC = () => {
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all ${
+                className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all ${
                   activeTab === tab.id
                     ? 'bg-brand-navy-900 text-white shadow-sm'
                     : 'text-slate-600 hover:text-brand-navy-900 hover:bg-slate-100'
@@ -94,241 +140,379 @@ export const Resources: React.FC = () => {
         </div>
       </section>
 
-      {/* 1. STUDENT SECTION */}
+      {/* ============================================================== */}
+      {/* 1. FOR STUDENTS: KNOW THE RISKS. KNOW YOUR CHOICES.           */}
+      {/* ============================================================== */}
       <section id="students" className="py-14 sm:py-20 bg-slate-50 border-b border-slate-200 scroll-mt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          <SectionHeader
+            badge="For Students"
+            title="Know the Risks. Know Your Choices."
+            subtitle="Real facts about chemical substances and practical scripts to stay confident and in control."
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mt-8">
             
-            <SlideInLeft className="lg:col-span-4 space-y-4 lg:sticky lg:top-36">
-              <Badge variant="teal">Youth & Adolescents</Badge>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy-950 leading-tight">
-                Know the Risks. Know Your Choices.
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Curiosity, peer pressure, exam anxiety, or seeking a temporary escape are natural feelings, but turning to chemical substances has long-term neurological consequences.
-              </p>
+            {/* Left 7 Columns: The 6 Key Substance Categories */}
+            <div className="lg:col-span-7 space-y-4">
+              <h3 className="text-lg sm:text-xl font-bold text-brand-navy-950 flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5 text-amber-500" />
+                <span>Substance Categories & Real Neurological Impacts</span>
+              </h3>
+
+              <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {substanceRisks.map((item) => (
+                  <StaggerItem key={item.name}>
+                    <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:shadow-md transition-all h-full flex flex-col justify-between">
+                      <div className="space-y-2">
+                        <span className="font-extrabold text-sm sm:text-base text-brand-navy-950 block">
+                          {item.name}
+                        </span>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          <strong>Direct Harm:</strong> {item.risk}
+                        </p>
+                      </div>
+                      <div className="mt-3 pt-2.5 border-t border-slate-100 text-[11px] text-amber-800 font-medium">
+                        ⚠️ {item.warning}
+                      </div>
+                    </div>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+
+            {/* Right 5 Columns: Tips for Students & Confidence Scripts */}
+            <div className="lg:col-span-5 space-y-5 lg:sticky lg:top-36">
               
-              <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-2">
-                <span className="font-bold text-xs text-brand-navy-950 block">Got Questions Without The Lecture?</span>
-                <p className="text-xs text-slate-500">
-                  Our youth helpline is completely confidential. We do not report callers or notify schools.
+              <div className="bg-gradient-to-br from-brand-navy-950 to-brand-navy-900 text-white p-6 sm:p-7 rounded-3xl border border-brand-navy-800 shadow-xl space-y-4">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-amber-400" />
+                  <h4 className="text-lg font-extrabold text-white">Tips for Students</h4>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Navigating high school and college social circles doesn't require compromising your future. Remember these fundamental rules:
                 </p>
-                <div className="pt-1">
+
+                <ul className="space-y-3 text-xs sm:text-sm text-slate-200">
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
+                    <span><strong>Trust your gut:</strong> If an environment feels unsafe or substances appear, leave immediately.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
+                    <span><strong>Guard your drink:</strong> Never accept open cups or unsealed beverages from strangers at parties.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
+                    <span><strong>Choose real friends:</strong> True peers respect your boundaries and will never pressure you to consume substances.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
+                    <span><strong>Have an exit plan:</strong> Set up a discreet code with a trusted sibling or parent to pick you up anytime.</span>
+                  </li>
+                </ul>
+
+                <div className="pt-3 border-t border-white/10">
                   <a
                     href={`tel:${organizationData.contact.helpline}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700 hover:text-amber-800"
+                    className="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-xl bg-brand-teal-600/80 hover:bg-brand-teal-500 text-white text-xs font-bold transition-all"
                   >
-                    <PhoneCall className="w-3.5 h-3.5" />
-                    <span>Call {organizationData.contact.helplineDisplay}</span>
+                    <span className="flex items-center gap-2">
+                      <PhoneCall className="w-3.5 h-3.5" />
+                      <span>Call Confidential Youth Helpline</span>
+                    </span>
+                    <span>+91 77779 27742</span>
                   </a>
                 </div>
               </div>
-            </SlideInLeft>
 
-            <SlideInRight className="lg:col-span-8 space-y-6">
-              
-              {/* Myth Busters */}
-              <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-4">
-                <h3 className="font-bold text-lg text-brand-navy-950 flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-amber-500" />
-                  <span>Common Myths vs. Scientific Reality</span>
-                </h3>
-                
-                <div className="space-y-4 text-xs sm:text-sm">
-                  <div className="p-4 rounded-2xl bg-slate-50 space-y-1">
-                    <strong className="text-rose-700 block">Myth: "Vapes and modern synthetic herbs are completely harmless."</strong>
-                    <p className="text-slate-600">
-                      <strong>Fact:</strong> E-cigarettes and designer synthetics contain ultra-concentrated nicotine, heavy metals, and uncontrolled chemical stimulants that cause accelerated neuro-addiction and respiratory inflammation in adolescent lungs.
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-slate-50 space-y-1">
-                    <strong className="text-rose-700 block">Myth: "Prescription pills for ADHD or sleep are safe to share with friends."</strong>
-                    <p className="text-slate-600">
-                      <strong>Fact:</strong> Non-prescribed pharmaceutical misuse (opioids, sedatives, methylphenidate) carries severe risk of chemical dependency, cardiac irregularity, and lethal overdose when combined with other agents.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Peer Refusal Strategies */}
-              <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-4">
-                <h3 className="font-bold text-lg text-brand-navy-950 flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5 text-teal-600" />
-                  <span>Confidence Script: How to Say 'No' Without Losing Face</span>
-                </h3>
-                <ul className="space-y-3 text-xs sm:text-sm text-slate-700">
-                  <li className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                    <span><strong>The Direct Blame Shift:</strong> "I’ve got medical sports training / coach blood tests early tomorrow — can’t touch anything."</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                    <span><strong>The Firm Alternative:</strong> "I’m good with a soda. You guys do what you want, I’m chilling."</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                    <span><strong>The Code Exit:</strong> Agree on a safe code emoji with an older sibling or parent so they call and demand you return home immediately.</span>
-                  </li>
-                </ul>
-              </div>
-
-            </SlideInRight>
+            </div>
 
           </div>
         </div>
       </section>
 
-      {/* 2. PARENT SECTION */}
+      {/* ============================================================== */}
+      {/* 2. FOR PARENTS: NOTICE. LISTEN. SUPPORT.                      */}
+      {/* ============================================================== */}
       <section id="parents" className="py-14 sm:py-20 bg-white border-b border-slate-200 scroll-mt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          <SectionHeader
+            badge="For Parents"
+            title="Notice. Listen. Support."
+            subtitle="Recognizing early warning signs and transforming confrontation into collaborative recovery."
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mt-8">
             
-            <SlideInLeft className="lg:col-span-4 space-y-4 lg:sticky lg:top-36">
-              <Badge variant="amber">Parents & Families</Badge>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy-950 leading-tight">
-                Listening Without Accusation
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Finding suspected substance paraphernalia or sudden behavioural shifts triggers natural panic. Your reaction in the first 48 hours determines whether your child isolates or accepts help.
-              </p>
-              
-              <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 space-y-2">
-                <span className="font-bold text-xs text-brand-navy-950 block">Need Parent Coaching?</span>
-                <p className="text-xs text-amber-900">
-                  Our family counsellors guide parents through non-combative confrontation and clinical assessment navigation.
-                </p>
-                <div className="pt-1">
-                  <Button to="/contact?subject=Parent+Counselling" variant="primary" size="sm" fullWidth>
-                    <span>Request Family Consultation</span>
+            {/* Warning Signs Categorized */}
+            <div className="lg:col-span-7 space-y-5">
+              <h3 className="text-lg sm:text-xl font-bold text-brand-navy-950 flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5 text-rose-500" />
+                <span>Early Warning Signs Across Four Key Dimensions</span>
+              </h3>
+
+              <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <StaggerItem>
+                  <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 h-full">
+                    <span className="font-extrabold text-sm text-brand-navy-950 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-rose-500" />
+                      Physical Signs
+                    </span>
+                    <ul className="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                      <li>• Bloodshot eyes, pinpoint or abnormally dilated pupils</li>
+                      <li>• Sudden dramatic weight loss or rapid fluctuations</li>
+                      <li>• Chemical or smoke odor on clothing and bedding</li>
+                      <li>• Unexplained nosebleeds, chronic cough, or tremors</li>
+                      <li>• Constant extreme fatigue or sudden sleep disturbances</li>
+                    </ul>
+                  </div>
+                </StaggerItem>
+
+                <StaggerItem>
+                  <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 h-full">
+                    <span className="font-extrabold text-sm text-brand-navy-950 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-amber-500" />
+                      Behavioral Signs
+                    </span>
+                    <ul className="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                      <li>• Heightened secrecy regarding phone passwords and whereabouts</li>
+                      <li>• Abrupt abandonment of long-term hobbies and sports</li>
+                      <li>• Frequent uncharacteristic demands for money</li>
+                      <li>• Disappearance of cash, jewelry, or medication from home</li>
+                      <li>• Avoiding eye contact and retreating to locked bedrooms</li>
+                    </ul>
+                  </div>
+                </StaggerItem>
+
+                <StaggerItem>
+                  <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 h-full">
+                    <span className="font-extrabold text-sm text-brand-navy-950 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-teal-500" />
+                      Emotional Signs
+                    </span>
+                    <ul className="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                      <li>• Sudden explosive hostility over minor requests</li>
+                      <li>• Uncharacteristic anxiety, paranoia, or defensive anger</li>
+                      <li>• Loss of enthusiasm, apathy, and emotional detachment</li>
+                      <li>• Severe mood swings between hyper-energy and deep depression</li>
+                      <li>• Defensiveness when questioned about friendships</li>
+                    </ul>
+                  </div>
+                </StaggerItem>
+
+                <StaggerItem>
+                  <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 h-full">
+                    <span className="font-extrabold text-sm text-brand-navy-950 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-sky-500" />
+                      School & Social Signs
+                    </span>
+                    <ul className="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                      <li>• Sudden drop in academic performance and missed deadlines</li>
+                      <li>• Chronic unexplained school or college absenteeism</li>
+                      <li>• Disciplinary notices from teachers or administrators</li>
+                      <li>• Replacing trusted childhood friends with unknown circles</li>
+                      <li>• Reluctance to introduce new acquaintances to family</li>
+                    </ul>
+                  </div>
+                </StaggerItem>
+
+              </StaggerContainer>
+            </div>
+
+            {/* What To Do for Parents */}
+            <div className="lg:col-span-5 space-y-5 lg:sticky lg:top-36">
+              <div className="p-6 sm:p-7 rounded-3xl bg-amber-50/70 border border-amber-200/80 space-y-4">
+                <h4 className="text-lg font-extrabold text-brand-navy-950 flex items-center gap-2">
+                  <HeartHandshake className="w-5 h-5 text-amber-600" />
+                  <span>What To Do (Parent Action Guide)</span>
+                </h4>
+                
+                <div className="space-y-3 text-xs sm:text-sm text-slate-700">
+                  <div className="p-3 bg-white rounded-xl border border-amber-100 space-y-1">
+                    <strong className="text-brand-navy-950 block">1. Stay Calm & Avoid Panic</strong>
+                    <p className="text-slate-600">A furious reaction or punitive threats force youth into deeper isolation. Take a breath before speaking.</p>
+                  </div>
+
+                  <div className="p-3 bg-white rounded-xl border border-amber-100 space-y-1">
+                    <strong className="text-brand-navy-950 block">2. Speak During a Sober, Quiet Moment</strong>
+                    <p className="text-slate-600">Never initiate a serious dialogue when either of you is tired, rushed, or intoxicated.</p>
+                  </div>
+
+                  <div className="p-3 bg-white rounded-xl border border-amber-100 space-y-1">
+                    <strong className="text-brand-navy-950 block">3. Reassure Unconditional Love</strong>
+                    <p className="text-slate-600">Make it clear that you love them completely, and that you will tackle this health challenge together.</p>
+                  </div>
+
+                  <div className="p-3 bg-white rounded-xl border border-amber-100 space-y-1">
+                    <strong className="text-brand-navy-950 block">4. Seek Confidential Professional Help</strong>
+                    <p className="text-slate-600">Contact certified de-addiction specialists and counselors rather than trying to handle clinical addiction alone.</p>
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <Button to="/contact" variant="primary" size="md" fullWidth>
+                    <span>Request Confidential Parent Consultation</span>
                   </Button>
                 </div>
               </div>
-            </SlideInLeft>
-
-            <SlideInRight className="lg:col-span-8 space-y-6">
-              
-              {/* Warning Signs */}
-              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-4">
-                <h3 className="font-bold text-lg text-brand-navy-950">
-                  Observable Warning Signs to Note (Not Conclusive Proof Alone)
-                </h3>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
-                  <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-2">
-                    <strong className="text-brand-navy-950 block font-bold">Behavioural & Academic</strong>
-                    <ul className="space-y-1.5 text-slate-600 text-xs">
-                      <li>• Sudden drop in school grades & unexplained absenteeism</li>
-                      <li>• Abrupt change in friendship circles, secretive phone locks</li>
-                      <li>• Uncharacteristic cash requests or missing household valuables</li>
-                    </ul>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-white border border-slate-200 space-y-2">
-                    <strong className="text-brand-navy-950 block font-bold">Physical & Emotional</strong>
-                    <ul className="space-y-1.5 text-slate-600 text-xs">
-                      <li>• Drastic appetite changes, rapid weight fluctuation</li>
-                      <li>• Severe mood swings, explosive hostility or extreme lethargy</li>
-                      <li>• Bloodshot eyes, dilated pupils, heavy reliance on eye drops</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Dialogue Guide */}
-              <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-4">
-                <h3 className="font-bold text-lg text-brand-navy-950">
-                  Recommended Dialogue Rules
-                </h3>
-                <div className="space-y-3 text-xs sm:text-sm text-slate-700">
-                  <div className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                    <div>
-                      <strong>Choose Calm Timing:</strong> Never start a confrontation when either you or your child is angry, intoxicated, or running late for school.
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                    <div>
-                      <strong>Use 'I' Statements:</strong> Say <em>"I noticed you've seemed exhausted and withdrawn lately, and I love you too much not to ask"</em> instead of <em>"What are you hiding from me?"</em>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                    <div>
-                      <strong>Separate the Person from the Behaviour:</strong> Reassure your adolescent that your love is unconditional, but substance risk must be medically managed together.
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </SlideInRight>
+            </div>
 
           </div>
         </div>
       </section>
 
-      {/* 3. TEACHER & EDUCATOR SECTION */}
+      {/* ============================================================== */}
+      {/* 3. FOR TEACHERS: OBSERVE. UNDERSTAND. ACT.                     */}
+      {/* ============================================================== */}
       <section id="teachers" className="py-14 sm:py-20 bg-slate-50 border-b border-slate-200 scroll-mt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          <SectionHeader
+            badge="For Teachers & Schools"
+            title="Observe. Understand. Act."
+            subtitle="Campus safeguarding protocols that protect students without punitive stigmatization."
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-8">
             
-            <SlideInLeft className="lg:col-span-4 space-y-4 lg:sticky lg:top-36">
-              <Badge variant="teal">Teachers & Educational Institutions</Badge>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy-950 leading-tight">
-                Campus Safeguarding Framework
-              </h2>
+            {/* What to Look For */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 space-y-4">
+              <h3 className="text-lg sm:text-xl font-bold text-brand-navy-950 flex items-center gap-2">
+                <Eye className="w-5 h-5 text-brand-teal-600" />
+                <span>What to Look For in Classrooms & Campuses</span>
+              </h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Secondary schools and universities are critical lines of defence. Punitive expulsion often pushes a struggling student deeper into predatory networks; structured restorative guidance saves lives.
+                Educators often spend more waking hours with youth than parents do. Be alert to these classroom indicators:
               </p>
-              
+
+              <ul className="space-y-3 text-xs sm:text-sm text-slate-700">
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                  <span><strong>Frequent Restroom Breaks:</strong> Leaving classes repeatedly or lingering in campus corners with older outsiders.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                  <span><strong>Disruptive Slump or Agitation:</strong> Sleeping on desks, inability to sustain attention, or sudden erratic outbursts.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                  <span><strong>Changes in Written Expression:</strong> Dark, nihilistic, or substance-referencing themes in student creative essays or artwork.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                  <span><strong>Suspicious Peer Networks:</strong> Sudden clustering around vulnerable students by known outside groups.</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* What to Do */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 space-y-4">
+              <h3 className="text-lg sm:text-xl font-bold text-brand-navy-950 flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-brand-teal-600" />
+                <span>What to Do (Campus Intervention Protocol)</span>
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Punitive suspension frequently pushes an adolescent into the hands of street distributors. Follow restorative protocols:
+              </p>
+
+              <div className="space-y-3 text-xs sm:text-sm text-slate-700">
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                  <strong className="text-brand-navy-950 block">Step 1: Document Without Humiliation</strong>
+                  <span className="text-slate-600 text-xs">Note dates, observed behaviors, and academic shifts quietly. Never publicly accuse or search a student before peers.</span>
+                </div>
+
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                  <strong className="text-brand-navy-950 block">Step 2: Connect with School Psychologist</strong>
+                  <span className="text-slate-600 text-xs">Involve the institutional counselor under strict clinical confidentiality guidelines.</span>
+                </div>
+
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                  <strong className="text-brand-navy-950 block">Step 3: Compassionate Parent Partnership</strong>
+                  <span className="text-slate-600 text-xs">Convene parents collaboratively, sharing observations with empathy and guiding them to verified recovery avenues.</span>
+                </div>
+              </div>
+
               <div className="pt-2">
-                <Button to="/contact?subject=School+Safeguarding+Workshop" variant="primary" size="sm">
-                  <span>Book Teacher Training Module</span>
+                <Button to="/contact" variant="outline" size="sm">
+                  <span>Schedule an Institutional Awareness Session</span>
                 </Button>
               </div>
-            </SlideInLeft>
-
-            <SlideInRight className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-6">
-              <h3 className="font-bold text-lg text-brand-navy-950">
-                Institutional SOP (Standard Operating Procedure) for Classrooms
-              </h3>
-
-              <div className="space-y-4 text-xs sm:text-sm">
-                <div className="flex gap-4">
-                  <div className="w-8 h-8 rounded-xl bg-brand-navy-900 text-white flex items-center justify-center shrink-0 font-bold">1</div>
-                  <div className="space-y-1">
-                    <strong className="text-brand-navy-950 block">Discreet Clinical Observation</strong>
-                    <p className="text-slate-600">Document observable facts (attendance, changes in physical appearance) without making public accusations in front of peers.</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-8 h-8 rounded-xl bg-brand-navy-900 text-white flex items-center justify-center shrink-0 font-bold">2</div>
-                  <div className="space-y-1">
-                    <strong className="text-brand-navy-950 block">Designated Counsellor Referral</strong>
-                    <p className="text-slate-600">Direct the student to the school psychologist or internal guidance committee under confidential protection.</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-8 h-8 rounded-xl bg-brand-navy-900 text-white flex items-center justify-center shrink-0 font-bold">3</div>
-                  <div className="space-y-1">
-                    <strong className="text-brand-navy-950 block">Supportive Parent Conference</strong>
-                    <p className="text-slate-600">Engage the family as care partners rather than disciplinary adversaries, providing external public de-addiction directory referrals.</p>
-                  </div>
-                </div>
-              </div>
-            </SlideInRight>
+            </div>
 
           </div>
         </div>
       </section>
 
-      {/* 4. DOWNLOADABLE GUIDES */}
+      {/* ============================================================== */}
+      {/* 4. FOR EVERYONE: REMEMBER THREE STEPS                          */}
+      {/* ============================================================== */}
+      <section id="everyone" className="py-14 sm:py-20 bg-gradient-to-br from-brand-navy-950 via-brand-navy-900 to-brand-navy-950 text-white border-b border-brand-navy-800 scroll-mt-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+          
+          <div className="max-w-3xl mx-auto space-y-3">
+            <Badge variant="amber" className="uppercase tracking-widest text-xs font-black">
+              Crucial Protocol
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+              For Everyone: Remember Three Steps
+            </h2>
+            <p className="text-base sm:text-lg text-slate-300 font-light">
+              Simple, powerful actions that every citizen, friend, parent, and teacher can take to save a young life.
+            </p>
+          </div>
+
+          {/* The 3 Steps Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            
+            <div className="p-6 sm:p-8 rounded-3xl bg-white/10 border border-white/15 backdrop-blur-md space-y-3 text-left">
+              <div className="w-12 h-12 rounded-2xl bg-amber-400 text-brand-navy-950 font-black text-xl flex items-center justify-center">
+                1
+              </div>
+              <h3 className="text-2xl font-black text-white">NOTICE</h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Pay attention to sudden physical, emotional, and behavioral changes in those around you. Awareness is the first line of defence.
+              </p>
+            </div>
+
+            <div className="p-6 sm:p-8 rounded-3xl bg-white/10 border border-white/15 backdrop-blur-md space-y-3 text-left">
+              <div className="w-12 h-12 rounded-2xl bg-brand-teal-400 text-brand-navy-950 font-black text-xl flex items-center justify-center">
+                2
+              </div>
+              <h3 className="text-2xl font-black text-white">TALK</h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Open a calm, non-judgmental conversation. Listen more than you speak. Let them know they are supported and not alone.
+              </p>
+            </div>
+
+            <div className="p-6 sm:p-8 rounded-3xl bg-white/10 border border-white/15 backdrop-blur-md space-y-3 text-left">
+              <div className="w-12 h-12 rounded-2xl bg-sky-400 text-brand-navy-950 font-black text-xl flex items-center justify-center">
+                3
+              </div>
+              <h3 className="text-2xl font-black text-white">GET HELP</h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Reach out immediately to professional counsellors, the Antidote Helpline (<strong>+91 77779 27742</strong>), or verified medical rehab centres.
+              </p>
+            </div>
+
+          </div>
+
+          {/* Core Foundation Motto */}
+          <div className="pt-6 border-t border-white/10 max-w-2xl mx-auto">
+            <p className="text-xl sm:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-200 to-amber-300">
+              Protect Young Lives. Build a Drug-Free India.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ============================================================== */}
+      {/* 5. DOWNLOADABLE GUIDES & PRINTABLES                            */}
+      {/* ============================================================== */}
       <section id="downloads" className="py-14 sm:py-20 bg-white scroll-mt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
@@ -337,7 +521,7 @@ export const Resources: React.FC = () => {
             subtitle="Free PDF toolkits, infographics, and awareness flyers developed for distribution across Indian campuses."
           />
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             {downloadResources.map((dl) => (
               <StaggerItem key={dl.id} className="h-full">
                 <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200/90 shadow-subtle hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-4 h-full">

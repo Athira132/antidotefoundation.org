@@ -42,25 +42,25 @@ export const Programs: React.FC = () => {
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER */}
+      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full-width background; Mobile: Photo first) */}
       <PageHero
         badge="Intervention Framework"
         badgeVariant="teal"
         badgeIcon={ShieldAlert}
-        title="Programs & Community Initiatives"
+        title="Programs & Events"
         subtitle="Six comprehensive prevention, counselling, and advocacy pillars safeguarding Indian adolescents, collegiate campuses, and local communities."
         breadcrumbs={[{ label: 'Programs & Events' }]}
         imageSrc="/images/school-awareness.jpg"
         imageAlt="School and college youth awareness programs"
         imageBadgeText="Evidence-based peer education & life-skills"
-        variant="split"
+        variant="background"
         actions={
           <>
             <Button to="/contact?subject=School+College+Workshop" variant="accent" size="md">
               <span>Request Campus Workshop</span>
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
-            <Button to="/volunteer" variant="secondary" size="md" className="bg-white/10 hover:bg-white/20 text-white border-white/20">
+            <Button to="/volunteer" variant="secondary" size="md" className="bg-white/15 hover:bg-white/25 text-white border-white/25 backdrop-blur-md">
               <Users className="w-4 h-4 mr-1 text-teal-300" />
               <span>Join as Campus Ambassador</span>
             </Button>
