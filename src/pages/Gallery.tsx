@@ -9,6 +9,10 @@ import { GalleryItem } from '../types';
 import { PageHero } from '../components/ui/PageHero';
 import { Lightbox } from '../components/ui/Lightbox';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import {
+  StaggerContainer,
+  StaggerItem
+} from '../components/animations/MotionComponents';
 
 export const Gallery: React.FC = () => {
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
@@ -52,42 +56,40 @@ export const Gallery: React.FC = () => {
       <section className="py-12 sm:py-16 bg-slate-50 min-h-[600px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Responsive Gallery Columns: 4 cols on xl desktop, 3 on lg, 2 on tablet, 1 on mobile */}
-          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 [column-fill:_balance]">
+          {/* Uniform Gallery Grid: 4 cols on xl desktop, 3 on lg, 2 on tablet, 1 on mobile */}
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch">
             {galleryItems.map((item) => (
-              <div
-                key={item.id}
-                className="break-inside-avoid mb-6 inline-block w-full"
-              >
-                <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col group hover:-translate-y-1">
+              <StaggerItem key={item.id} className="h-full">
+                <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col h-full group hover:-translate-y-1 overflow-hidden">
 
-                  {/* Photo Container: Natural Aspect Ratio, Fully Visible, Zero Cropping, object-fit contain */}
+                  {/* 1. Uniform Image Display Area: Same dimensions for every card, 100% visible, zero cropping */}
                   <div
                     onClick={() => setActiveItem(item)}
-                    className="relative w-full cursor-pointer overflow-hidden"
+                    className="relative w-full aspect-[4/3] flex items-center justify-center cursor-pointer p-2 overflow-hidden bg-white"
                   >
                     <img
                       src={item.image}
                       alt={item.title || 'Antidote Foundation of India gallery photograph'}
-                      className="w-full h-auto object-contain block group-hover:scale-[1.01] transition-transform duration-300"
+                      className="w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
                       loading="lazy"
                       style={{ objectFit: 'contain' }}
                     />
-                    <div className="absolute inset-0 bg-brand-navy-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className="absolute inset-0 bg-brand-navy-950/15 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <div className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md text-brand-navy-900 flex items-center justify-center shadow-lg transform translate-y-1 group-hover:translate-y-0 transition-transform">
                         <Maximize2 className="w-4 h-4" />
                       </div>
                     </div>
                   </div>
 
-                  {/* Content Below Photo: 2-3 lines initially + Read More Option */}
-                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
-                    <p className="text-xs sm:text-[13px] text-slate-700 leading-relaxed line-clamp-3">
+                  {/* 2. Uniform Description Area: Same dimensions for every card, no card stretching */}
+                  <div className="p-4 sm:p-5 flex flex-col justify-between h-[140px] border-t border-slate-100 bg-white">
+                    <p className="text-xs sm:text-[13px] text-slate-700 leading-relaxed line-clamp-3 overflow-hidden">
                       {item.description}
                     </p>
 
-                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+                    <div className="pt-2 flex items-center justify-between">
                       <button
+                        type="button"
                         onClick={() => setActiveItem(item)}
                         className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-teal-700 hover:text-brand-navy-900 transition-colors cursor-pointer group/btn"
                       >
@@ -98,9 +100,9 @@ export const Gallery: React.FC = () => {
                   </div>
 
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
 
         </div>
       </section>

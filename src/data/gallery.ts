@@ -20,6 +20,13 @@ export const galleryItems: GalleryItem[] = [
     description: 'A proud moment for AFOI. Our team with Shri Ganesh Dutt Lohani, Director General, Directorate of Revenue Intelligence, CBIC, Dr. M Subramanyam, IRS, Pr. Director General, NACIN, and Shri Gopakumar, IRS, Additional Director General, NACIN — during the National Symposium on Drug Abuse Prevention, Mental Health & Institutional Coordination on 15th June 2026.'
   },
   {
+    id: 'gal-19',
+    title: "AFOI Team Meets Kerala Hon'ble Home Minister",
+    category: 'Field Activities',
+    image: '/images/gallery_19.jpg',
+    description: "Members of AFOI met Shri. Ramesh Chennithala, Hon'ble Home Minister of Kerala, and briefed him about AFOI's ongoing social, educational and youth empowerment activities.\n\nThe Minister appreciated the team's efforts and extended his full support and best wishes for future initiatives."
+  },
+  {
     id: 'gal-03',
     title: 'Adv. Bushra Valappil Addressing National Symposium',
     category: 'Field Activities',
@@ -35,10 +42,10 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 'gal-05',
-    title: 'Youth Empowerment Camp at Sumanahalli',
+    title: 'Youth Empowerment Camp at Chikkabanavara',
     category: 'Field Activities',
     image: '/images/gallery_05.jpg',
-    description: 'Where young dreams found direction. A 2-day Youth Empowerment Camp by Antidote Foundation of India in association with Hope Foundation at Sumanahalli.'
+    description: "AFOI's Youth empowerment Camp at Chikkabanavara in association with Smile Charitable Trust Bengaluru."
   },
   {
     id: 'gal-06',
