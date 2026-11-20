@@ -93,17 +93,17 @@ export const About: React.FC = () => {
   const leadershipTeam = [
     {
       name: 'P.A. Issac',
-      role: 'President & Founder',
+      role: 'Founder/Chairman',
       image: '/images/leader_1_pa_issac.jpg',
-      bio: 'P.A. Issac is the President & Founder of Antidote Foundation, a non-profit organization dedicated to creating a drug-free society through awareness, education, prevention, and community engagement. Driven by a passion for empowering youth and strengthening families, he leads initiatives that promote healthy lifestyles, positive values, and hope for a better future. Under his leadership, the Foundation works with schools, communities, and organizations to inspire lasting social change and prevent substance abuse.'
+      bio: 'P.A. Issac is the Founder/Chairman of Antidote Foundation of India, a non-profit organization dedicated to creating a drug-free society through awareness, education, prevention, and community engagement. Driven by a passion for empowering youth and strengthening families, he leads initiatives that promote healthy lifestyles, positive values, and hope for a better future. Under his leadership, the Foundation works with schools, communities, and organizations to inspire lasting social change and prevent substance abuse.'
     },
     {
       name: 'Binu Dinakaran',
-      role: 'Vice President',
+      role: 'President',
       image: '/images/leader_2_binu_dinakaran.jpg'
     },
     {
-      name: 'Advt. Pramod Varaprath',
+      name: 'Adv. Pramod Varaprath',
       role: 'Vice President',
       image: '/images/leader_3_pramod_varaprath.jpg'
     },
@@ -347,13 +347,13 @@ export const About: React.FC = () => {
                 <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100 group">
                   <img
                     src="/images/leader_1_pa_issac.jpg"
-                    alt="P.A. Issac, President & Founder, Antidote Foundation of India"
+                    alt="P.A. Issac, Founder/Chairman, Antidote Foundation of India"
                     className="w-full h-full object-cover object-top group-hover:scale-104 transition-transform duration-500"
                   />
                 </div>
                 {/* Accent Badge */}
                 <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-brand-navy-950 text-white shadow-lg border border-white/20 text-xs font-bold whitespace-nowrap">
-                  P.A. Issac · Founder & President
+                  P.A. Issac · Founder/Chairman
                 </div>
               </div>
             </SlideInLeft>
@@ -381,7 +381,7 @@ export const About: React.FC = () => {
 
               <div className="pt-2 text-sm">
                 <div className="font-extrabold text-brand-navy-950 text-base">P.A. Issac</div>
-                <div className="font-semibold text-teal-700 text-xs">Founder / President</div>
+                <div className="font-semibold text-teal-700 text-xs">Founder/Chairman</div>
                 <div className="text-slate-500 text-xs">Antidote Foundation of India</div>
               </div>
             </SlideInRight>

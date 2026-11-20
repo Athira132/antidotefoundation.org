@@ -160,8 +160,8 @@ const documentedEvents: DocumentedArchiveEvent[] = [
       'Once solicited your presence and active participation to take key important decisions and the selection of Cordinators across bangalore and to form an NGO to mitigate this burning issue.'
     ],
     signoff: {
-      name: 'PA ISSAC',
-      role: 'President & Founder',
+      name: 'P.A. Issac',
+      role: 'Founder/Chairman',
       org: 'Antidote Foundation of India'
     }
   }

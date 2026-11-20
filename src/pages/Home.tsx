@@ -95,7 +95,7 @@ export const Home: React.FC = () => {
                 className="space-y-1.5"
               >
                 <p className="text-base sm:text-lg font-bold text-teal-300 tracking-wide">
-                  Antidote India | A Voluntary Movement for a Drug-Free Generation
+                  Antidote Foundation of India | A Voluntary Movement for a Drug-Free Generation
                 </p>
                 <p className="text-sm sm:text-base font-semibold text-slate-200">
                   Empowering Youth. Preventing Addiction. Transforming India.

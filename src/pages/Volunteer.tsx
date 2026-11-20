@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import {
   Users,
   GraduationCap,
-  HeartHandshake,
-  Calendar,
   Sparkles,
+  PhoneCall,
+  MapPin,
+  Mail,
   ShieldCheck,
-  CheckCircle2,
-  ArrowRight,
-  Info,
-  Clock,
-  Award
+  Award,
+  ArrowRight
 } from 'lucide-react';
 import { organizationData } from '../data/organization';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
-import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
 import {
@@ -26,83 +22,48 @@ import {
 } from '../components/animations/MotionComponents';
 
 export const Volunteer: React.FC = () => {
-  const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    mobile: '',
-    age: '',
-    city: '',
-    state: '',
-    preferredRole: 'Campus Ambassador',
-    availability: 'Part-time (3-5 hours/week)',
-    message: '',
-    privacyConsent: false
-  });
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitting, setSubmitting] = useState(false);
-
   const roles = [
     {
       title: 'Campus Ambassador',
-      desc: 'Lead awareness drives, distribute prevention guides, and organize student dialogues in your college or university.',
-      icon: GraduationCap
+      category: 'College & University',
+      desc: 'Lead student assemblies, organize anti-drug rallies, distribute bilingual educational flyers, and serve as the peer contact on campus.',
+      icon: GraduationCap,
+      color: 'teal'
     },
     {
-      title: 'Trained Counsellor',
-      desc: 'Qualified psychology graduates providing empathetic listening, crisis de-escalation, and telephonic guidance.',
-      icon: HeartHandshake
+      title: 'Youth Community Mentor',
+      category: 'Community & Peer Support',
+      desc: 'Engage youth aged 13–30 in sports, creative arts, and constructive peer discussions to build resilience against substance pressure.',
+      icon: Users,
+      color: 'navy'
     },
     {
-      title: 'Event Coordinator',
-      desc: 'Plan and execute school workshops, community marathons, webinar series, and stakeholder dialogue forums.',
-      icon: Calendar
+      title: 'School Outreach Speaker',
+      category: 'Classroom Workshops',
+      desc: 'Facilitate interactive workshops in high schools and higher secondary institutions using evidence-based life skills curricula.',
+      icon: Sparkles,
+      color: 'amber'
     },
     {
-      title: 'Creative Volunteer',
-      desc: 'Design inspiring digital graphics, video stories, multilingual posters, and social media campaigns.',
-      icon: Sparkles
+      title: 'Event & Campaign Coordinator',
+      category: 'Public Outreach',
+      desc: 'Coordinate public awareness walks, coordinate volunteers, manage logistics, and interface with community and municipal partners.',
+      icon: Award,
+      color: 'teal'
     },
     {
-      title: 'Community Leader',
-      desc: 'Mobilise neighbourhood associations, youth clubs, and sports groups to champion substance-free living.',
-      icon: Users
+      title: 'Digital & Media Creator',
+      category: 'Social Awareness',
+      desc: 'Help craft engaging digital campaigns, video reels, educational infographics, and articles to amplify the drug-free India message.',
+      icon: Sparkles,
+      color: 'navy'
     }
   ];
-
-  const validate = () => {
-    const errs: Record<string, string> = {};
-    if (!formData.name.trim()) errs.name = 'Full name is required';
-    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) errs.email = 'Valid email is required';
-    if (!formData.mobile.trim() || formData.mobile.replace(/[^0-9]/g, '').length < 10) errs.mobile = 'Valid 10-digit mobile number is required';
-    if (!formData.age.trim() || isNaN(Number(formData.age)) || Number(formData.age) < 13 || Number(formData.age) > 75) {
-      errs.age = 'Age must be between 13 and 75';
-    }
-    if (!formData.city.trim()) errs.city = 'City is required';
-    if (!formData.state.trim()) errs.state = 'State is required';
-    if (!formData.privacyConsent) errs.privacyConsent = 'You must agree to the privacy policy & volunteer code of conduct';
-
-    setErrors(errs);
-    return Object.keys(errs).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validate()) {
-      setSubmitting(true);
-      setTimeout(() => {
-        setSubmitting(false);
-        navigate('/volunteer/thank-you', { state: { volunteerName: formData.name, role: formData.preferredRole } });
-      }, 700);
-    }
-  };
 
   return (
     <div className="space-y-0">
       
-      {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full-width background; Mobile: Photo first) */}
+      {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero
         badge="Youth Empowerment Movement"
         badgeVariant="teal"
@@ -111,21 +72,30 @@ export const Volunteer: React.FC = () => {
         subtitle="Stand with Antidote Foundation of India. Empower fellow young adults, break the silence on mental wellness, and protect communities from addiction."
         breadcrumbs={[{ label: 'Volunteer' }]}
         imageSrc="/images/community-volunteering.jpg"
-        imageAlt="AFOI youth volunteers and community leaders"
+        imageAlt="Antidote Foundation of India youth volunteers and community leaders"
         imageBadgeText="Over 500+ active student leaders nationwide"
         variant="background"
         actions={
-          <a
-            href="#volunteer-form"
-            className="shimmer-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-extrabold text-sm shadow-xl hover:-translate-y-0.5 transition-all"
-          >
-            <span>Fill Volunteer Application</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="mailto:info@antidotefoundation.org?subject=Volunteer%20Application%20-%20Antidote%20Foundation%20of%20India"
+              className="shimmer-btn inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-extrabold text-sm shadow-xl hover:-translate-y-0.5 transition-all"
+            >
+              <Mail className="w-4 h-4" />
+              <span>Email Volunteer Desk</span>
+            </a>
+            <a
+              href={`tel:${organizationData.contact.helpline}`}
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-sm border border-white/20 backdrop-blur-md transition-colors"
+            >
+              <PhoneCall className="w-4 h-4 text-teal-300" />
+              <span>Call {organizationData.contact.helplineDisplay}</span>
+            </a>
+          </div>
         }
       />
 
-      {/* 2. Roles & Opportunities (Staggered Cards) */}
+      {/* 2. Roles & Opportunities */}
       <section className="py-14 sm:py-20 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
@@ -139,17 +109,28 @@ export const Volunteer: React.FC = () => {
               const IconComp = r.icon;
               return (
                 <StaggerItem key={r.title} className="h-full">
-                  <div className="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-subtle hover:shadow-xl hover:-translate-y-1 transition-all space-y-3 group h-full flex flex-col justify-between">
+                  <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200/90 shadow-subtle hover:border-brand-teal-500/50 hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col justify-between space-y-4 h-full group">
                     <div className="space-y-3">
-                      <div className="w-12 h-12 rounded-2xl bg-brand-navy-900 text-white flex items-center justify-center group-hover:bg-brand-teal-600 transition-colors">
-                        <IconComp className="w-6 h-6 text-teal-300 group-hover:text-white" />
+                      <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-brand-teal-600 group-hover:bg-brand-navy-900 group-hover:text-white transition-colors shadow-xs">
+                        <IconComp className="w-6 h-6" />
                       </div>
-                      <h3 className="font-extrabold text-lg text-brand-navy-950">
+                      <Badge variant="teal">{r.category}</Badge>
+                      <h3 className="text-lg font-bold text-brand-navy-950">
                         {r.title}
                       </h3>
                       <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                         {r.desc}
                       </p>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-200">
+                      <a
+                        href={`mailto:info@antidotefoundation.org?subject=Volunteer%20Application%20for%20${encodeURIComponent(r.title)}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy-900 group-hover:text-brand-teal-600 transition-colors"
+                      >
+                        <span>Apply via Email</span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      </a>
                     </div>
                   </div>
                 </StaggerItem>
@@ -157,16 +138,19 @@ export const Volunteer: React.FC = () => {
             })}
           </StaggerContainer>
 
-          {/* Volunteer Benefits */}
-          <FadeUp delay={0.2} className="mt-14 bg-brand-navy-50 p-6 sm:p-10 rounded-3xl border border-brand-navy-100">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {/* Training & Impact Guarantee Box */}
+          <FadeUp delay={0.15} className="mt-12 bg-brand-navy-50 border border-brand-navy-100 rounded-3xl p-6 sm:p-8">
+            <h3 className="text-lg font-bold text-brand-navy-950 mb-3">
+              What You Receive as an Antidote Foundation of India Volunteer
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
                 <div className="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center">
                   <Award className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-base text-brand-navy-950">Comprehensive Training</h4>
+                <h4 className="font-bold text-base text-brand-navy-950">Formal Certification</h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Learn practical adolescent psychology, peer refusal negotiation, and crisis de-escalation from certified specialists.
+                  Certificate of Appreciation and verified service hours acknowledged for college internships and portfolios.
                 </p>
               </div>
 
@@ -198,223 +182,91 @@ export const Volunteer: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Registration Form Section */}
-      <section id="volunteer-form" className="py-14 sm:py-20 bg-slate-50">
+      {/* 3. Direct Contact Enrollment (Phone & Email Only - No Forms) */}
+      <section className="py-14 sm:py-20 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <FadeUp className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-12 shadow-elevated space-y-8">
+          <FadeUp className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-12 shadow-elevated space-y-8">
             <div className="text-center space-y-2">
-              <Badge variant="teal">Enrollment Application</Badge>
+              <Badge variant="teal">Enrollment & Joining</Badge>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy-950">
-                Volunteer Registration Form
+                How to Join as a Volunteer
               </h2>
-              <p className="text-xs sm:text-sm text-slate-600">
-                Fill out the form below. Our volunteer coordination team will review your application and invite you to an orientation session.
+              <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
+                Connect directly with the volunteer coordination secretariat of Antidote Foundation of India. We welcome youth, students, and community advocates.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              
-              {/* Row 1: Name & Email */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Ananya Sharma"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
-                      errors.name ? 'border-rose-500 bg-rose-50/50' : 'border-slate-200 focus:border-brand-teal-500 focus:ring-1 focus:ring-brand-teal-500'
-                    }`}
-                  />
-                  {errors.name && <p className="text-xs text-rose-600 mt-1">{errors.name}</p>}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+              {/* Phone Contacts */}
+              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold">
+                    <PhoneCall className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-brand-navy-950">Call Volunteer Desk</h4>
+                    <p className="text-xs text-slate-500">Direct telephonic guidance</p>
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="e.g. ananya@university.edu"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
-                      errors.email ? 'border-rose-500 bg-rose-50/50' : 'border-slate-200 focus:border-brand-teal-500 focus:ring-1 focus:ring-brand-teal-500'
-                    }`}
-                  />
-                  {errors.email && <p className="text-xs text-rose-600 mt-1">{errors.email}</p>}
+                <div className="space-y-2 text-xs sm:text-sm">
+                  <div>
+                    <span className="text-slate-500 text-xs block">Helpline:</span>
+                    <a href="tel:+917777927742" className="text-brand-navy-900 font-bold hover:text-brand-teal-600 hover:underline">
+                      +91 77779 27742
+                    </a>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 text-xs block">Secretariat Line:</span>
+                    <a href="tel:+919148820193" className="text-brand-navy-900 font-bold hover:text-brand-teal-600 hover:underline">
+                      +91 91488 20193
+                    </a>
+                  </div>
                 </div>
               </div>
 
-              {/* Row 2: Mobile & Age */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Mobile / WhatsApp Number *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    value={formData.mobile}
-                    onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
-                      errors.mobile ? 'border-rose-500 bg-rose-50/50' : 'border-slate-200 focus:border-brand-teal-500 focus:ring-1 focus:ring-brand-teal-500'
-                    }`}
-                  />
-                  {errors.mobile && <p className="text-xs text-rose-600 mt-1">{errors.mobile}</p>}
+              {/* Email Application */}
+              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-brand-navy-950">Email Your Interest</h4>
+                    <p className="text-xs text-slate-500">Send resume or statement</p>
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Age (Years) *
-                  </label>
-                  <input
-                    type="number"
-                    required
-                    min="13"
-                    max="75"
-                    placeholder="e.g. 21"
-                    value={formData.age}
-                    onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
-                      errors.age ? 'border-rose-500 bg-rose-50/50' : 'border-slate-200 focus:border-brand-teal-500 focus:ring-1 focus:ring-brand-teal-500'
-                    }`}
-                  />
-                  {errors.age && <p className="text-xs text-rose-600 mt-1">{errors.age}</p>}
+                <div className="space-y-2 text-xs sm:text-sm">
+                  <div>
+                    <span className="text-slate-500 text-xs block">Official Email:</span>
+                    <a href="mailto:info@antidotefoundation.org?subject=Volunteer%20Application%20-%20Antidote%20Foundation%20of%20India" className="text-brand-teal-700 font-bold hover:underline">
+                      info@antidotefoundation.org
+                    </a>
+                  </div>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    Mention your name, city, educational background, and preferred volunteer role.
+                  </p>
                 </div>
               </div>
+            </div>
 
-              {/* Row 3: City & State */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    City / Town *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Bengaluru, Kochi, etc."
-                    value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
-                      errors.city ? 'border-rose-500 bg-rose-50/50' : 'border-slate-200 focus:border-brand-teal-500 focus:ring-1 focus:ring-brand-teal-500'
-                    }`}
-                  />
-                  {errors.city && <p className="text-xs text-rose-600 mt-1">{errors.city}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    State *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Karnataka, Kerala, etc."
-                    value={formData.state}
-                    onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${
-                      errors.state ? 'border-rose-500 bg-rose-50/50' : 'border-slate-200 focus:border-brand-teal-500 focus:ring-1 focus:ring-brand-teal-500'
-                    }`}
-                  />
-                  {errors.state && <p className="text-xs text-rose-600 mt-1">{errors.state}</p>}
+            {/* Postal Address & Secretariat */}
+            <div className="p-6 rounded-2xl bg-brand-navy-50/70 border border-brand-navy-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <div className="text-xs font-bold text-brand-navy-950">Secretariat Office Address</div>
+                  <div className="text-xs text-slate-600">{organizationData.address.full}</div>
                 </div>
               </div>
-
-              {/* Row 4: Preferred Role & Availability */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Preferred Volunteer Role
-                  </label>
-                  <select
-                    value={formData.preferredRole}
-                    onChange={(e) => setFormData({ ...formData, preferredRole: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500 bg-white"
-                  >
-                    <option value="Campus Ambassador">Campus Ambassador (Colleges/Schools)</option>
-                    <option value="Trained Counsellor">Counsellor / Psychological Guidance</option>
-                    <option value="Event Coordinator">Event & Workshop Coordinator</option>
-                    <option value="Creative Volunteer">Creative Design & Media</option>
-                    <option value="Community Leader">Community & Neighbourhood Leader</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Time Availability
-                  </label>
-                  <select
-                    value={formData.availability}
-                    onChange={(e) => setFormData({ ...formData, availability: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500 bg-white"
-                  >
-                    <option value="Part-time (3-5 hours/week)">Part-time (3–5 hours/week)</option>
-                    <option value="Weekends Only">Weekends Only</option>
-                    <option value="Full-time during Campaign Drives">Full-time during Campaign Drives</option>
-                    <option value="Virtual / Remote Support">Virtual / Remote Support</option>
-                  </select>
-                </div>
+              <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
+                <ShieldCheck className="w-4 h-4 text-teal-600" />
+                <span>Reg: {organizationData.registrationNumber}</span>
               </div>
+            </div>
 
-              {/* Row 5: Statement of Motivation */}
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                  Why do you wish to volunteer with AFOI? (Optional)
-                </label>
-                <textarea
-                  rows={4}
-                  placeholder="Share a brief note about your interest, academic background, or personal drive..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500 placeholder:text-slate-400"
-                />
-              </div>
-
-              {/* Privacy Consent */}
-              <div className="pt-2">
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.privacyConsent}
-                    onChange={(e) => setFormData({ ...formData, privacyConsent: e.target.checked })}
-                    className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-navy-900 focus:ring-brand-teal-500"
-                  />
-                  <span className="text-xs text-slate-600 leading-relaxed">
-                    I agree to the <a href="/privacy-policy" className="text-brand-navy-900 font-semibold underline">Privacy Policy</a> and agree to adhere to the non-profit volunteer code of conduct. I confirm that all provided details are true and accurate.
-                  </span>
-                </label>
-                {errors.privacyConsent && (
-                  <p className="text-xs text-rose-600 mt-1">{errors.privacyConsent}</p>
-                )}
-              </div>
-
-              {/* Submit CTA */}
-              <div className="pt-4">
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="lg"
-                  fullWidth
-                  disabled={submitting}
-                >
-                  {submitting ? 'Processing Registration...' : 'Submit Volunteer Application'}
-                </Button>
-              </div>
-
-              <div className="text-center text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-teal-600" />
-                <span>Your application is held under strict confidentiality.</span>
-              </div>
-
-            </form>
           </FadeUp>
 
         </div>
@@ -426,3 +278,5 @@ export const Volunteer: React.FC = () => {
     </div>
   );
 };
+
+export default Volunteer;

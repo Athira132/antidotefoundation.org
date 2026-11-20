@@ -101,10 +101,10 @@ export const Lightbox: React.FC<LightboxProps> = ({
           </div>
 
           {(item.title || item.description || item.isIllustrative) ? (
-            <div className="p-4 sm:p-5 bg-brand-navy-950 border-t border-brand-navy-800 text-white space-y-2">
+            <div className="p-5 sm:p-6 bg-brand-navy-950 border-t border-brand-navy-800 text-white space-y-2.5">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 {item.category && (
-                  <span className="text-xs uppercase tracking-wider font-semibold text-teal-400">
+                  <span className="text-xs uppercase tracking-wider font-bold text-teal-400">
                     {item.category}
                   </span>
                 )}
@@ -117,20 +117,20 @@ export const Lightbox: React.FC<LightboxProps> = ({
               </div>
 
               {item.title && (
-                <h3 className="text-base sm:text-lg font-bold">
+                <h3 className="text-base sm:text-lg font-bold text-white">
                   {item.title}
                 </h3>
               )}
 
               {item.description && (
-                <p className="text-xs sm:text-sm text-slate-300">
+                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
                   {item.description}
                 </p>
               )}
             </div>
           ) : (
             <div className="p-3 bg-brand-navy-950/90 text-center text-xs text-slate-400 border-t border-white/10">
-              Antidote Foundation Photographic Archive
+              Antidote Foundation of India Photographic Archive
             </div>
           )}
         </motion.div>

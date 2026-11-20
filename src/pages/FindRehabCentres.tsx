@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import {
-  Search,
   MapPin,
   PhoneCall,
   ShieldCheck,
@@ -8,7 +7,6 @@ import {
   Building,
   CheckCircle,
   ExternalLink,
-  AlertCircle,
   HeartHandshake,
   Filter
 } from 'lucide-react';
@@ -27,13 +25,10 @@ import {
 } from '../components/animations/MotionComponents';
 
 export const FindRehabCentres: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedState, setSelectedState] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedCentreForAssistance, setSelectedCentreForAssistance] = useState<RehabCentre | null>(null);
-  const [assistanceSent, setAssistanceSent] = useState(false);
-  const [assistancePhone, setAssistancePhone] = useState('');
 
   // Extract unique filter options
   const states = useMemo(() => {
@@ -57,35 +52,18 @@ export const FindRehabCentres: React.FC = () => {
   // Filtered results
   const filteredCentres = useMemo(() => {
     return verifiedRehabCentres.filter(c => {
-      const q = searchQuery.toLowerCase().trim();
-      const matchesQuery = !q ||
-        c.name.toLowerCase().includes(q) ||
-        c.city.toLowerCase().includes(q) ||
-        c.district.toLowerCase().includes(q) ||
-        c.state.toLowerCase().includes(q) ||
-        c.pinCode.includes(q) ||
-        c.services.some(s => s.toLowerCase().includes(q));
-
       const matchesState = !selectedState || c.state === selectedState;
       const matchesDistrict = !selectedDistrict || c.district === selectedDistrict;
       const matchesCity = !selectedCity || c.city === selectedCity;
 
-      return matchesQuery && matchesState && matchesDistrict && matchesCity;
+      return matchesState && matchesDistrict && matchesCity;
     });
-  }, [searchQuery, selectedState, selectedDistrict, selectedCity]);
+  }, [selectedState, selectedDistrict, selectedCity]);
 
   const handleReset = () => {
-    setSearchQuery('');
     setSelectedState('');
     setSelectedDistrict('');
     setSelectedCity('');
-  };
-
-  const handleRequestAssistance = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (assistancePhone.trim()) {
-      setAssistanceSent(true);
-    }
   };
 
   return (
@@ -115,31 +93,56 @@ export const FindRehabCentres: React.FC = () => {
       <section className="py-14 bg-slate-50 min-h-[600px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Search & Filter Card with entrance reveal */}
+          {/* Filter Card */}
           <FadeUp className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-subtle mb-10 space-y-6">
             
-            {/* Search Input Bar */}
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-              <input
-                type="text"
-                placeholder="Search by centre name, city, district, state, PIN code or treatment service..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-brand-teal-500 focus:ring-2 focus:ring-brand-teal-500/20 text-sm sm:text-base outline-none transition-all placeholder:text-slate-400"
-              />
-              {searchQuery && (
+            {/* Quick State Pills */}
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">
+                Quick Region Filter
+              </label>
+              <div className="flex flex-wrap gap-2">
                 <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400 hover:text-slate-600 bg-slate-200 px-2 py-0.5 rounded"
+                  type="button"
+                  onClick={() => {
+                    setSelectedState('');
+                    setSelectedDistrict('');
+                    setSelectedCity('');
+                  }}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                    selectedState === ''
+                      ? 'bg-brand-navy-900 text-white shadow-sm'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  }`}
                 >
-                  Clear
+                  All Regions ({verifiedRehabCentres.length})
                 </button>
-              )}
+                {states.map((st) => {
+                  const count = verifiedRehabCentres.filter(c => c.state === st).length;
+                  return (
+                    <button
+                      key={st}
+                      type="button"
+                      onClick={() => {
+                        setSelectedState(st);
+                        setSelectedDistrict('');
+                        setSelectedCity('');
+                      }}
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                        selectedState === st
+                          ? 'bg-brand-navy-900 text-white shadow-sm'
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                    >
+                      {st} ({count})
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Filter Dropdowns Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center pt-2 border-t border-slate-100">
               
               {/* State Filter */}
               <div>
@@ -204,8 +207,9 @@ export const FindRehabCentres: React.FC = () => {
               {/* Reset Button */}
               <div className="sm:self-end pt-1 sm:pt-0">
                 <button
+                  type="button"
                   onClick={handleReset}
-                  className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100 text-xs font-bold transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100 text-xs font-bold transition-colors cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reset All Filters</span>
@@ -217,8 +221,8 @@ export const FindRehabCentres: React.FC = () => {
             {/* Active filters indicators */}
             <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 text-xs text-slate-500">
               <div>
-                Showing <strong className="text-brand-navy-950 font-bold">{filteredCentres.length}</strong> verified facilities
-                {(selectedState || selectedDistrict || selectedCity || searchQuery) && ' matching your criteria'}
+                Showing <strong className="text-brand-navy-950 font-bold">{filteredCentres.length}</strong> verified public healthcare centres
+                {(selectedState || selectedDistrict || selectedCity) && ' matching your selected criteria'}
               </div>
 
               <div className="flex items-center gap-2 text-teal-700 font-semibold">
@@ -233,18 +237,19 @@ export const FindRehabCentres: React.FC = () => {
           {filteredCentres.length === 0 ? (
             <FadeUp className="bg-white p-12 rounded-3xl border border-slate-200 text-center max-w-xl mx-auto space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
-                <Search className="w-6 h-6" />
+                <Filter className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-brand-navy-950">
                 No matching centres found
               </h3>
               <p className="text-xs sm:text-sm text-slate-500">
-                We could not find any verified centres matching your search terms. Try clearing filters or call our helpline for personal navigation.
+                We could not find any verified centres matching your selected criteria. Try resetting filters or call our helpline for personal assistance.
               </p>
               <div className="pt-2 flex justify-center gap-3">
                 <button
+                  type="button"
                   onClick={handleReset}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-brand-navy-900 rounded-xl text-xs font-bold"
+                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-brand-navy-900 rounded-xl text-xs font-bold cursor-pointer"
                 >
                   Reset Filters
                 </button>
@@ -270,39 +275,42 @@ export const FindRehabCentres: React.FC = () => {
                           <span className="text-[10px] font-bold uppercase tracking-wider text-teal-800 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200 inline-block mb-1">
                             {centre.type}
                           </span>
-                          <h3 className="text-lg sm:text-xl font-bold text-brand-navy-950 leading-snug">
+                          <h3 className="text-base sm:text-lg font-extrabold text-brand-navy-950 leading-snug">
                             {centre.name}
                           </h3>
                         </div>
-                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 shrink-0">
-                          <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                          <span>Verified</span>
-                        </span>
+                        {centre.isVerified && (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-teal-700 bg-teal-50/70 px-2 py-0.5 rounded-md border border-teal-100 shrink-0">
+                            <CheckCircle className="w-3 h-3 text-teal-600" />
+                            <span>Gov Verified</span>
+                          </span>
+                        )}
                       </div>
 
-                      {/* Address & Contact Details */}
-                      <div className="space-y-2 text-xs sm:text-sm text-slate-600 pt-1">
-                        <div className="flex items-start gap-2.5">
-                          <MapPin className="w-4 h-4 text-brand-navy-700 shrink-0 mt-0.5" />
-                          <span className="leading-relaxed">{centre.address}</span>
-                        </div>
-
-                        <div className="flex items-center gap-2.5">
-                          <PhoneCall className="w-4 h-4 text-brand-navy-700 shrink-0" />
-                          <span>Contact / EPABX: <strong className="text-brand-navy-950">{centre.phone}</strong></span>
-                        </div>
+                      {/* Location & Address */}
+                      <div className="flex items-start gap-2 text-xs text-slate-600">
+                        <MapPin className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                        <span>{centre.address}, {centre.city}, {centre.state} - {centre.pinCode}</span>
                       </div>
 
-                      {/* Services Tags */}
+                      {/* Phone Contact */}
+                      <div className="flex items-center gap-2 text-xs font-semibold text-brand-navy-900">
+                        <PhoneCall className="w-4 h-4 text-teal-600 shrink-0" />
+                        <a href={`tel:${centre.phone.replace(/[^0-9+]/g, '')}`} className="hover:underline">
+                          {centre.phone}
+                        </a>
+                      </div>
+
+                      {/* Services list */}
                       <div className="pt-2">
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
-                          Specialized Clinical Services:
+                        <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                          Services Offered
                         </div>
                         <div className="flex flex-wrap gap-1.5">
-                          {centre.services.map((svc) => (
+                          {centre.services.map((svc, i) => (
                             <span
-                              key={svc}
-                              className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg"
+                              key={i}
+                              className="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-lg border border-slate-200/60"
                             >
                               {svc}
                             </span>
@@ -310,35 +318,28 @@ export const FindRehabCentres: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Notes */}
-                      {centre.notes && (
-                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-500 leading-relaxed">
-                          <strong className="text-slate-700 font-semibold">Institutional Note:</strong> {centre.notes}
-                        </div>
-                      )}
-
                     </div>
 
-                    {/* Actions */}
+                    {/* Action Footer */}
                     <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
                       <button
-                        onClick={() => {
-                          setSelectedCentreForAssistance(centre);
-                          setAssistanceSent(false);
-                        }}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-brand-navy-900 hover:bg-brand-navy-800 text-white text-xs font-bold rounded-xl transition-colors"
+                        type="button"
+                        onClick={() => setSelectedCentreForAssistance(centre)}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-teal-700 hover:text-brand-teal-800 transition-colors cursor-pointer"
                       >
-                        <HeartHandshake className="w-3.5 h-3.5 text-teal-400" />
-                        <span>Request Guided Assistance</span>
+                        <HeartHandshake className="w-3.5 h-3.5" />
+                        <span>Contact & Assistance Info</span>
                       </button>
 
-                      <a
-                        href={`tel:${centre.phone.replace(/[^0-9]/g, '')}`}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-brand-navy-800 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors"
-                      >
-                        <PhoneCall className="w-3.5 h-3.5" />
-                        <span>Call Centre</span>
-                      </a>
+                      <div className="flex items-center gap-2">
+                        <a
+                          href={`tel:${centre.phone.replace(/[^0-9+]/g, '')}`}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-navy-900 hover:bg-brand-navy-950 text-white rounded-xl text-xs font-bold transition-transform hover:-translate-y-0.5 shadow-sm"
+                        >
+                          <PhoneCall className="w-3 h-3" />
+                          <span>Call Centre</span>
+                        </a>
+                      </div>
                     </div>
 
                   </div>
@@ -347,113 +348,76 @@ export const FindRehabCentres: React.FC = () => {
             </StaggerContainer>
           )}
 
-          {/* Integration & Verification Standards Box */}
-          <FadeUp delay={0.2} className="mt-12 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-subtle space-y-3">
-            <div className="flex items-center gap-2 text-brand-navy-950 font-bold text-base">
-              <ShieldCheck className="w-5 h-5 text-teal-600" />
-              <span>Verified Database & Hospital Integration Notice</span>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              AFOI strictly catalogs verified autonomous institutes, government medical college psychiatry units, and state mission de-addiction facilities. We do not invent addresses or publish unaccredited private facilities.
-            </p>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              <strong>Database Integration Point:</strong> State de-addiction missions and medical directorates seeking API or dataset synchronization can establish direct interoperability with our public assistance registry by contacting the AFOI technical committee.
-            </p>
-          </FadeUp>
-
         </div>
       </section>
 
-      {/* Guided Assistance Modal */}
+      {/* Guided Assistance Modal (Informational Only - No Form) */}
       {selectedCentreForAssistance && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl relative">
-            <button
-              onClick={() => setSelectedCentreForAssistance(null)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1"
-            >
-              ✕
-            </button>
-
-            <div className="space-y-1">
-              <Badge variant="teal">Confidential Patient Referral</Badge>
-              <h3 className="text-xl font-bold text-brand-navy-950">
-                Request Assisted Navigation
-              </h3>
-              <p className="text-xs text-slate-500">
-                Centre: <strong className="text-brand-navy-900">{selectedCentreForAssistance.name}</strong>
-              </p>
+        <div className="fixed inset-0 z-50 bg-brand-navy-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-5 animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <span className="text-[10px] font-bold text-teal-800 uppercase tracking-wider bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200 inline-block mb-1">
+                  Rehabilitation Guidance Desk
+                </span>
+                <h3 className="text-lg font-bold text-brand-navy-950">
+                  {selectedCentreForAssistance.name}
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedCentreForAssistance(null)}
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-sm cursor-pointer"
+              >
+                ✕
+              </button>
             </div>
 
-            {assistanceSent ? (
-              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 text-center space-y-2">
-                <CheckCircle className="w-8 h-8 text-emerald-600 mx-auto" />
-                <h4 className="font-bold text-emerald-950 text-sm">Assistance Request Logged</h4>
-                <p className="text-xs text-emerald-800">
-                  Our counsellor will connect with you at <strong>{assistancePhone}</strong> during working hours to help navigate admission protocols.
-                </p>
-                <div className="pt-2">
-                  <button
-                    onClick={() => setSelectedCentreForAssistance(null)}
-                    className="px-4 py-2 bg-emerald-600 text-white text-xs font-bold rounded-xl"
-                  >
-                    Done
-                  </button>
+            <div className="space-y-4 text-xs text-slate-600">
+              <p className="leading-relaxed">
+                Antidote Foundation of India provides direct guidance and psycho-social counselling navigation to help families connect with verified public care institutions.
+              </p>
+
+              <div className="p-4 rounded-2xl bg-brand-navy-50 border border-brand-navy-100 space-y-2">
+                <div className="text-xs font-bold text-brand-navy-950">Direct Helpline Numbers:</div>
+                <div className="space-y-1 text-sm">
+                  <div>
+                    <a href="tel:+917777927742" className="text-brand-navy-950 font-bold hover:underline flex items-center gap-2">
+                      <PhoneCall className="w-4 h-4 text-teal-600" />
+                      <span>+91 77779 27742 (24/7 Helpline)</span>
+                    </a>
+                  </div>
+                  <div>
+                    <a href="tel:+919148820193" className="text-brand-navy-950 font-bold hover:underline flex items-center gap-2">
+                      <PhoneCall className="w-4 h-4 text-teal-600" />
+                      <span>+91 91488 20193 (Secretariat)</span>
+                    </a>
+                  </div>
                 </div>
               </div>
-            ) : (
-              <form onSubmit={handleRequestAssistance} className="space-y-4">
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Navigating de-addiction admissions can be daunting. Enter your contact number and our trained guidance counsellor will call you back to explain admission procedures, documents, and what to expect.
-                </p>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Your Phone / WhatsApp Number *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    value={assistancePhone}
-                    onChange={(e) => setAssistancePhone(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-brand-teal-500 focus:ring-1 focus:ring-brand-teal-500 text-sm outline-none"
-                  />
-                </div>
-
-                <div className="text-[11px] text-slate-400 flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-teal-600 shrink-0" />
-                  <span>100% confidential. Your details are never shared with third parties.</span>
-                </div>
-
-                <div className="pt-2 flex justify-end gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCentreForAssistance(null)}
-                    className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-5 py-2.5 bg-brand-navy-900 hover:bg-brand-navy-800 text-white text-xs font-bold rounded-xl shadow"
-                  >
-                    Submit Request
-                  </button>
-                </div>
-              </form>
-            )}
-
-            <div className="pt-3 border-t border-slate-100 text-center">
-              <span className="text-xs text-slate-500">Need urgent help right now? </span>
-              <a
-                href={`tel:${organizationData.contact.helpline}`}
-                className="text-xs font-bold text-amber-600 hover:underline"
-              >
-                Call 24/7 Helpline: {organizationData.contact.helplineDisplay}
-              </a>
+              <div className="p-3 bg-slate-50 rounded-xl text-xs text-slate-500 border border-slate-200">
+                Direct Facility Contact: <strong className="text-slate-800">{selectedCentreForAssistance.phone}</strong> • {selectedCentreForAssistance.address}
+              </div>
             </div>
 
+            <div className="pt-2 flex items-center justify-between gap-3 border-t border-slate-100">
+              <a
+                href={`tel:${organizationData.contact.helpline}`}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl shadow transition-transform hover:-translate-y-0.5"
+              >
+                <PhoneCall className="w-4 h-4" />
+                <span>Call Helpline Now</span>
+              </a>
+
+              <button
+                type="button"
+                onClick={() => setSelectedCentreForAssistance(null)}
+                className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}

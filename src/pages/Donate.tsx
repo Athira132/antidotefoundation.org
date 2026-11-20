@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Heart,
   ShieldCheck,
-  CheckCircle2,
-  Lock,
   Building,
   CreditCard,
   QrCode,
   AlertCircle,
-  HelpCircle,
-  ArrowRight,
+  Phone,
+  Mail,
+  MapPin,
+  Lock,
   Info
 } from 'lucide-react';
 import { organizationData } from '../data/organization';
@@ -22,14 +21,10 @@ import { HelplineBanner } from '../components/common/HelplineBanner';
 import {
   FadeUp,
   SlideInLeft,
-  SlideInRight,
-  StaggerContainer,
-  StaggerItem
+  SlideInRight
 } from '../components/animations/MotionComponents';
 
 export const Donate: React.FC = () => {
-  const navigate = useNavigate();
-
   const presetAmounts = [
     { amount: 500, label: '₹500', impact: 'One Free Youth Counselling Session' },
     { amount: 1000, label: '₹1,000', impact: 'Educational Awareness Workshop Materials' },
@@ -40,57 +35,7 @@ export const Donate: React.FC = () => {
   ];
 
   const [selectedAmount, setSelectedAmount] = useState<number>(1000);
-  const [customAmount, setCustomAmount] = useState<string>('');
-  const [isCustom, setIsCustom] = useState<boolean>(false);
   const [frequency, setFrequency] = useState<'one-time' | 'monthly'>('one-time');
-  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'bank_transfer' | 'card' | 'net_banking'>('upi');
-
-  const [donorDetails, setDonorDetails] = useState({
-    name: '',
-    email: '',
-    mobile: '',
-    panNumber: '',
-    city: '',
-    state: '',
-    anonymous: false
-  });
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitting, setSubmitting] = useState(false);
-
-  const activeAmount = isCustom ? Number(customAmount) || 0 : selectedAmount;
-
-  const validate = () => {
-    const errs: Record<string, string> = {};
-    if (!isCustom && !selectedAmount) errs.amount = 'Please select a donation amount';
-    if (isCustom && (!customAmount || Number(customAmount) < 100)) {
-      errs.amount = 'Please enter a valid amount of at least ₹100';
-    }
-    if (!donorDetails.name.trim()) errs.name = 'Full name is required';
-    if (!donorDetails.email.trim() || !/\S+@\S+\.\S+/.test(donorDetails.email)) errs.email = 'Valid email is required';
-    if (!donorDetails.mobile.trim() || donorDetails.mobile.replace(/[^0-9]/g, '').length < 10) errs.mobile = 'Valid 10-digit mobile number is required';
-
-    setErrors(errs);
-    return Object.keys(errs).length === 0;
-  };
-
-  const handlePledgeSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validate()) {
-      setSubmitting(true);
-      setTimeout(() => {
-        setSubmitting(false);
-        navigate('/donate/thank-you', {
-          state: {
-            donorName: donorDetails.name,
-            amount: activeAmount,
-            frequency,
-            paymentMethod
-          }
-        });
-      }, 700);
-    }
-  };
 
   return (
     <div className="space-y-0">
@@ -98,81 +43,82 @@ export const Donate: React.FC = () => {
       {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero
         badge="Support Our Cause"
-        badgeVariant="amber"
+        badgeVariant="teal"
         badgeIcon={Heart}
-        title="Every Contribution Can Protect a Young Life."
-        subtitle="Your generous partnership funds free adolescent tele-counselling, school prevention toolkits, parent guidance, and community recovery assistance."
-        breadcrumbs={[{ label: 'Donate' }]}
+        title="Empower a Youth, Save a Family"
+        subtitle="Your tax-transparent contributions directly support collegiate preventive workshops, free psycho-social counselling, and community safeguarding against substance abuse."
+        breadcrumbs={[{ label: 'Contribute' }]}
         imageSrc="/images/donation-impact.jpg"
-        imageAlt="AFOI youth impact and donation support"
-        imageBadgeText="100% Directed Towards Youth Interventions"
+        imageAlt="Antidote Foundation of India youth empowerment and counselling initiative"
+        imageBadgeText="100% Directed to Grassroots Initiatives"
         variant="background"
         stats={[
-          { label: 'Free Helpline', value: '100% Free' },
-          { label: 'Youth Reached', value: '5,000+' },
-          { label: 'Transparency', value: 'Public Society' },
-          { label: 'Audit Standard', value: 'Ethical Non-Profit' }
+          { value: '100%', label: 'Public Accountability' },
+          { value: 'Zero', label: 'Commercial Overhead' },
+          { value: '24/7', label: 'Toll-Free Helpline' },
+          { value: 'KA/2025', label: 'Registered Society' },
         ]}
       />
 
-      {/* 2. Main Donation Container */}
-      <section className="py-14 sm:py-20 bg-slate-50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 2. CONTRIBUTION WORKFLOW */}
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
-            {/* Left 7 Cols: Donation Selector & Form */}
-            <SlideInLeft className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-elevated space-y-8">
+            {/* Left 7 Cols: Contribution Options & Direct Channels */}
+            <SlideInLeft className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-subtle space-y-8">
               
-              {/* Step 1: Frequency */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
-                  Donation Frequency
-                </label>
-                <div className="grid grid-cols-2 gap-3">
+                <SectionHeader
+                  badge="Direct Philanthropic Support"
+                  title="Choose Your Contribution Level"
+                  subtitle="All donations empower young people across India through free community education, school drives, and helpline navigation."
+                  centered={false}
+                  className="mb-6"
+                />
+
+                {/* Step 1: Frequency Toggle */}
+                <div className="flex rounded-2xl bg-slate-100 p-1.5 max-w-xs">
                   <button
                     type="button"
                     onClick={() => setFrequency('one-time')}
-                    className={`py-3 px-4 rounded-xl text-xs sm:text-sm font-bold border transition-all ${
+                    className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${
                       frequency === 'one-time'
-                        ? 'bg-brand-navy-900 text-white border-brand-navy-900 shadow-sm'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                        ? 'bg-brand-navy-900 text-white shadow-sm'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    One-Time Gift
+                    One-Time Support
                   </button>
                   <button
                     type="button"
                     onClick={() => setFrequency('monthly')}
-                    className={`py-3 px-4 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center justify-center gap-1.5 ${
+                    className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${
                       frequency === 'monthly'
-                        ? 'bg-brand-navy-900 text-white border-brand-navy-900 shadow-sm'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                        ? 'bg-brand-navy-900 text-white shadow-sm'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    <Heart className="w-3.5 h-3.5 text-rose-500 fill-current" />
-                    <span>Monthly Guardian</span>
+                    Monthly Sustainer
                   </button>
                 </div>
               </div>
 
-              {/* Step 2: Choose Amount */}
+              {/* Step 2: Preset Contribution Amounts */}
               <div className="space-y-3">
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Select Contribution Amount
+                  Select Contribution Tier
                 </label>
                 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {presetAmounts.map((p) => {
-                    const isSelected = !isCustom && selectedAmount === p.amount;
+                    const isSelected = selectedAmount === p.amount;
                     return (
                       <button
                         key={p.amount}
                         type="button"
-                        onClick={() => {
-                          setSelectedAmount(p.amount);
-                          setIsCustom(false);
-                        }}
+                        onClick={() => setSelectedAmount(p.amount)}
                         className={`p-3.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
                           isSelected
                             ? 'bg-brand-navy-50 border-brand-navy-900 ring-2 ring-brand-navy-900 shadow-sm'
@@ -189,180 +135,88 @@ export const Donate: React.FC = () => {
                     );
                   })}
                 </div>
-
-                {/* Custom Amount option */}
-                <div className="pt-2">
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setIsCustom(true)}
-                      className={`px-4 py-2.5 rounded-xl border text-xs font-bold transition-all ${
-                        isCustom
-                          ? 'bg-brand-navy-900 text-white border-brand-navy-900'
-                          : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
-                      }`}
-                    >
-                      Custom Amount
-                    </button>
-
-                    {isCustom && (
-                      <div className="relative flex-grow">
-                        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">₹</span>
-                        <input
-                          type="number"
-                          min="100"
-                          step="100"
-                          placeholder="Enter amount (min ₹100)"
-                          value={customAmount}
-                          onChange={(e) => setCustomAmount(e.target.value)}
-                          className="w-full pl-8 pr-4 py-2.5 rounded-xl border border-brand-navy-900 text-sm font-bold outline-none"
-                        />
-                      </div>
-                    )}
-                  </div>
-                  {errors.amount && <p className="text-xs text-rose-600 mt-1">{errors.amount}</p>}
-                </div>
               </div>
 
-              {/* Step 3: Donor Details Form */}
-              <form onSubmit={handlePledgeSubmit} className="space-y-4 pt-4 border-t border-slate-200">
-                <h3 className="font-bold text-sm text-brand-navy-950 uppercase tracking-wider">
-                  Donor Information
-                </h3>
-
+              {/* Direct Contribution Channels */}
+              <div className="pt-6 border-t border-slate-200 space-y-6">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Vikram Malhotra"
-                    value={donorDetails.name}
-                    onChange={(e) => setDonorDetails({ ...donorDetails, name: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500"
-                  />
-                  {errors.name && <p className="text-xs text-rose-600 mt-1">{errors.name}</p>}
+                  <h3 className="font-extrabold text-base text-brand-navy-950 mb-1">
+                    Direct Bank Transfer & Secretariat Contact
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    To make a contribution or pledge support for Antidote Foundation of India, please connect directly with our treasury and leadership desk:
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Email Address *</label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="e.g. vikram@domain.com"
-                      value={donorDetails.email}
-                      onChange={(e) => setDonorDetails({ ...donorDetails, email: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500"
-                    />
-                    {errors.email && <p className="text-xs text-rose-600 mt-1">{errors.email}</p>}
-                  </div>
+                  <a
+                    href="tel:+917777927742"
+                    className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-teal-500 transition-all group flex items-start gap-3"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-brand-teal-50 text-brand-teal-700 flex items-center justify-center shrink-0">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Helpline & Treasury</div>
+                      <div className="text-sm font-bold text-brand-navy-950 group-hover:text-brand-teal-600">
+                        +91 77779 27742
+                      </div>
+                      <div className="text-[11px] text-slate-500 mt-0.5">Click to call directly</div>
+                    </div>
+                  </a>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Mobile Number *</label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="+91 98765 43210"
-                      value={donorDetails.mobile}
-                      onChange={(e) => setDonorDetails({ ...donorDetails, mobile: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500"
-                    />
-                    {errors.mobile && <p className="text-xs text-rose-600 mt-1">{errors.mobile}</p>}
-                  </div>
-                </div>
+                  <a
+                    href="tel:+919148820193"
+                    className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-teal-500 transition-all group flex items-start gap-3"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-brand-teal-50 text-brand-teal-700 flex items-center justify-center shrink-0">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Secretariat Support</div>
+                      <div className="text-sm font-bold text-brand-navy-950 group-hover:text-brand-teal-600">
+                        +91 91488 20193
+                      </div>
+                      <div className="text-[11px] text-slate-500 mt-0.5">Click to call directly</div>
+                    </div>
+                  </a>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">City</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Bengaluru"
-                      value={donorDetails.city}
-                      onChange={(e) => setDonorDetails({ ...donorDetails, city: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">PAN Card (Optional for 80G)</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. ABCDE1234F"
-                      value={donorDetails.panNumber}
-                      onChange={(e) => setDonorDetails({ ...donorDetails, panNumber: e.target.value.toUpperCase() })}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm outline-none focus:border-brand-teal-500 uppercase"
-                    />
-                  </div>
-                </div>
-
-                {/* Intended Payment Method Selection */}
-                <div className="pt-2">
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                    Intended Payment Channel
-                  </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {[
-                      { id: 'upi', label: 'UPI / QR', icon: QrCode },
-                      { id: 'bank_transfer', label: 'Bank Transfer / NEFT', icon: Building },
-                      { id: 'card', label: 'Debit / Credit Card', icon: CreditCard },
-                      { id: 'net_banking', label: 'Net Banking', icon: Lock },
-                    ].map((pm) => {
-                      const Icon = pm.icon;
-                      const active = paymentMethod === pm.id;
-                      return (
-                        <button
-                          key={pm.id}
-                          type="button"
-                          onClick={() => setPaymentMethod(pm.id as any)}
-                          className={`p-2.5 rounded-xl border text-center text-xs font-bold transition-all flex flex-col items-center justify-center gap-1 ${
-                            active
-                              ? 'bg-brand-navy-900 text-white border-brand-navy-900 shadow-sm'
-                              : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                          }`}
-                        >
-                          <Icon className="w-4 h-4" />
-                          <span>{pm.label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
+                  <a
+                    href="mailto:info@antidotefoundation.org?subject=Contribution%20Support%20-%20Antidote%20Foundation%20of%20India"
+                    className="sm:col-span-2 p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-teal-500 transition-all group flex items-start gap-3"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-brand-teal-50 text-brand-teal-700 flex items-center justify-center shrink-0">
+                      <Mail className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Official Email Communication</div>
+                      <div className="text-sm font-bold text-brand-navy-950 group-hover:text-brand-teal-600">
+                        info@antidotefoundation.org
+                      </div>
+                      <div className="text-[11px] text-slate-500 mt-0.5">
+                        Send payment receipts, CSR grant queries, and pledge confirmations
+                      </div>
+                    </div>
+                  </a>
                 </div>
 
                 {/* Regulatory Payment Gateway Status Notice */}
                 <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200/90 text-xs text-amber-900 space-y-1.5">
                   <div className="flex items-center gap-1.5 font-bold">
                     <AlertCircle className="w-4 h-4 text-amber-700 shrink-0" />
-                    <span>Official Bank & Payment Gateway Compliance Status:</span>
+                    <span>Official Bank & Compliance Verification:</span>
                   </div>
                   <p className="leading-relaxed text-[11px] text-amber-800">
-                    Antidote Foundation of India is registered under the Karnataka Societies Registration Act (Reg No: DRB1/SOR/257/2025-2026). In accordance with non-profit statutory standards, online instant checkout gateway keys and bank mandates are undergoing official verification before live transactions are enabled. We do not invent dummy bank accounts or simulated payment transactions. Submitting below records your contribution pledge with our treasury.
+                    Antidote Foundation of India is registered under the Karnataka Societies Registration Act (Reg No: DRB1/SOR/257/2025-2026). In accordance with non-profit statutory standards, official bank accounts and payment gateway accounts are verified directly through scheduled commercial banks. Direct bank transfer credentials (NEFT/RTGS) and official receipts are provided via our secretariat upon request.
                   </p>
-                </div>
-
-                {/* Submit Pledge Button */}
-                <div className="pt-2">
-                  <Button
-                    type="submit"
-                    variant="accent"
-                    size="lg"
-                    fullWidth
-                    disabled={submitting}
-                  >
-                    <Heart className="w-4 h-4 fill-current text-slate-950" />
-                    <span>
-                      {submitting
-                        ? 'Recording Your Pledge...'
-                        : `Pledge Contribution of ₹${activeAmount > 0 ? activeAmount.toLocaleString('en-IN') : '...'}`}
-                    </span>
-                  </Button>
                 </div>
 
                 <div className="text-center text-[11px] text-slate-400 flex items-center justify-center gap-1.5 pt-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-teal-600" />
-                  <span>Secure & Confidential • Zero Spam Guarantee</span>
+                  <span>Verified Non-Profit Entity • Karnataka Societies Registration Act</span>
                 </div>
 
-              </form>
+              </div>
 
             </SlideInLeft>
 
@@ -415,12 +269,13 @@ export const Donate: React.FC = () => {
                   Companies seeking structured Corporate Social Responsibility (CSR) partnerships for collegiate health programs may contact our Bengaluru secretariat directly.
                 </p>
                 <div className="text-xs text-slate-300 space-y-1 pt-1">
-                  <div>Bengaluru HQ: No. 38, Lakshman Layout, J. P. Nagar, Bengaluru 560078</div>
+                  <div>Bengaluru HQ: No. 38, Lakshman Layout, J. P. Nagar, Bengaluru 560 078</div>
                   <div>Helpline: <strong className="text-amber-400">{organizationData.contact.helplineDisplay}</strong></div>
+                  <div>Alternate: <strong className="text-amber-400">+91 91488 20193</strong></div>
                 </div>
                 <div className="pt-2">
-                  <Button to="/contact?subject=CSR+Enquiry" variant="secondary" size="sm" fullWidth>
-                    <span>Initiate CSR Dialogue</span>
+                  <Button to="/contact" variant="secondary" size="sm" fullWidth>
+                    <span>Contact Secretariat</span>
                   </Button>
                 </div>
               </div>
