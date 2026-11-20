@@ -97,6 +97,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
               src={item.image}
               alt={item.title}
               className="max-h-[70vh] w-auto object-contain mx-auto"
+              style={{ objectFit: 'contain' }}
             />
           </div>
 

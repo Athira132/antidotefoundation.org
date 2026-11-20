@@ -9,10 +9,6 @@ import { GalleryItem } from '../types';
 import { PageHero } from '../components/ui/PageHero';
 import { Lightbox } from '../components/ui/Lightbox';
 import { HelplineBanner } from '../components/common/HelplineBanner';
-import {
-  StaggerContainer,
-  StaggerItem
-} from '../components/animations/MotionComponents';
 
 export const Gallery: React.FC = () => {
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
@@ -56,24 +52,28 @@ export const Gallery: React.FC = () => {
       <section className="py-12 sm:py-16 bg-slate-50 min-h-[600px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Image Grid: 4 columns on wide desktop, 2 on tablet, 1 on mobile */}
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Responsive Gallery Columns: 4 cols on xl desktop, 3 on lg, 2 on tablet, 1 on mobile */}
+          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 [column-fill:_balance]">
             {galleryItems.map((item) => (
-              <StaggerItem key={item.id} className="h-full">
-                <div className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full group hover:-translate-y-1">
+              <div
+                key={item.id}
+                className="break-inside-avoid mb-6 inline-block w-full"
+              >
+                <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col group hover:-translate-y-1">
 
-                  {/* Photo Container: Uniform Aspect Ratio & Proper Cropping */}
+                  {/* Photo Container: Natural Aspect Ratio, Fully Visible, Zero Cropping, object-fit contain */}
                   <div
                     onClick={() => setActiveItem(item)}
-                    className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 cursor-pointer"
+                    className="relative w-full cursor-pointer overflow-hidden"
                   >
                     <img
                       src={item.image}
                       alt={item.title || 'Antidote Foundation of India gallery photograph'}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-auto object-contain block group-hover:scale-[1.01] transition-transform duration-300"
                       loading="lazy"
+                      style={{ objectFit: 'contain' }}
                     />
-                    <div className="absolute inset-0 bg-brand-navy-950/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className="absolute inset-0 bg-brand-navy-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <div className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md text-brand-navy-900 flex items-center justify-center shadow-lg transform translate-y-1 group-hover:translate-y-0 transition-transform">
                         <Maximize2 className="w-4 h-4" />
                       </div>
@@ -98,9 +98,9 @@ export const Gallery: React.FC = () => {
                   </div>
 
                 </div>
-              </StaggerItem>
+              </div>
             ))}
-          </StaggerContainer>
+          </div>
 
         </div>
       </section>
