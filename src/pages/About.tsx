@@ -98,9 +98,9 @@ export const About: React.FC = () => {
       bio: 'P.A. Issac is the Founder/Chairman of Antidote Foundation of India, a non-profit organization dedicated to creating a drug-free society through awareness, education, prevention, and community engagement. Driven by a passion for empowering youth and strengthening families, he leads initiatives that promote healthy lifestyles, positive values, and hope for a better future. Under his leadership, the Foundation works with schools, communities, and organizations to inspire lasting social change and prevent substance abuse.'
     },
     {
-      name: 'Binu Dinakaran',
+      name: 'Binu Divakaran',
       role: 'President',
-      image: '/images/leader_2_binu_dinakaran.jpg'
+      image: '/images/leader_2_binu_divakaran.jpg'
     },
     {
       name: 'Adv. Pramod Varaprath',
@@ -113,7 +113,7 @@ export const About: React.FC = () => {
       image: '/images/leader_4_tomy_j_alunkal.jpg'
     },
     {
-      name: 'Advt. Bushra Valappil',
+      name: 'Adv Bushra Valappil',
       role: 'General Secretary',
       image: '/images/leader_5_bushra_valappil.jpg'
     },

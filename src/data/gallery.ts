@@ -21,10 +21,10 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 'gal-03',
-    title: 'Adv. Bushra Valappil Addressing National Symposium',
+    title: 'Adv Bushra Valappil Addressing National Symposium',
     category: 'Field Activities',
     image: '/images/gallery_03.jpg',
-    description: 'From the grassroots to the national stage. Adv. Bushra Valappil, General Secretary, AFOI, as the voice of NGOs at Session 2 — Schools, Families and Preventive Ecosystem, National Symposium, NACIN Palasamudram on 15th June 2026.'
+    description: 'From the grassroots to the national stage. Adv Bushra Valappil, General Secretary, AFOI, as the voice of NGOs at Session 2 — Schools, Families and Preventive Ecosystem, National Symposium, NACIN Palasamudram on 15th June 2026.'
   },
   {
     id: 'gal-04',
