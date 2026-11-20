@@ -113,7 +113,7 @@ export const About: React.FC = () => {
       image: '/images/leader_4_tomy_j_alunkal.jpg'
     },
     {
-      name: 'Adv Bushra Valappil',
+      name: 'Adv. Bushra Valappil',
       role: 'General Secretary',
       image: '/images/leader_5_bushra_valappil.jpg'
     },
