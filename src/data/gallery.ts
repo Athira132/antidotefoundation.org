@@ -13,11 +13,32 @@ export const galleryItems: GalleryItem[] = [
     description: "AFOI Office Bearers' Meeting with Sri. B Dayananda, IPS, Commissioner of Police, Bengaluru City | 9th February 2025"
   },
   {
+    id: 'gal-20',
+    title: "AFOI Chairman and Treasurer Met Kerala Chief Minister",
+    category: 'Field Activities',
+    image: '/images/gallery_20.jpg',
+    description: "AFOI Chairman Mr. P. A. Issac and Treasurer Mr. Joju Varghese met Hon'ble Chief Minister of Kerala, Shri V. D. Satheesan, at Thiruvananthapuram."
+  },
+  {
     id: 'gal-02',
     title: 'National Symposium Dignitaries & AFOI Team',
     category: 'Field Activities',
     image: '/images/gallery_02.jpg',
     description: 'A proud moment for AFOI. Our team with Shri Ganesh Dutt Lohani, Director General, Directorate of Revenue Intelligence, CBIC, Dr. M Subramanyam, IRS, Pr. Director General, NACIN, and Shri Gopakumar, IRS, Additional Director General, NACIN — during the National Symposium on Drug Abuse Prevention, Mental Health & Institutional Coordination on 15th June 2026.'
+  },
+  {
+    id: 'gal-21',
+    title: "AFOI Team with Kerala Opposition Leader",
+    category: 'Field Activities',
+    image: '/images/gallery_21.jpg',
+    description: "AFOI team with Kerala Opposition Leader Pinarayi Vijayan"
+  },
+  {
+    id: 'gal-22',
+    title: "AFOI Leadership with Kerala Higher Education Minister",
+    category: 'Field Activities',
+    image: '/images/gallery_22.jpg',
+    description: "AFOI Chairman P A Issac and Treasurer Joju Varghese with Kerala Higher Education Minister Roji M John"
   },
   {
     id: 'gal-19',
