@@ -9,6 +9,7 @@ import { GalleryItem } from '../types';
 import { PageHero } from '../components/ui/PageHero';
 import { Lightbox } from '../components/ui/Lightbox';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   StaggerContainer,
   StaggerItem
@@ -37,6 +38,13 @@ export const Gallery: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title="Gallery | AFOI Drug Awareness & Youth Empowerment"
+        description="Explore photographs of Antidote Foundation of India's awareness campaigns, youth empowerment camps, community activities and public initiatives."
+        canonicalPath="/gallery"
+        keywords="Drug Awareness and Youth Empowerment Activities, AFOI gallery, Anti-drug campaigns India photos, Youth empowerment camp Bengaluru, Antidote Foundation of India gallery"
+        breadcrumbs={[{ name: 'Gallery', path: '/gallery' }]}
+      />
 
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero
@@ -69,7 +77,7 @@ export const Gallery: React.FC = () => {
                   >
                     <img
                       src={item.image}
-                      alt={item.title || 'Antidote Foundation of India gallery photograph'}
+                      alt={item.title ? `${item.title} - Antidote Foundation of India (AFOI)` : 'Antidote Foundation of India gallery photograph'}
                       className="w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
                       loading="lazy"
                       style={{ objectFit: 'contain' }}

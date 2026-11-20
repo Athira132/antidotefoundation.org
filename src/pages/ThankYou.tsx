@@ -5,10 +5,16 @@ import { organizationData } from '../data/organization';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { FadeUp } from '../components/animations/MotionComponents';
+import { SEO } from '../components/common/SEO';
 
 export const ThankYou: React.FC = () => {
   return (
     <div className="space-y-0">
+      <SEO
+        title="Message Received | Antidote Foundation of India"
+        description="Thank you for contacting Antidote Foundation of India."
+        noIndex={true}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

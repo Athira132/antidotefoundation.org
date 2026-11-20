@@ -5,6 +5,7 @@ import { organizationData } from '../data/organization';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { FadeUp } from '../components/animations/MotionComponents';
+import { SEO } from '../components/common/SEO';
 
 export const VolunteerThankYou: React.FC = () => {
   const location = useLocation();
@@ -12,6 +13,11 @@ export const VolunteerThankYou: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title="Volunteer Interest Received | Antidote Foundation of India"
+        description="Thank you for signing up to volunteer with Antidote Foundation of India."
+        noIndex={true}
+      />
 
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

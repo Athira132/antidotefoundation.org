@@ -4,11 +4,19 @@ import { organizationData } from '../data/organization';
 import { Badge } from '../components/ui/Badge';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import { FadeUp } from '../components/animations/MotionComponents';
 
 export const PrivacyPolicy: React.FC = () => {
   return (
     <div className="space-y-0">
+      <SEO
+        title="Privacy Policy | Antidote Foundation of India"
+        description="Read the privacy and data protection standards for Antidote Foundation of India, upholding confidentiality and visitor trust."
+        canonicalPath="/privacy-policy"
+        keywords="Antidote Foundation Privacy Policy, AFOI confidentiality, Helpline data protection, Donor privacy policy"
+        breadcrumbs={[{ name: 'Privacy Policy', path: '/privacy-policy' }]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

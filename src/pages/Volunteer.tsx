@@ -15,6 +15,7 @@ import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   StaggerContainer,
@@ -62,6 +63,13 @@ export const Volunteer: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title="Volunteer for Drug Awareness | Antidote Foundation of India"
+        description="Join Antidote Foundation of India as a volunteer and help promote drug awareness, youth empowerment and substance abuse prevention across India."
+        canonicalPath="/volunteer"
+        keywords="Volunteer for Drug Awareness Programmes, Youth volunteer India, Substance abuse prevention volunteer, NGO volunteer Bengaluru, Anti-drug campaign volunteer India"
+        breadcrumbs={[{ name: 'Volunteer', path: '/volunteer' }]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

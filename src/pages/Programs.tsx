@@ -23,6 +23,7 @@ import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   StaggerContainer,
@@ -181,6 +182,13 @@ export const Programs: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title="Drug Awareness Programmes & Events in India | AFOI"
+        description="Discover AFOI's drug awareness campaigns, school and college programmes, youth empowerment activities and community initiatives."
+        canonicalPath="/programs-events"
+        keywords="Drug Awareness Programmes in India, Anti-drug awareness programmes, Drug awareness programmes in schools, Drug awareness programmes in colleges, Youth drug prevention programmes"
+        breadcrumbs={[{ name: 'Programs & Events', path: '/programs-events' }]}
+      />
 
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

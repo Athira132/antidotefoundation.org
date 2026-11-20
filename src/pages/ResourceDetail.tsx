@@ -16,6 +16,7 @@ import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   SlideInLeft,
@@ -34,6 +35,16 @@ export const ResourceDetail: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title={`${resource.title} | Antidote Foundation of India`}
+        description={resource.summary}
+        canonicalPath={`/resources/${resource.slug}`}
+        keywords={`${resource.title}, Substance abuse awareness and education, Drug prevention resources, AFOI educational guides`}
+        breadcrumbs={[
+          { name: 'Resources', path: '/resources' },
+          { name: resource.title, path: `/resources/${resource.slug}` }
+        ]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

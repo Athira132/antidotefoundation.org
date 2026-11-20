@@ -18,6 +18,7 @@ import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   StaggerContainer,
@@ -68,6 +69,13 @@ export const FindRehabCentres: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title="Drug Rehabilitation Centres in India | AFOI"
+        description="Find rehabilitation centre information across India. Search by city, district or state and explore support options for individuals and families."
+        canonicalPath="/find-rehab-centres"
+        keywords="Drug Rehabilitation Centres in India, De-addiction centres in India, Rehab centres Bengaluru, Rehab centres Karnataka, Addiction treatment centres India"
+        breadcrumbs={[{ name: 'Find Rehab Centres', path: '/find-rehab-centres' }]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero

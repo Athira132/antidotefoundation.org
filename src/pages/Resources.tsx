@@ -25,6 +25,7 @@ import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   SlideInLeft,
@@ -73,6 +74,13 @@ export const Resources: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title="Drug Awareness Resources & Education | AFOI"
+        description="Explore educational resources about substance abuse, drug prevention, addiction awareness and guidance for students, parents and communities."
+        canonicalPath="/resources"
+        keywords="Substance Abuse Awareness and Education, Drug prevention for students, Substance abuse education for parents, Addiction prevention education, Drug awareness guides India"
+        breadcrumbs={[{ name: 'Resources', path: '/resources' }]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero

@@ -15,6 +15,7 @@ import { organizationData } from '../data/organization';
 import { Badge } from '../components/ui/Badge';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   SlideInLeft,
   SlideInRight
@@ -23,6 +24,13 @@ import {
 export const Contact: React.FC = () => {
   return (
     <div className="space-y-0">
+      <SEO
+        title="Contact Antidote Foundation of India | AFOI"
+        description="Contact Antidote Foundation of India for drug awareness initiatives, volunteering, counselling support, partnerships and community programmes."
+        canonicalPath="/contact"
+        keywords="Antidote Foundation of India Contact, Drug awareness NGO Bengaluru contact, Free addiction counselling in India, AFOI helpline, Antidote Foundation phone"
+        breadcrumbs={[{ name: 'Contact Us', path: '/contact' }]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

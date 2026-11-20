@@ -5,10 +5,16 @@ import { organizationData } from '../data/organization';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { FadeUp } from '../components/animations/MotionComponents';
+import { SEO } from '../components/common/SEO';
 
 export const NotFound: React.FC = () => {
   return (
     <div className="space-y-0">
+      <SEO
+        title="404 - Page Not Found | Antidote Foundation of India"
+        description="The requested page could not be found. Explore Antidote Foundation of India's substance prevention resources, rehabilitation directory, and youth initiatives."
+        noIndex={true}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

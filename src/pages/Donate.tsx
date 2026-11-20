@@ -18,6 +18,7 @@ import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   SlideInLeft,
@@ -39,6 +40,13 @@ export const Donate: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title="Support Drug Abuse Prevention in India | Antidote Foundation of India"
+        description="Support Antidote Foundation of India's drug awareness workshops, youth empowerment campaigns, and confidential counselling across India."
+        canonicalPath="/donate"
+        keywords="Support drug abuse prevention India, Donate to drug awareness NGO, Youth empowerment donation India, Antidote Foundation of India donate"
+        breadcrumbs={[{ name: 'Contribute', path: '/donate' }]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero

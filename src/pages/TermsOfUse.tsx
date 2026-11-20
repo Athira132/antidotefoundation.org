@@ -4,11 +4,19 @@ import { organizationData } from '../data/organization';
 import { Badge } from '../components/ui/Badge';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import { FadeUp } from '../components/animations/MotionComponents';
 
 export const TermsOfUse: React.FC = () => {
   return (
     <div className="space-y-0">
+      <SEO
+        title="Terms of Use | Antidote Foundation of India"
+        description="Terms and conditions governing the use of Antidote Foundation of India's web portals, educational toolkits, and assistance services."
+        canonicalPath="/terms-of-use"
+        keywords="Antidote Foundation Terms of Use, AFOI terms and conditions, Website terms of service"
+        breadcrumbs={[{ name: 'Terms of Use', path: '/terms-of-use' }]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

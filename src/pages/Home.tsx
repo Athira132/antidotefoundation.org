@@ -25,6 +25,7 @@ import { SectionHeader } from '../components/ui/SectionHeader';
 import { HelplineBanner } from '../components/common/HelplineBanner';
 import { TrustDisclaimer } from '../components/common/TrustDisclaimer';
 import { DiagonalCapsuleCollage } from '../components/home/DiagonalCapsuleCollage';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   SlideInLeft,
@@ -39,6 +40,12 @@ import {
 export const Home: React.FC = () => {
   return (
     <div className="space-y-0 overflow-hidden">
+      <SEO
+        title="Drug Abuse Prevention in India | Antidote Foundation of India"
+        description="Antidote Foundation of India promotes drug abuse prevention, youth empowerment, substance abuse awareness, counselling and a drug-free generation across India."
+        canonicalPath="/"
+        keywords="Drug Abuse Prevention in India, Substance Abuse Awareness India, Drug Awareness NGO in India, Drug-Free India Initiative, Youth empowerment NGO India, Drug addiction awareness, Substance abuse prevention NGO, Anti-drug awareness programmes, Drug prevention for students, Addiction awareness campaigns, Drug awareness NGO in Bengaluru, Drug prevention NGO in Bangalore, Substance abuse awareness in Karnataka, Drug awareness programmes in Kerala"
+      />
       
       {/* ============================================================== */}
       {/* 1. DIAGONAL CAPSULE HERO SECTION (Artistic Image Presentation) */}

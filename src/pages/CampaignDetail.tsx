@@ -17,6 +17,7 @@ import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   SlideInLeft,
@@ -35,6 +36,16 @@ export const CampaignDetail: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title={`${campaign.title} | Antidote Foundation of India`}
+        description={campaign.summary}
+        canonicalPath={`/campaigns/${campaign.slug}`}
+        keywords={`${campaign.title}, Anti-drug campaigns in India, Drug-free India initiative, AFOI campaigns`}
+        breadcrumbs={[
+          { name: 'Campaigns', path: '/campaigns' },
+          { name: campaign.title, path: `/campaigns/${campaign.slug}` }
+        ]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

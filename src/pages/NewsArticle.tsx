@@ -18,6 +18,7 @@ import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   SlideInLeft,
@@ -34,6 +35,17 @@ export const NewsArticle: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title={`${article.title} | Antidote Foundation of India`}
+        description={article.excerpt}
+        canonicalPath={`/news/${article.slug}`}
+        ogType="article"
+        keywords={`${article.title}, Antidote Foundation news, AFOI press release, Drug prevention NGO updates`}
+        breadcrumbs={[
+          { name: 'News & Media', path: '/news' },
+          { name: article.title, path: `/news/${article.slug}` }
+        ]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER */}
       <PageHero

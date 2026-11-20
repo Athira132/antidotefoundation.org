@@ -19,6 +19,7 @@ import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
 import { TrustDisclaimer } from '../components/common/TrustDisclaimer';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   SlideInLeft,
@@ -141,6 +142,13 @@ export const About: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title="About Us | Antidote Foundation of India"
+        description="Learn about Antidote Foundation of India, our mission, vision and commitment to substance abuse prevention, youth education and community empowerment."
+        canonicalPath="/about"
+        keywords="Antidote Foundation of India, About AFOI, Drug prevention NGO India, Substance abuse NGO Bengaluru, Youth empowerment NGO India, Non-profit drug awareness India"
+        breadcrumbs={[{ name: 'About Us', path: '/about' }]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER (Full-width background on desktop, photo first on mobile) */}
       <PageHero

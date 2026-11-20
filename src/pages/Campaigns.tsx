@@ -16,6 +16,7 @@ import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { PageHero } from '../components/ui/PageHero';
 import { HelplineBanner } from '../components/common/HelplineBanner';
+import { SEO } from '../components/common/SEO';
 import {
   FadeUp,
   StaggerContainer,
@@ -31,6 +32,13 @@ export const Campaigns: React.FC = () => {
 
   return (
     <div className="space-y-0">
+      <SEO
+        title="Anti-Drug Awareness Campaigns in India | AFOI"
+        description="Explore national and community-level anti-drug campaigns by Antidote Foundation of India promoting a drug-free generation."
+        canonicalPath="/campaigns"
+        keywords="Anti-drug campaigns in India, Drug-free India campaign, Substance abuse awareness campaigns, Youth anti-drug rallies India, AFOI campaigns"
+        breadcrumbs={[{ name: 'Campaigns', path: '/campaigns' }]}
+      />
       
       {/* 1. DISTINCTIVE HERO BANNER (Desktop: Full background; Mobile: Photo first) */}
       <PageHero
