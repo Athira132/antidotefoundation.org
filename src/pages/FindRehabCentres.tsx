@@ -387,18 +387,12 @@ export const FindRehabCentres: React.FC = () => {
               </p>
 
               <div className="p-4 rounded-2xl bg-brand-navy-50 border border-brand-navy-100 space-y-2">
-                <div className="text-xs font-bold text-brand-navy-950">Direct Helpline Numbers:</div>
+                <div className="text-xs font-bold text-brand-navy-950">24/7 Emergency Helpline:</div>
                 <div className="space-y-1 text-sm">
                   <div>
                     <a href="tel:+917777927742" className="text-brand-navy-950 font-bold hover:underline flex items-center gap-2">
                       <PhoneCall className="w-4 h-4 text-teal-600" />
                       <span>+91 77779 27742 (24/7 Helpline)</span>
-                    </a>
-                  </div>
-                  <div>
-                    <a href="tel:+919148820193" className="text-brand-navy-950 font-bold hover:underline flex items-center gap-2">
-                      <PhoneCall className="w-4 h-4 text-teal-600" />
-                      <span>+91 91488 20193 (Secretariat)</span>
                     </a>
                   </div>
                 </div>

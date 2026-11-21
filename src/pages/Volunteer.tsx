@@ -220,15 +220,9 @@ export const Volunteer: React.FC = () => {
 
                 <div className="space-y-2 text-xs sm:text-sm">
                   <div>
-                    <span className="text-slate-500 text-xs block">Helpline:</span>
+                    <span className="text-slate-500 text-xs block">24/7 Helpline:</span>
                     <a href="tel:+917777927742" className="text-brand-navy-900 font-bold hover:text-brand-teal-600 hover:underline">
                       +91 77779 27742
-                    </a>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 text-xs block">Secretariat Line:</span>
-                    <a href="tel:+919148820193" className="text-brand-navy-900 font-bold hover:text-brand-teal-600 hover:underline">
-                      +91 91488 20193
                     </a>
                   </div>
                 </div>

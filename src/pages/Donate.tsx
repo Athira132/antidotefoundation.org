@@ -174,24 +174,8 @@ export const Donate: React.FC = () => {
                   </a>
 
                   <a
-                    href="tel:+919148820193"
-                    className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-teal-500 transition-all group flex items-start gap-3"
-                  >
-                    <div className="w-9 h-9 rounded-xl bg-brand-teal-50 text-brand-teal-700 flex items-center justify-center shrink-0">
-                      <Phone className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Secretariat Support</div>
-                      <div className="text-sm font-bold text-brand-navy-950 group-hover:text-brand-teal-600">
-                        +91 91488 20193
-                      </div>
-                      <div className="text-[11px] text-slate-500 mt-0.5">Click to call directly</div>
-                    </div>
-                  </a>
-
-                  <a
                     href="mailto:info@antidotefoundation.org?subject=Contribution%20Support%20-%20Antidote%20Foundation%20of%20India"
-                    className="sm:col-span-2 p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-teal-500 transition-all group flex items-start gap-3"
+                    className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-teal-500 transition-all group flex items-start gap-3"
                   >
                     <div className="w-9 h-9 rounded-xl bg-brand-teal-50 text-brand-teal-700 flex items-center justify-center shrink-0">
                       <Mail className="w-4 h-4" />
@@ -279,7 +263,6 @@ export const Donate: React.FC = () => {
                 <div className="text-xs text-slate-300 space-y-1 pt-1">
                   <div>Bengaluru HQ: No. 38, Lakshman Layout, J. P. Nagar, Bengaluru 560 078</div>
                   <div>Helpline: <strong className="text-amber-400">{organizationData.contact.helplineDisplay}</strong></div>
-                  <div>Alternate: <strong className="text-amber-400">+91 91488 20193</strong></div>
                 </div>
                 <div className="pt-2">
                   <Button to="/contact" variant="secondary" size="sm" fullWidth>

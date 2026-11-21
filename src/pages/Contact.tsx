@@ -106,25 +106,12 @@ export const Contact: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <PhoneCall className="w-4 h-4 text-brand-teal-600 shrink-0 mt-1" />
                     <div>
-                      <strong className="text-brand-navy-950 block mb-0.5">Helpline Line 1:</strong>
+                      <strong className="text-brand-navy-950 block mb-0.5">24/7 Helpline:</strong>
                       <a
                         href="tel:+917777927742"
                         className="text-brand-navy-900 font-bold hover:text-brand-teal-600 hover:underline transition-colors"
                       >
                         +91 77779 27742
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <PhoneCall className="w-4 h-4 text-brand-teal-600 shrink-0 mt-1" />
-                    <div>
-                      <strong className="text-brand-navy-950 block mb-0.5">Secretariat Line 2:</strong>
-                      <a
-                        href="tel:+919148820193"
-                        className="text-brand-navy-900 font-bold hover:text-brand-teal-600 hover:underline transition-colors"
-                      >
-                        +91 91488 20193
                       </a>
                     </div>
                   </div>

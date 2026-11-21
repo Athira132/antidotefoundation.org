@@ -111,13 +111,6 @@ export const SEO: React.FC<SEOProps> = ({
           contactType: 'emergency helpline',
           areaServed: 'IN',
           availableLanguage: ['English', 'Hindi', 'Kannada', 'Malayalam']
-        },
-        {
-          '@type': 'ContactPoint',
-          telephone: '+91-91488-20193',
-          contactType: 'secretariat support',
-          areaServed: 'IN',
-          availableLanguage: ['English', 'Hindi', 'Kannada', 'Malayalam']
         }
       ],
       areaServed: [
